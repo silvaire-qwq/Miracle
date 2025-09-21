@@ -28,7 +28,7 @@ export function getTimeString(): string {
   const get = (type: string) =>
     parts.find((p) => p.type === type)?.value ?? "00";
 
-  return `${get("year")}${get("month")}${get("day")}_${get("hour")}${get(
+  return `${get("year")}-${get("month")}-${get("day")}_${get("hour")}${get(
     "minute"
   )}`;
 }

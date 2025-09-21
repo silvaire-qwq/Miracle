@@ -196,7 +196,7 @@ const momentFileTemplate = `{
             <a
               :href="`https://github.com/${
                 globalConfig.githubRepo
-              }/new/main/src/config/moments?filename=${getTimeString()}.md&value=${encodeURIComponent(
+              }/new/main/src/config/moments?filename=${getTimeString()}.json&value=${encodeURIComponent(
                 momentFileTemplate
               )}`"
               target="_blank"
@@ -255,7 +255,7 @@ const momentFileTemplate = `{
             <a
               :href="`https://github.com/${
                 globalConfig.githubRepo
-              }/new/main/src/config/friends?filename=${getTimeString()}.md&value=${encodeURIComponent(
+              }/new/main/src/config/friends?filename=${getTimeString()}.json&value=${encodeURIComponent(
                 friendFileTemplate
               )}`"
               target="_blank"
