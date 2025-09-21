@@ -10,11 +10,11 @@ jobs:
     steps:
       # 1️⃣ Checkout 源码
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2️⃣ 设置 Node.js
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
@@ -32,8 +32,8 @@ jobs:
 
       # 5️⃣ 上传打包好的 zip 文件为 artifact
       - name: Upload release artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-zip
           path: |
-            ./$(node -p "require('./src/theme.ts').themeVersion.name + '-' + require('./src/theme.ts').themeVersion.version + '-' + require('./src/theme.ts').themeVersion.type + '.zip'")          
+            ./$(node -p "require('./src/theme.ts').themeVersion.name + '-' + require('./src/theme.ts').themeVersion.version + '-' + require('./src/theme.ts').themeVersion.type + '.zip'")
