@@ -26,8 +26,6 @@ const groupedMoments = computed(() =>
     columnCount.value
   )
 );
-
-const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 
 <template>

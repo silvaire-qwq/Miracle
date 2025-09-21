@@ -22,7 +22,7 @@ export const globalConfig = {
     // modules
     modules: {
       banner:
-        "https://tc-new.z.wiki/autoupload/f/MQvyZMSRCyXfEMMOraS3y-2Q_fY7_mvkXK8ADvVxmQmyl5f0KlZfm6UsKj-HyTuv/20250919/Qrlw/1600X1205/wallhaven-z88xrg.jpg/webp", // img url or avatar
+        "https://tc-new.z.wiki/autoupload/f/MQvyZMSRCyXfEMMOraS3y-2Q_fY7_mvkXK8ADvVxmQmyl5f0KlZfm6UsKj-HyTuv/20250919/Qrlw/1600X1205/wallhaven-z88xrg.jpg/webp", // img url or "avatar"
       about: false, // about
       lastMoment: true, // last moment
       recentPosts: true, // recent posts

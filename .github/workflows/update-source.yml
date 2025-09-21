@@ -1,0 +1,39 @@
+name: Release Package
+
+on:
+  workflow_dispatch: # 手动触发
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout 源码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ 设置 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      # 3️⃣ 安装依赖
+      - name: Install dependencies
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+
+      # 4️⃣ 运行你的 release 脚本
+      - name: Run release script
+        run: |
+          pnpm release
+
+      # 5️⃣ 上传打包好的 zip 文件为 artifact
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-zip
+          path: |
+            ./$(node -p "require('./src/theme.ts').themeVersion.name + '-' + require('./src/theme.ts').themeVersion.version + '-' + require('./src/theme.ts').themeVersion.type + '.zip'")          

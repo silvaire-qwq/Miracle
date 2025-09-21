@@ -60,7 +60,8 @@ div.VPLink.no-icon.VPFeature {
     margin-bottom: 30px;
 }
 
-main .vp-doc h2, .styledH2 {
+main .vp-doc h2,
+.styledH2 {
     background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% .7rem;
     display: inline-block;
 }
@@ -144,9 +145,13 @@ footer.VPFooter {
     margin-top: 50px;
     font-family: var(--vp-font-family-mono);
     opacity: .8;
+
     a {
         color: var(--vp-c-brand-1);
-        &:hover {color: var(--vp-c-brand-2) !important}
+
+        &:hover {
+            color: var(--vp-c-brand-2) !important
+        }
     }
 }
 
@@ -361,6 +366,16 @@ div.menu .VPMenu {
     top: -15px;
 }
 
+@media screen and (min-width: 767px) {
+    button.button {
+        margin-left: var(--vp-gap);
+        height: 36px !important;
+        border: 1px solid var(--vp-c-divider);
+        padding: 5px 12px;
+        border-radius: var(--vp-border-radius-1);
+    }
+}
+
 button.VPNavBarHamburger.hamburger {
     margin-left: var(--vp-gap);
     height: 36px !important;
@@ -530,4 +545,3 @@ div.VPDocAside {
         font-weight: 600;
     }
 }
-

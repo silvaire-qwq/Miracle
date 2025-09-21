@@ -24,6 +24,36 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 <template>
   <a
     :href="props.url"
+    v-if="props.url"
+    class="diary"
+    @mouseenter="handleMouseEnter"
+    @mousemove="handleMouseMove"
+    @mouseleave="handleMouseLeave"
+  >
+    <div v-if="props.image" class="img-container">
+      <img :src="props.image" />
+    </div>
+    <div class="textPlace">
+      <p class="title" v-if="props.title">{{ props.title }}</p>
+      
+      <p class="details" v-if="props.description && props.title">{{ props.description }}</p>
+      <p class="details notitle" v-else-if="props.description">{{ props.description }}</p>
+
+      <div class="meta">
+        <!-- 修改此处，使得点击分类时跳转到相应的分类页面 -->
+        <a
+          class="category"
+          v-if="props.category"
+          :href="`/src/pages/archive?category=${props.category}`"
+          >{{ props.category }}</a
+        >{{ props.date }}
+      </div>
+    </div>
+  </a>
+
+
+  <a
+    v-else
     class="diary"
     @mouseenter="handleMouseEnter"
     @mousemove="handleMouseMove"
