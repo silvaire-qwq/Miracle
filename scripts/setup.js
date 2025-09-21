@@ -30,14 +30,14 @@ function log(module, message, filePath = "", type = "info") {
 function ensureDir(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
-        log("setup", "Directory created", dirPath, "success");
+        log("miracle", "Directory created", dirPath, "success");
     }
 }
 
 function emptyDir(dirPath) {
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
-        log("setup", "Directory created (empty)", dirPath, "success");
+        log("miracle", "Directory created (empty)", dirPath, "success");
         return;
     }
 
@@ -45,7 +45,7 @@ function emptyDir(dirPath) {
     for (const item of items) {
         const full = path.join(dirPath, item);
         fs.rmSync(full, { recursive: true, force: true });
-        log("setup", "Removed", full, "warn");
+        log("miracle", "Removed", full, "warn");
     }
 }
 
@@ -55,22 +55,22 @@ try {
     const markdownDir = path.resolve("./src/markdown");
     const generatedDir = path.resolve("./src/generated");
 
-    log("setup", "Clearing directories");
+    log("miracle", "Clearing directories");
     emptyDir(friendsDir);
     emptyDir(momentsDir);
     emptyDir(markdownDir);
 
     if (fs.existsSync(generatedDir)) {
         fs.rmSync(generatedDir, { recursive: true, force: true });
-        log("setup", "Removed generated directory", generatedDir, "warn");
+        log("miracle", "Removed generated directory", generatedDir, "warn");
     }
 
-    log("setup", "Ensuring directories exist");
+    log("miracle", "Ensuring directories exist");
     ensureDir(friendsDir);
     ensureDir(momentsDir);
     ensureDir(markdownDir);
 
-    log("setup", "Writing templates");
+    log("miracle", "Writing templates");
     const friendTemplate = {
         title: "It's Miracle!!!!!",
         link: "https://github.com/silvaire-qwq/miracle",
@@ -78,7 +78,7 @@ try {
         img: "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c"
     };
     fs.writeFileSync(path.join(friendsDir, "friend-template.json"), JSON.stringify(friendTemplate, null, 2), "utf-8");
-    log("setup", "Friend template written", path.join(friendsDir, "friend-template.json"), "success");
+    log("miracle", "Friend template written", path.join(friendsDir, "friend-template.json"), "success");
 
     const momentTemplate = {
         date: "2025-09-21",
@@ -86,7 +86,7 @@ try {
         content: "QwQ"
     };
     fs.writeFileSync(path.join(momentsDir, "moment-template.json"), JSON.stringify(momentTemplate, null, 2), "utf-8");
-    log("setup", "Moment template written", path.join(momentsDir, "moment-template.json"), "success");
+    log("miracle", "Moment template written", path.join(momentsDir, "moment-template.json"), "success");
 
     const postTemplate = `---
 title: It's Miracle!!!!!
@@ -98,10 +98,10 @@ origin: https://github.com/silvaire-qwq/miracle
 ---
 `;
     fs.writeFileSync(path.join(markdownDir, "post-template.md"), postTemplate, "utf-8");
-    log("setup", "Post template written", path.join(markdownDir, "post-template.md"), "success");
+    log("miracle", "Post template written", path.join(markdownDir, "post-template.md"), "success");
 
-    log("setup", "Setup completed", "", "success");
+    log("miracle", "Setup completed", "", "success");
 } catch (err) {
-    log("setup", "Error occurred", err.message, "error");
+    log("miracle", "Error occurred", err.message, "error");
     process.exit(1);
 }
