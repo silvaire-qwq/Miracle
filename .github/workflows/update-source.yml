@@ -36,4 +36,4 @@ jobs:
         with:
           name: release-zip
           path: |
-            ./$(node -p "const t=require('./src/theme.ts').themeVersion; t.name + '-' + t.version + '-' + t.type + '.zip'")
+            ./$(node -p "const t=require('./src/theme.js').themeVersion; t.name + '-' + t.version + '-' + t.type + '.zip'")
