@@ -5,7 +5,7 @@ import archiver from "archiver";
 import chalk from "chalk";
 import dayjs from "dayjs";
 import os from "os";
-import { themeVersion } from "../src/theme.ts";
+import { themeVersion } from "../src/theme.js";
 
 const projectDir = process.cwd();
 // 使用系统临时目录，避免复制到自身子目录
