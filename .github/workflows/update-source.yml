@@ -12,23 +12,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ 设置 Node.js
-      - name: Setup Node.js
+      # 2️⃣ 设置 Node.js 并启用 Corepack
+      - name: Setup Node.js and enable Corepack
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
+      - run: corepack enable
 
       # 3️⃣ 安装依赖
       - name: Install dependencies
-        run: |
-          corepack enable
-          pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      # 4️⃣ 运行你的 release 脚本
+      # 4️⃣ 运行 release 脚本
       - name: Run release script
-        run: |
-          pnpm release
+        run: pnpm release
 
       # 5️⃣ 上传打包好的 zip 文件为 artifact
       - name: Upload release artifact
@@ -36,4 +34,4 @@ jobs:
         with:
           name: release-zip
           path: |
-            ./$(node -p "require('./src/theme.ts').themeVersion.name + '-' + require('./src/theme.ts').themeVersion.version + '-' + require('./src/theme.ts').themeVersion.type + '.zip'")
+            ./$(node -p "const t=require('./src/theme.ts').themeVersion; t.name + '-' + t.version + '-' + t.type + '.zip'")
