@@ -45,9 +45,7 @@ export default defineConfig({
     footer: {
       message: `© ${new Date().getFullYear()} ${
         globalConfig.author
-      }. All Rights Reserved. / <a href="${
-        globalConfig.url
-      }/feed.rss">RSS</a><br>
+      }. All Rights Reserved.<br>
         Powered by <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
         "${globalConfig.title}" has existed for ${getRunningTime(
         globalConfig.dateCreated
