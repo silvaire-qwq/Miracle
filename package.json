@@ -9,15 +9,13 @@
   "dependencies": {
     "@catppuccin/vitepress": "^0.1.2",
     "@iconify/vue": "^4.3.0",
-    "archiver": "^7.0.1",
     "chalk": "^5.6.2",
     "dayjs": "^1.11.18",
-    "fs-extra": "^11.3.2",
     "typed.js": "^2.1.0",
     "vitepress-theme-flexoki": "^0.0.1"
   },
   "scripts": {
-    "release": "node scripts/createRelease.js",
+    "clear": "node scripts/setup.js",
     "generate": "node scripts/generateData.js",
     "dev": "node scripts/generateData.js && vitepress dev --port 4321",
     "build": "node scripts/generateData.js && vitepress build",
