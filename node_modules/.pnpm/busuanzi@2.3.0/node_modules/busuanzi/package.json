@@ -1,0 +1,19 @@
+{
+  "name": "busuanzi",
+  "version": "2.3.0",
+  "description": "仅仅只是一个 不蒜子 计数器的 JS Mirror。",
+  "main": "bsz.pure.mini.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SukkaW/busuanzi.git"
+  },
+  "author": "SukkaW <isukkaw@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SukkaW/busuanzi/issues"
+  },
+  "homepage": "https://github.com/SukkaW/busuanzi#readme"
+}
