@@ -60,7 +60,7 @@ div.VPLink.no-icon.VPFeature {
     margin-bottom: 30px;
 }
 
-main .vp-doc h2 {
+main .vp-doc h2, .styledH2 {
     background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% .7rem;
     display: inline-block;
 }
@@ -148,6 +148,10 @@ footer.VPFooter {
         color: var(--vp-c-brand-1);
         &:hover {color: var(--vp-c-brand-2) !important}
     }
+}
+
+.VPDocFooter {
+    display: none;
 }
 
 /**
@@ -526,3 +530,4 @@ div.VPDocAside {
         font-weight: 600;
     }
 }
+

@@ -132,7 +132,7 @@ div.vp-doc.layout.beforeDocs {
       margin-right: 7px;
       aspect-ratio: 1;
       border-radius: var(--vp-border-radius-4);
-      background-color: var(--vp-c-border);
+      background-color: var(--vp-mini-bg);
     }
     .busuanzi {
       color: var(--vp-c-text-3);

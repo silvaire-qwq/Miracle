@@ -24,6 +24,7 @@ const RSS: RSSOptions = {
 export default defineConfig({
   title: globalConfig.title,
   description: globalConfig.description,
+  cleanUrls: true,
   vite: {
     plugins: [RssPlugin(RSS)],
   },

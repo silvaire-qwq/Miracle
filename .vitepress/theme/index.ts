@@ -28,6 +28,7 @@ import Manager from "../../src/components/manager/manager.vue";
 
 // Layout
 import beforeDocs from "../../src/components/layout/beforeDocs.vue";
+import afterDocs from "../../src/components/layout/afterDocs.vue";
 
 export default {
   extends: DefaultTheme,
@@ -35,6 +36,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       "doc-before": () => h(beforeDocs),
+      "doc-after": () => h(afterDocs),
     });
   },
   enhanceApp({ app, router, siteData }) {
@@ -51,6 +53,7 @@ export default {
     app.component("Moments", Moments);
     app.component("Tags", tags);
     app.component("Manager", Manager);
+    app.component("Comments", afterDocs);
     // ...
   },
 } satisfies Theme;

@@ -8,7 +8,7 @@ export const globalConfig = {
   favicon:
     "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508&mask=circle", // favicon
   url: "https://qwq.blue", // main url
-  githubRepo: "silvaire-qwq/Website",
+  githubRepo: "silvaire-qwq/Miracle",
   dateCreated: "2024-08-23",
 
   // homepage setting
@@ -71,18 +71,28 @@ export const globalConfig = {
     {
       text: "Articles",
       items: [
-        { text: "Archive", link: "/src/pages/archive.md" },
-        { text: "Moments", link: "/src/pages/moments.md" },
+        { text: "Archive", link: "/src/pages/archive" },
+        { text: "Moments", link: "/src/pages/moments" },
       ],
     },
     {
       text: "Others",
       items: [
-        { text: "Friends", link: "/src/pages/friends.md" },
-        { text: "Manager", link: "/src/pages/manager.md" },
+        { text: "Friends", link: "/src/pages/friends" },
+        { text: "Manager", link: "/src/pages/manager" },
+        { text: "Whiteboard", link: "/src/pages/whiteboard" },
       ],
     },
   ],
+
+  // comments
+  comments: {
+    enable: true,
+    lang: "en",
+    repo: "silvaire-qwq/Miracle",
+    repoId: "R_kgDOPz1WLw",
+    categoryId: "DIC_kwDOPz1WL84Cvsrq",
+  },
 
   // waterfall
   waterfall: {
