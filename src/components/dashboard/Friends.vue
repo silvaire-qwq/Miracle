@@ -1,29 +1,36 @@
 <template>
-  <div class="first-page">
-  </div>
-  <div class="friend-grid">
-    <div
-      v-for="friend in friends"
-      :key="friend.title"
-      class="friend-card"
-      @mouseenter="handleMouseEnter"
-      @mousemove="handleMouseMove"
-      @mouseleave="handleMouseLeave"
-    >
-      <a :href="friend.link" target="_blank" class="friend-inner">
-        <img :src="friend.img" alt="" class="friend-icon" />
-        <div class="friend-info">
-          <p class="friend-title">{{ friend.title }}</p>
-        </div>
-      </a>
+  <div class="first-page"></div>
+  <ClientOnly>
+    <div class="friend-grid">
+      <div
+        v-for="friend in friends"
+        :key="friend.title"
+        class="friend-card"
+        @mouseenter="handleMouseEnter"
+        @mousemove="handleMouseMove"
+        @mouseleave="handleMouseLeave"
+      >
+        <a :href="friend.link" target="_blank" class="friend-inner">
+          <img :src="friend.img" alt="" class="friend-icon" />
+          <div class="friend-info">
+            <p class="friend-title">{{ friend.title }}</p>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
 import { globalConfig } from "../../../config";
+function shuffle(array: any[]) {
+  return array
+    .map((item) => ({ item, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ item }) => item);
+}
 
-const friends = (
+const friends = shuffle(
   globalConfig.friends.map((friend) => ({
     ...friend,
     img:

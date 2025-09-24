@@ -1,5 +1,6 @@
 import { momentList } from "./src/generated/moment";
 import { friendList } from "./src/generated/friend";
+import { postList } from "./src/generated/post";
 
 export const globalConfig = {
   title: "Silvaire's Blog", // title
@@ -17,16 +18,15 @@ export const globalConfig = {
     author: "Silvaire", // your name
     city: "Tianjin", // your location
     introduce:
-      "A 13-year-old middle school student who is learning programming. Dreaming of becoming a pro. XD", // introduce your self
+      "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
 
     // modules
     modules: {
-      banner:
-        "https://tc-new.z.wiki/autoupload/f/MQvyZMSRCyXfEMMOraS3y-2Q_fY7_mvkXK8ADvVxmQmyl5f0KlZfm6UsKj-HyTuv/20250919/Qrlw/1600X1205/wallhaven-z88xrg.jpg/webp", // img url or "avatar"
-      about: false, // about
+      banner: "https://youke1.picui.cn/s1/2025/09/24/68d3e9867b869.png", // img url or "avatar"
+      about: true, // about
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
-      projects: false, // projects (very sloooooow)
+      projects: true, // projects (very sloooooow)
       techStack: true, // tech stack
       friends: true, // friends
     },
@@ -97,9 +97,10 @@ export const globalConfig = {
   // waterfall
   waterfall: {
     oneColumnMax: 700,
-    twoColumnMax: 1024,
+    twoColumnMax: 1100,
   },
 
   friends: friendList, // friends (edit it in config/friends)
   moments: momentList, // moments (edit it in config/moments)
+  posts: postList, // post data (do not edit it!)
 };

@@ -44,6 +44,7 @@ const friendGrid = computed(() =>
 
 <div style="height: 40px;"></div>
 <div class="allFriend">
+  <ClientOnly>
   <div class="friends-grid">
     <div
       v-for="(col, colIndex) in friendGrid[0].columns"
@@ -61,6 +62,7 @@ const friendGrid = computed(() =>
       </div>
     </div>
   </div>
+  </ClientOnly>
 </div>
 
 <style scoped>

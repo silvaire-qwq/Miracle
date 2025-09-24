@@ -11,24 +11,35 @@
     <div v-else style="height: 50px"></div>
     <div class="textArea">
       <div class="miniBar">
-          <div v-if="frontmatter.origin" class="watch">
-            <Icon class="miniIcon" icon="fluent:link-square-12-regular" />
-            <a class="busuanzi" :href="frontmatter.origin" style="font-weight: 400">{{ formatUrl(frontmatter.origin) }}</a>
-          </div>
-          <div v-else class="watch">
-            <Icon class="miniIcon" icon="fluent:eye-12-regular" />
-            <span class="busuanzi"
-              ><span id="busuanzi_page_pv">0</span> Readings</span
-            >
-          </div>
+        <!-- 📖 新增：字数 -->
+        <div v-if="postInfo" class="words">
+          <Icon class="miniIcon" icon="fluent:text-12-regular" />
+          <span class="busuanzi">{{ postInfo.wordCount }} words</span>
+        </div>
 
-        <div class="person">
+        <!-- ⏱️ 新增：阅读时间 -->
+        <div v-if="postInfo" class="reading">
+          <Icon class="miniIcon" icon="fluent:clock-12-regular" />
+          <span class="busuanzi">{{ postInfo.readingTime }} minutes</span>
+        </div>
+        
+        <div v-if="frontmatter.origin" class="watch">
+          <Icon class="miniIcon" icon="fluent:link-square-12-regular" />
+          <a
+            class="busuanzi"
+            :href="frontmatter.origin"
+            style="font-weight: 400"
+            >{{ formatUrl(frontmatter.origin) }}</a
+          >
+        </div>
+        <div v-else class="person">
           <Icon class="miniIcon" icon="fluent:person-12-regular" />
           <span class="busuanzi"
-            ><span id="busuanzi_page_uv">0</span> Readers</span
+            ><span id="busuanzi_page_uv">0</span> readers</span
           >
         </div>
       </div>
+
       <h1 class="title">
         {{ frontmatter.title }}
       </h1>
@@ -74,23 +85,12 @@ import { useData } from "vitepress";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
 import { globalConfig } from "../../../config";
 import { formatUrl } from "../../utils/formatUrl";
-
-(() => {
-  const u = new URL("https://api.busuanzi.cc/api.php");
-  fetch(u.protocol + "//" + u.host + "/api.php", {
-    method: "POST",
-    body: JSON.stringify({ url: location.href, referrer: document.referrer }),
-  })
-    .then((r) => r.json())
-    .then((r) => {
-      for (const k in r)
-        document.querySelectorAll("#" + k).forEach((e) => (e.innerText = r[k]));
-    })
-    .catch((e) => console.error(e));
-})();
+import { useCardHover } from "../../utils/useCardHover";
 
 const { page } = useData();
-const frontmatter = page.value.frontmatter;
+const frontmatter = page.value?.frontmatter || {};
+
+const postInfo = globalConfig.posts?.find((p) => p.title === frontmatter.title);
 
 const image = frontmatter.image
   ? /^(https?:\/\/)/.test(frontmatter.image)
@@ -98,7 +98,6 @@ const image = frontmatter.image
     : `${globalConfig.imgBed}${frontmatter.image}`
   : "";
 
-import { useCardHover } from "../../utils/useCardHover";
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 <style scoped>
@@ -121,7 +120,9 @@ div.vp-doc.layout.beforeDocs {
     gap: 0.5rem 1rem;
 
     .watch,
-    .person {
+    .person,
+    .words,
+    .reading {
       display: flex;
       align-items: center !important;
     }

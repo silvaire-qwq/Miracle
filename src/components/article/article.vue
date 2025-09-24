@@ -119,7 +119,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <Icon icon="fluent:tag-16-regular" style="opacity: 0.4" />
+        <Icon icon="material-symbols:tag-rounded" style="opacity: 0.4" />
         <span class="name"> Tags</span>
       </a>
       <span

@@ -1,4 +1,4 @@
-const maxMove = 12;
+const maxMove = 9;
 const easing = 0.1;
 
 interface CardState {

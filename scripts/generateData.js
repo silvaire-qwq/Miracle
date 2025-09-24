@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 import dayjs from "dayjs";
+
 /* ---------------------- LOG ---------------------- */
 function log(module, message, filePath = "", type = "info") {
     const time = chalk.gray(dayjs().format("HH:mm:ss"));
@@ -117,3 +118,81 @@ ${momentList
 ];\n`;
 
 writeTsFile(MOMENTS_OUTPUT, momentsTsContent);
+
+
+/* ---------------------- POSTS ---------------------- */
+const MARKDOWN_DIR = path.resolve("./src/markdown");
+const POSTS_OUTPUT = path.resolve("./src/generated/post.ts");
+
+const mdFiles = fs.existsSync(MARKDOWN_DIR)
+    ? fs.readdirSync(MARKDOWN_DIR).filter(f => f.endsWith(".md"))
+    : [];
+
+/* 提取 frontmatter */
+function extractFrontmatter(mdContent) {
+    const fmMatch = mdContent.match(/^---\n([\s\S]*?)\n---/);
+    if (!fmMatch) return {};
+    const fmLines = fmMatch[1].split("\n");
+    const fm = {};
+    for (const line of fmLines) {
+        const [key, ...rest] = line.split(":");
+        if (key && rest.length) {
+            fm[key.trim()] = rest.join(":").trim().replace(/^"|"$/g, "");
+        }
+    }
+    return fm;
+}
+
+/* 提取纯文本 */
+function extractText(mdContent) {
+    let text = mdContent
+        .replace(/^---[\s\S]*?---/, "") // 去掉 frontmatter
+        .replace(/```[\s\S]*?```/g, "") // 删除代码块
+        .replace(/`[^`]*`/g, "") // 删除行内代码
+        .replace(/!\[.*?\]\(.*?\)/g, "") // 删除图片
+        .replace(/\[.*?\]\(.*?\)/g, "") // 删除链接
+        .replace(/[#>*_\-\[\]\(\)`]/g, " ") // 删除 Markdown 符号
+        .replace(/[0-9]/g, " ") // 删除数字
+        .replace(/[^\u4e00-\u9fa5a-zA-Z\s]/g, " "); // 只保留中英文和空格
+
+    return text.replace(/\s+/g, " ").trim();
+}
+
+/* 统计字数 */
+function countWords(text) {
+    const chineseChars = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+    const englishWords = (text.match(/[a-zA-Z]+/g) || []).length;
+    return chineseChars + englishWords;
+}
+
+/* 阅读时长：200字 ≈ 1分钟 */
+function calcReadingTime(text) {
+    const words = countWords(text);
+    return Math.max(1, Math.ceil(words / 200));
+}
+
+const postList = mdFiles.map(file => {
+    const raw = fs.readFileSync(path.join(MARKDOWN_DIR, file), "utf-8");
+    const frontmatter = extractFrontmatter(raw);
+    const content = extractText(raw);
+    const wordCount = countWords(content);
+    return {
+        title: frontmatter.title || path.basename(file, ".md"),
+        content,
+        wordCount,
+        readingTime: calcReadingTime(content)
+    };
+});
+
+const postsTsContent = `export const postList = [
+${postList
+        .map(p => `  {
+    title: \`${escapeTemplateString(p.title)}\`,
+    content: \`${escapeTemplateString(p.content)}\`,
+    wordCount: ${p.wordCount},
+    readingTime: ${p.readingTime}
+  }`)
+        .join(",\n")}
+];\n`;
+
+writeTsFile(POSTS_OUTPUT, postsTsContent);
