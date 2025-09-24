@@ -83,7 +83,7 @@
     opacity: 0.7;
     z-index: -1;
     mask-image: linear-gradient(var(--vp-c-gutter) 20%, transparent);
-    text-transform: uppercase;
+    text-transform: var(--vp-title-uppercase);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -110,7 +110,7 @@
 
 .tag {
     font-family: var(--vp-font-family-mono);
-    text-transform: uppercase;
+    text-transform: var(--vp-title-uppercase);
     transition: all var(--vp-transition-time);
     padding: 12px 24px;
     color: var(--vp-c-text-1);

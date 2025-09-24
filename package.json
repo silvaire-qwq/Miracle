@@ -11,6 +11,7 @@
     "@iconify/vue": "^4.3.0",
     "chalk": "^5.6.2",
     "dayjs": "^1.11.18",
+    "rss-parser": "^3.13.0",
     "typed.js": "^2.1.0",
     "vitepress-theme-flexoki": "^0.0.1"
   },

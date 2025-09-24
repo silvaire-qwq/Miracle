@@ -1,63 +1,101 @@
 import fs from "fs";
 import path from "path";
+import chalk from "chalk";
+import dayjs from "dayjs";
+/* ---------------------- LOG ---------------------- */
+function log(module, message, filePath = "", type = "info") {
+    const time = chalk.gray(dayjs().format("HH:mm:ss"));
+    const moduleLabel = chalk.cyan.bold(`[${module}]`);
+    let msgColored;
 
-/* ---------------------- OUTPUT DIR ---------------------- */
+    switch (type) {
+        case "success":
+            msgColored = chalk.green(message);
+            break;
+        case "warn":
+            msgColored = chalk.yellow(message);
+            break;
+        case "error":
+            msgColored = chalk.red(message);
+            break;
+        default:
+            msgColored = chalk.white(message);
+    }
 
-const outputDir = path.resolve("./src/generated");
-if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+    const pathColored = chalk.gray(filePath);
+    console.log(`${time} ${moduleLabel} ${msgColored} ${pathColored}`);
 }
 
-/* ---------------------- FRIENDS GENERATION ---------------------- */
+/* ---------------------- UTILS ---------------------- */
+function ensureDir(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        log("miracle", "Directory created", dirPath, "success");
+    }
+}
 
-const friendsDir = path.resolve("./src/config/friends");
-const friendsOutputFile = path.join(outputDir, "friend.ts");
+function writeTsFile(filePath, content) {
+    fs.writeFileSync(filePath, content, "utf-8");
+    log("miracle", "File written", filePath, "success");
+}
 
-const friendFiles = fs.existsSync(friendsDir)
-    ? fs.readdirSync(friendsDir).filter(f => f.endsWith(".json"))
+function escapeTemplateString(str) {
+    return str.replace(/`/g, "\\`");
+}
+
+/* ---------------------- OUTPUT DIR ---------------------- */
+const OUTPUT_DIR = path.resolve("./src/generated");
+ensureDir(OUTPUT_DIR);
+
+/* ---------------------- FRIENDS ---------------------- */
+const FRIENDS_DIR = path.resolve("./src/config/friends");
+ensureDir(FRIENDS_DIR);
+
+const FRIENDS_OUTPUT = path.join(OUTPUT_DIR, "friend.ts");
+
+const friendFiles = fs.existsSync(FRIENDS_DIR)
+    ? fs.readdirSync(FRIENDS_DIR).filter(f => f.endsWith(".json"))
     : [];
 
 const friendList = friendFiles.map(file => {
-    const data = JSON.parse(fs.readFileSync(path.join(friendsDir, file), "utf-8"));
+    const data = JSON.parse(fs.readFileSync(path.join(FRIENDS_DIR, file), "utf-8"));
     return {
         fileName: file,
         title: data.title,
         link: data.link,
         desc: data.desc,
         img: data.img,
+        rss: data.rss || undefined
     };
 });
 
-const friendsTsContent = `export const friendList: { fileName: string; title: string; link: string; desc: string; img: string; blog: string }[] = [
+const friendsTsContent = `export const friendList = [
 ${friendList
-        .map(
-            l => `  {
-    fileName: "${l.fileName}",
-    title: "${l.title}",
-    link: "${l.link}",
-    desc: "${l.desc}",
-    img: "${l.img}",
-  }`
-        )
+        .map(f => `  {
+    fileName: "${f.fileName}",
+    title: \`${escapeTemplateString(f.title)}\`,
+    link: "${f.link}",
+    desc: \`${escapeTemplateString(f.desc)}\`,
+    img: "${f.img}"${f.rss ? `,\n    rss: "${f.rss}"` : ""}
+  }`)
         .join(",\n")}
 ];\n`;
 
-fs.writeFileSync(friendsOutputFile, friendsTsContent, "utf-8");
+writeTsFile(FRIENDS_OUTPUT, friendsTsContent);
 
-/* ---------------------- MOMENTS GENERATION ---------------------- */
+/* ---------------------- MOMENTS ---------------------- */
+const MOMENTS_DIR = path.resolve("./src/config/moments");
+ensureDir(MOMENTS_DIR);
 
-const momentsDir = path.resolve("./src/config/moments");
-const momentsOutputFile = path.join(outputDir, "moment.ts");
+const MOMENTS_OUTPUT = path.join(OUTPUT_DIR, "moment.ts");
 
-const momentFiles = fs.existsSync(momentsDir)
-    ? fs.readdirSync(momentsDir).filter(f => f.endsWith(".json"))
+const momentFiles = fs.existsSync(MOMENTS_DIR)
+    ? fs.readdirSync(MOMENTS_DIR).filter(f => f.endsWith(".json"))
     : [];
-
-// Sort by filename for chronological order
 momentFiles.sort();
 
 const momentList = momentFiles.map(file => {
-    const data = JSON.parse(fs.readFileSync(path.join(momentsDir, file), "utf-8"));
+    const data = JSON.parse(fs.readFileSync(path.join(MOMENTS_DIR, file), "utf-8"));
     return {
         fileName: file,
         date: data.date,
@@ -67,19 +105,15 @@ const momentList = momentFiles.map(file => {
     };
 });
 
-const momentsTsContent = `export const momentList: { fileName: string; date: string; time: string; content: string; image?: string }[] = [
+const momentsTsContent = `export const momentList = [
 ${momentList
-        .map(m => {
-            const imageLine = m.image ? `    image: "${m.image}",\n` : "";
-            return `  {
+        .map(m => `  {
     fileName: "${m.fileName}",
     date: "${m.date}",
     time: "${m.time}",
-${imageLine}    content: "${m.content.replace(/"/g, '\\"')}",
-  }`;
-        })
+    content: \`${escapeTemplateString(m.content)}\`${m.image ? `,\n    image: "${m.image}"` : ""}
+  }`)
         .join(",\n")}
 ];\n`;
 
-
-fs.writeFileSync(momentsOutputFile, momentsTsContent, "utf-8");
+writeTsFile(MOMENTS_OUTPUT, momentsTsContent);

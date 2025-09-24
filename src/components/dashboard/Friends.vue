@@ -23,15 +23,7 @@
 <script setup lang="ts">
 import { globalConfig } from "../../../config";
 
-// 打乱数组的简单函数
-function shuffle(array) {
-  return array
-    .map((item) => ({ item, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ item }) => item);
-}
-
-const friends = shuffle(
+const friends = (
   globalConfig.friends.map((friend) => ({
     ...friend,
     img:

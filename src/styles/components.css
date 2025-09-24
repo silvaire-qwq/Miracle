@@ -73,7 +73,7 @@ main .vp-doc h2,
 main .vp-doc a {
     background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
     text-decoration: none;
-    padding: 1px 5px;
+    padding: 1px 4px;
     transition: var(--vp-transition-time);
 }
 
@@ -313,8 +313,8 @@ a.header-anchor {
 
 .VPNav * {
     font-family: var(--vp-font-family-mono);
-    text-transform: uppercase;
     font-weight: 600;
+    text-transform: var(--vp-title-uppercase);
 }
 
 @media screen and (min-width: 960px) {

@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 function log(module, message, filePath = "", type = "info") {
     const time = chalk.gray(dayjs().format("HH:mm:ss"));
-    const moduleLabel = chalk.magenta.bold(`[${module}]`);
+    const moduleLabel = chalk.cyan.bold(`[${module}]`);
     let msgColored;
 
     switch (type) {
