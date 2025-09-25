@@ -7,7 +7,7 @@ interface CardProps {
   link: string;
   desc: string;
   img: string;
-  blog: string;
+  folder: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   link: "",
   desc: "",
   img: "",
-  blog: "",
+  folder: "",
 });
 </script>
 

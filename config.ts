@@ -97,7 +97,15 @@ export const globalConfig = {
   // waterfall
   waterfall: {
     oneColumnMax: 700,
-    twoColumnMax: 1100,
+    twoColumnMax: 1050,
+  },
+
+  // friend weight (default: 0)
+  // the higher the weight, the lower the friend will be displayed
+  friendWeights: {
+    // example: -99, // "example" will be displayed at the top
+    qwq: -50,
+    friends: 0, // "friends" will be displayed at the bottom
   },
 
   friends: friendList, // friends (edit it in config/friends)

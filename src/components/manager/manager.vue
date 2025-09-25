@@ -65,6 +65,7 @@ const friendFileTemplate = `{
   "link": "",
   "desc": "",
   "img": "",
+  "folder": ""
 }`;
 
 const beijingNow = new Date(

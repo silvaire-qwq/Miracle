@@ -66,7 +66,7 @@ const friendList = friendFiles.map(file => {
         link: data.link,
         desc: data.desc,
         img: data.img,
-        rss: data.rss || undefined
+        folder: data.folder || "friends"
     };
 });
 
@@ -77,7 +77,8 @@ ${friendList
     title: \`${escapeTemplateString(f.title)}\`,
     link: "${f.link}",
     desc: \`${escapeTemplateString(f.desc)}\`,
-    img: "${f.img}"${f.rss ? `,\n    rss: "${f.rss}"` : ""}
+    img: "${f.img}",
+    folder: "${f.folder}"
   }`)
         .join(",\n")}
 ];\n`;
@@ -178,7 +179,6 @@ const postList = mdFiles.map(file => {
     const wordCount = countWords(content);
     return {
         title: frontmatter.title || path.basename(file, ".md"),
-        content,
         wordCount,
         readingTime: calcReadingTime(content)
     };
@@ -188,7 +188,6 @@ const postsTsContent = `export const postList = [
 ${postList
         .map(p => `  {
     title: \`${escapeTemplateString(p.title)}\`,
-    content: \`${escapeTemplateString(p.content)}\`,
     wordCount: ${p.wordCount},
     readingTime: ${p.readingTime}
   }`)
