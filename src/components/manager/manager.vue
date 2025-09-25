@@ -65,7 +65,6 @@ const friendFileTemplate = `{
   "link": "",
   "desc": "",
   "img": "",
-  "blog": ""
 }`;
 
 const beijingNow = new Date(
@@ -211,7 +210,7 @@ const momentFileTemplate = `{
       </div>
       <div
         v-if="activeTab === 'moments'"
-        v-for="m in globalConfig.moments"
+        v-for="m in globalConfig.moments.reverse()"
         :key="m.date + m.time"
         class="post-card diary"
         @mouseenter="handleMouseEnter"
@@ -221,9 +220,6 @@ const momentFileTemplate = `{
         <div class="textPlace">
           <h3 class="title">{{ m.content }}</h3>
           <div class="actions">
-            <button @click="navigator.clipboard.writeText(m.content)">
-              <Icon icon="material-symbols:copy-all-outline" />
-            </button>
             <a
               :href="`https://github.com/${globalConfig.githubRepo}/edit/main/src/config/moments/${m.fileName}`"
               target="_blank"
