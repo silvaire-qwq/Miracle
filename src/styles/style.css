@@ -21,7 +21,7 @@
 
 :root {
     --vp-font-family-base: "MiSans VF";
-    --vp-font-family-mono: "SF Mono";
+    --vp-font-family-mono: "SF Mono", var(--vp-font-family-base);
 
     /*
     * Title Text Transform

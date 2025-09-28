@@ -142,7 +142,6 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   line-height: 20px;
   margin: 0 0 10px 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

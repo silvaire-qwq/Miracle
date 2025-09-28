@@ -84,7 +84,7 @@ const momentFileTemplate = `{
 <template>
   <div>
     <!-- 顶部标题 -->
-    <h1 class="year">{{ activeTab.toUpperCase() }}</h1>
+    <h1 class="year">{{ globalConfig.lang[activeTab] }}</h1>
 
     <!-- Tab 切换按钮 -->
     <div class="tags">
@@ -96,7 +96,7 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <span class="name">POSTS</span>
+        <span class="name">{{ globalConfig.lang.posts }}</span>
       </span>
       <span
         class="tag"
@@ -106,7 +106,7 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <span class="name">MOMENTS</span>
+        <span class="name">{{ globalConfig.lang.moments }}</span>
       </span>
       <span
         class="tag"
@@ -116,11 +116,11 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <span class="name">FRIENDS</span>
+        <span class="name">{{ globalConfig.lang.friends }}</span>
       </span>
     </div>
 
-    <h1 class="year">{{ "Contents".toUpperCase() }}</h1>
+    <h1 class="year">{{ globalConfig.lang.contents }}</h1>
 
     <!-- 统一卡片列表 -->
     <div class="posts-grid">
@@ -132,7 +132,7 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">Create a New Post</h3>
+          <h3 class="title">{{ globalConfig.lang.createANewPost}}</h3>
           <div class="actions">
             <a
               :href="`https://github.com/${
@@ -191,7 +191,7 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">Create a New Moment</h3>
+          <h3 class="title">{{ globalConfig.lang.createANewMoment }}</h3>
           <div class="actions">
             <a
               :href="`https://github.com/${
@@ -247,7 +247,7 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">Create a New Link</h3>
+          <h3 class="title">{{ globalConfig.lang.addANewLink }}</h3>
           <div class="actions">
             <a
               :href="`https://github.com/${

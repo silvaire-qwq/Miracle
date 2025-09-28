@@ -8,12 +8,12 @@ footer: false
 <FirstPage />
 
 <div v-if="globalConfig.homePage.modules.about">
-    <h2><Icon icon="fluent:info-16-regular" /> About</h2>
+    <h2><Icon icon="fluent:info-16-regular" /> {{ globalConfig.lang.about }}</h2>
     {{ globalConfig.homePage.introduce }}
 </div>
 
 <div v-if="globalConfig.homePage.modules.recentPosts">
-    <h2><Icon icon="fluent:document-16-regular" /> Recent Posts</h2>
+    <h2><Icon icon="fluent:document-16-regular" /> {{ globalConfig.lang.recentPosts }}</h2>
     <div v-if="globalConfig.homePage.modules.lastMoment">
         <LastMoment />
     </div>
@@ -21,17 +21,17 @@ footer: false
 </div>
 
 <div v-if="globalConfig.homePage.modules.projects">
-    <h2><Icon icon="fluent:shopping-bag-16-regular" /> Projects</h2>
+    <h2><Icon icon="fluent:shopping-bag-16-regular" /> {{ globalConfig.lang.projects }}</h2>
     <Projects />
 </div>
 
 <div v-if="globalConfig.homePage.modules.techStack">
-    <h2><Icon icon="fluent:network-adapter-16-regular" /> Tech Stack</h2>
+    <h2><Icon icon="fluent:network-adapter-16-regular" /> {{ globalConfig.lang.techStack }}</h2>
     <TechStack />
 </div>
 
 <div v-if="globalConfig.homePage.modules.friends">
-    <h2><Icon icon="fluent:person-16-regular" /> Friends</h2>
+    <h2><Icon icon="fluent:person-16-regular" /> {{ globalConfig.lang.friends }}</h2>
     <Friends />
 </div>
 

@@ -6,6 +6,7 @@ import { useCardHover } from "../../utils/useCardHover";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
 import PostCard from "../../components/article/postCard.vue";
 import { Icon } from "@iconify/vue";
+import { globalConfig } from "../../../config";
 
 const props = defineProps({
   maxItems: {
@@ -108,7 +109,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 <template>
   <div>
-    <h1 class="year">Categories</h1>
+    <h1 class="year">{{ globalConfig.lang.categories }}</h1>
 
     <!-- Categories Section -->
     <div class="tags">
@@ -120,7 +121,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
       >
         <Icon icon="material-symbols:tag-rounded" style="opacity: 0.4" />
-        <span class="name"> Tags</span>
+        <span class="name">{{ " " + globalConfig.lang.tags }}</span>
       </a>
       <span
         class="tag"
@@ -130,7 +131,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
         :class="{ active: !selectedCategory }"
       >
-        <span class="name">All Posts</span>
+        <span class="name">{{ globalConfig.lang.allPosts }}</span>
       </span>
       <span
         v-for="category in categories"

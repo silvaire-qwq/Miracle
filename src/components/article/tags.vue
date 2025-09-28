@@ -5,6 +5,7 @@ import { generateGrid } from "../../utils/generateGrid";
 import { useCardHover } from "../../utils/useCardHover";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
 import PostCard from "./postCard.vue";
+import { globalConfig } from "../../../config";
 import { Icon } from "@iconify/vue";
 
 const props = defineProps({
@@ -105,7 +106,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 <template>
   <div>
-    <h1 class="year">Tags</h1>
+    <h1 class="year">{{ globalConfig.lang.tags }}</h1>
 
     <!-- Tags Section -->
     <div class="tags">
@@ -117,7 +118,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
       >
         <Icon icon="material-symbols:book-2-outline-rounded" style="opacity: 0.4" />
-        <span class="name"> Categories</span>
+        <span class="name">{{ " " + globalConfig.lang.categories }}</span>
       </a>
       <span
         class="tag"
@@ -127,7 +128,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
         :class="{ active: !selectedTag }"
       >
-        <span class="name">All Posts</span>
+        <span class="name">{{ globalConfig.lang.allPosts }}</span>
       </span>
       <span
         v-for="tag in tags"

@@ -13,16 +13,20 @@
       <div class="miniBar">
         <!-- 📖 新增：字数 -->
         <div v-if="postInfo" class="words">
-          <Icon class="miniIcon" icon="fluent:text-12-regular" />
-          <span class="busuanzi">{{ postInfo.wordCount }} words</span>
+          <Icon class="miniIcon" icon="material-symbols:notes-rounded" />
+          <span class="busuanzi"
+            >{{ postInfo.wordCount }} {{ globalConfig.lang.words }}</span
+          >
         </div>
 
         <!-- ⏱️ 新增：阅读时间 -->
         <div v-if="postInfo" class="reading">
           <Icon class="miniIcon" icon="fluent:clock-12-regular" />
-          <span class="busuanzi">{{ postInfo.readingTime }} minutes</span>
+          <span class="busuanzi"
+            >{{ postInfo.readingTime }} {{ globalConfig.lang.minutes }}</span
+          >
         </div>
-        
+
         <div v-if="frontmatter.origin" class="watch">
           <Icon class="miniIcon" icon="fluent:link-square-12-regular" />
           <a
@@ -35,7 +39,8 @@
         <div v-else class="person">
           <Icon class="miniIcon" icon="fluent:person-12-regular" />
           <span class="busuanzi"
-            ><span id="busuanzi_page_uv">0</span> readers</span
+            ><span id="busuanzi_page_uv">0</span>
+            {{ globalConfig.lang.readers }}</span
           >
         </div>
       </div>
@@ -103,14 +108,21 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 <style scoped>
 div.vp-doc.layout.beforeDocs {
   /* 提高文字区域的空间 */
-  .textArea {
-    margin-top: 50px;
-    margin-bottom: 100px;
+  @media screen and (min-width: 600px) {
+    .textArea {
+      margin-top: 30px;
+      margin-bottom: 70px;
+    }
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
     .miniBar {
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.5rem;
+    }
+    .textArea {
+      margin-top: 0px;
+      margin-bottom: 48px;
     }
   }
 

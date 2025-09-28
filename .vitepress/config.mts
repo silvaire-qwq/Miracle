@@ -39,17 +39,29 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: globalConfig.nav,
+
     // it seems bad TwT
     logo: globalConfig.favicon,
 
+    langMenuLabel: globalConfig.lang.langMenuLabel,
+    darkModeSwitchLabel: globalConfig.lang.darkModeSwitchLabel,
+    lightModeSwitchTitle: globalConfig.lang.lightModeSwitchTitle,
+    darkModeSwitchTitle: globalConfig.lang.darkModeSwitchTitle,
+    sidebarMenuLabel: globalConfig.lang.sidebarMenuLabel,
+    outline: { level: [2, 2], label: globalConfig.lang.outline },
+    returnToTopLabel: globalConfig.lang.returnToTopLabel,
+    lastUpdated: { text: globalConfig.lang.lastUpdated },
+
     footer: {
-      message: `© ${new Date().getFullYear()} ${
-        globalConfig.author
-      }. All Rights Reserved.<br>
-        Powered by <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
-        "${globalConfig.title}" has existed for ${getRunningTime(
-        globalConfig.dateCreated
-      )} days
+      message: `© ${new Date().getFullYear()} ${globalConfig.author}${
+        globalConfig.lang.allRightsReserved
+      }<br>
+        ${
+          globalConfig.lang.poweredBy
+        } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
+        "${globalConfig.title}" ${
+        globalConfig.lang.hasExistedFor
+      } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}
 
         `,
     },

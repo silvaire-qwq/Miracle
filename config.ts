@@ -2,15 +2,28 @@ import { momentList } from "./src/generated/moment";
 import { friendList } from "./src/generated/friend";
 import { postList } from "./src/generated/post";
 
+// experimental: i18n
+import { languageFile as zh } from "./src/lang/zh_CN";
+import { languageFile as en } from "./src/lang/en_US";
+const languageMap: Record<string, any> = {
+  zh: zh,
+  en: en,
+};
+
+// website language (zh / en)
+const defaultLanguage = "en";
+
+// config area
+const languageFile = languageMap[defaultLanguage] || en; // do not edit it
 export const globalConfig = {
   title: "Silvaire's Blog", // title
   description: "Per Aspera Ad Astra", // description
-  author: "Silvaire",
+  author: "Silvaire", // your name
   favicon:
     "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508&mask=circle", // favicon
   url: "https://qwq.blue", // main url
-  githubRepo: "silvaire-qwq/Miracle",
-  dateCreated: "2024-08-23",
+  githubRepo: "silvaire-qwq/Miracle", // github repo
+  dateCreated: "2024-08-23", // date created (YYYY-MM-DD)
 
   // homepage setting
   homePage: {
@@ -67,20 +80,20 @@ export const globalConfig = {
 
   // navigation items
   nav: [
-    { text: "Dashboard", link: "/" },
+    { text: languageFile.dashboard, link: "/" },
     {
-      text: "Articles",
+      text: languageFile.articles,
       items: [
-        { text: "Archive", link: "/src/pages/archive" },
-        { text: "Moments", link: "/src/pages/moments" },
+        { text: languageFile.archive, link: "/src/pages/archive" },
+        { text: languageFile.moments, link: "/src/pages/moments" },
       ],
     },
     {
-      text: "Others",
+      text: languageFile.others,
       items: [
-        { text: "Friends", link: "/src/pages/friends" },
-        { text: "Manager", link: "/src/pages/manager" },
-        { text: "Whiteboard", link: "/src/pages/whiteboard" },
+        { text: languageFile.friends, link: "/src/pages/friends" },
+        { text: languageFile.manager, link: "/src/pages/manager" },
+        { text: languageFile.whiteboard, link: "/src/pages/whiteboard" },
       ],
     },
   ],
@@ -88,7 +101,6 @@ export const globalConfig = {
   // comments
   comments: {
     enable: true,
-    lang: "en",
     repo: "silvaire-qwq/Miracle",
     repoId: "R_kgDOPz1WLw",
     categoryId: "DIC_kwDOPz1WL84Cvsrq",
@@ -111,4 +123,5 @@ export const globalConfig = {
   friends: friendList, // friends (edit it in config/friends)
   moments: momentList, // moments (edit it in config/moments)
   posts: postList, // post data (do not edit it!)
+  lang: languageFile, // language (do not edit it!)
 };

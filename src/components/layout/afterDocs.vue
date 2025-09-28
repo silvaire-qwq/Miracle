@@ -1,7 +1,7 @@
 <template>
   <div class="comment" v-if="globalConfig.comments.enable">
-    <div v-if="props.title === 'false'" style="margin-top: 40px;"></div>
-    <h2 class="styledH2" v-if="props.title !== 'false'">Comments</h2>
+    <div v-if="props.title === 'false'" style="margin-top: 40px"></div>
+    <h2 class="styledH2" v-if="props.title !== 'false'">{{ globalConfig.lang.comments }}</h2>
     <component
       v-if="isDark"
       :is="'script'"
@@ -15,7 +15,7 @@
       data-emit-metadata="0"
       data-input-position="top"
       data-theme="https://giscus.catppuccin.com/themes/mocha.css"
-      :data-lang="globalConfig.comments.lang"
+      :data-lang="globalConfig.lang.giscusLang"
       crossorigin="anonymous"
       data-loading="eager"
       async
@@ -34,7 +34,7 @@
       data-emit-metadata="0"
       data-input-position="top"
       data-theme="https://giscus.catppuccin.com/themes/latte.css"
-      :data-lang="globalConfig.comments.lang"
+      :data-lang="globalConfig.lang.giscusLang"
       crossorigin="anonymous"
       data-loading="eager"
       async
@@ -49,20 +49,23 @@ import { globalConfig } from "../../../config";
 const { isDark } = useData();
 
 interface CardProps {
-  title: string
+  title: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
-  title: "true"
+  title: "true",
 });
+
+const { page } = useData();
+const frontmatter = page.value?.frontmatter || {};
 </script>
 <style scoped>
-  .styledH2 {
-    margin: 48px 0px 36px 0px;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 32px;
-    padding-top: 24px;
-    border-top: 1px solid var(--vp-c-divider);
-  }
+.styledH2 {
+  margin: 48px 0px 36px 0px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--vp-c-divider);
+}
 </style>
