@@ -12,6 +12,7 @@
     "chalk": "^5.6.2",
     "dayjs": "^1.11.18",
     "rss-parser": "^3.13.0",
+    "twikoo": "^1.6.44",
     "typed.js": "^2.1.0",
     "vitepress-theme-flexoki": "^0.0.1"
   },

@@ -117,6 +117,8 @@ div.VPHero.has-image.VPHomeHero div.container {
     @media screen and (min-width: 960px) {
         .name.clip {
             line-height: 75px;
+            justify-self: center;
+            align-self: center;
         }
     }
 
@@ -434,7 +436,6 @@ div.VPNavBar {
         padding: 5px 16px;
         border-radius: var(--vp-border-radius-1) 0 0 var(--vp-border-radius-1);
         height: 36px;
-
     }
 
     img.VPImage.logo {
@@ -479,6 +480,8 @@ div.VPLocalNav {
     background-color: var(--vp-c-bg);
     border: 1px solid var(--vp-c-divider);
     padding: 5px 12px;
+    justify-self: center;
+    align-self: center;
     border-radius: 0 var(--vp-border-radius-1) var(--vp-border-radius-1) 0 !important;
     height: 36px;
 }
@@ -549,4 +552,3 @@ div.VPDocAside {
 /**
  * Catppuccin Mocha - Brand Soft
  * -------------------------------------------------------------------------- */
-

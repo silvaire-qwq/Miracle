@@ -23,6 +23,9 @@ importers:
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
+      twikoo:
+        specifier: ^1.6.44
+        version: 1.6.44
       typed.js:
         specifier: ^2.1.0
         version: 2.1.0
@@ -1062,6 +1065,9 @@ packages:
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
+
+  twikoo@1.6.44:
+    resolution: {integrity: sha512-Y3YfGtMelWT+1XxZS8SmGXkHZ6/26ry1ZteKKBNTYV0oA+o5/2ELUMi4ta2zYD/V0wGZGv6EXJ6HJU8GTPVh4g==}
 
   typed.js@2.1.0:
     resolution: {integrity: sha512-bDuXEf7YcaKN4g08NMTUM6G90XU25CK3bh6U0THC/Mod/QPKlEt9g/EjvbYB8x2Qwr2p6J6I3NrsoYaVnY6wsQ==}
@@ -2255,6 +2261,8 @@ snapshots:
       punycode: 2.3.1
 
   trim-lines@3.0.1: {}
+
+  twikoo@1.6.44: {}
 
   typed.js@2.1.0: {}
 

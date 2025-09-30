@@ -10,6 +10,8 @@ const languageMap: Record<string, any> = {
   en: en,
 };
 
+// hey !!! you !!!
+// change it to "zh" if you want to use Chinese
 // website language (zh / en)
 const defaultLanguage = "en";
 
@@ -101,9 +103,15 @@ export const globalConfig = {
   // comments
   comments: {
     enable: true,
-    repo: "silvaire-qwq/Miracle",
-    repoId: "R_kgDOPz1WLw",
-    categoryId: "DIC_kwDOPz1WL84Cvsrq",
+    type: "giscus",
+    giscus: {
+      repo: "silvaire-qwq/Miracle",
+      repoId: "R_kgDOPz1WLw",
+      categoryId: "DIC_kwDOPz1WL84Cvsrq",
+    },
+    twikoo: {
+      env: "https://twikoo.qwq.blue",
+    },
   },
 
   // waterfall
