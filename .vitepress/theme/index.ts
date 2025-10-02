@@ -3,32 +3,32 @@ import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { Icon } from "@iconify/vue";
-import "../../src/styles/style.css";
+import "./styles/style.css";
 import "@catppuccin/vitepress/theme/mocha/lavender.css";
 // enable it if you like it ;)
 // import "vitepress-theme-flexoki/index.css";
 
 // Dashboard
-import RecentPosts from "../../src/components/dashboard/RecentPosts.vue";
-import Projects from "../../src/components/dashboard/Projects.vue";
-import Friends from "../../src/components/dashboard/Friends.vue";
-import TechStack from "../../src/components/dashboard/TechStack.vue";
-import LastMoment from "../../src/components/dashboard/LastMoment.vue";
-import FirstPage from "../../src/components/dashboard/FirstPage.vue";
+import RecentPosts from "./components/dashboard/RecentPosts.vue";
+import Projects from "./components/dashboard/Projects.vue";
+import Friends from "./components/dashboard/Friends.vue";
+import TechStack from "./components/dashboard/TechStack.vue";
+import LastMoment from "./components/dashboard/LastMoment.vue";
+import FirstPage from "./components/dashboard/FirstPage.vue";
 
 // Components
-import PostCard from "../../src/components/article/postCard.vue";
-import FriendCard from "../../src/components/friends/card.vue";
+import PostCard from "./components/article/postCard.vue";
+import FriendCard from "./components/friends/card.vue";
 
 // Pages
-import Articles from "../../src/components/article/article.vue";
-import tags from "../../src/components/article/tags.vue";
-import Moments from "../../src/components/moments/moments.vue";
-import Manager from "../../src/components/manager/manager.vue";
+import Articles from "./components/article/article.vue";
+import tags from "./components/article/tags.vue";
+import Moments from "./components/moments/moments.vue";
+import Manager from "./components/manager/manager.vue";
 
 // Layout
-import beforeDocs from "../../src/components/layout/beforeDocs.vue";
-import afterDocs from "../../src/components/layout/afterDocs.vue";
+import beforeDocs from "./components/layout/beforeDocs.vue";
+import afterDocs from "./components/layout/afterDocs.vue";
 
 export default {
   extends: DefaultTheme,

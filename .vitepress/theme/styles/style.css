@@ -1,0 +1,63 @@
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+
+
+/**
+ * CSS
+ * -------------------------------------------------------------------------- */
+
+@import url("./default.css");
+@import url("./components.css");
+
+/**
+ * Variables
+ * -------------------------------------------------------------------------- */
+
+@import url("https://cdn-font.hyperos.mi.com/font/css?family=MiSans_VF:VF:Chinese_Simplify,Latin&display=swap");
+@import url("https://fonts.cdnfonts.com/css/sf-mono");
+
+:root {
+    --vp-font-family-base: "MiSans VF";
+    --vp-font-family-mono: "SF Mono", var(--vp-font-family-base);
+
+    /*
+    * Title Text Transform
+    *   - uppercase	(CATEGORIES)
+    *   - unset		(Categories)
+    */
+    --vp-title-uppercase: uppercase;
+
+    /* Border Radius */
+    --vp-border-radius-1: 26px;
+    --vp-border-radius-2: calc(var(--vp-border-radius-1) - 6px);
+    --vp-border-radius-3: calc(var(--vp-border-radius-2) - 6px);
+    --vp-border-radius-4: calc(var(--vp-border-radius-3) - 6px);
+
+    /* Transition Time */
+    --vp-transition-time: 0.1s;
+
+    /* Shadow */
+    --vp-shadow: var(--vp-c-bg-alt) 0px 12px 25px -5px,
+        var(--vp-c-bg-alt) 0px 7px 15px -7px;
+    --vp-shadow-brand: var(--vp-c-brand-soft) 0px 12px 25px -5px,
+        var(--vp-c-brand-soft) 0px 7px 15px -7px;
+
+    --vp-c-brand-soft: rgba(180, 190, 254, 0.4);
+
+    /* Post Card Gap */
+    --vp-gap: 12px;
+
+    /* Blur */
+    --vp-blur: blur(5px);
+
+    /* Mini Icon Background */
+    --vp-mini-bg: var(--vp-c-bg-elv)
+}
+
+.dark {
+    --vp-c-brand-soft: rgba(180, 190, 254, 0.1);
+    --vp-mini-bg: var(--vp-c-border);
+}

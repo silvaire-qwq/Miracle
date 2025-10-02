@@ -1,14 +1,11 @@
-import { momentList } from "./src/generated/moment";
-import { friendList } from "./src/generated/friend";
-import { postList } from "./src/generated/post";
+import { data as momentList } from "#theme/data/moments.data";
+import { data as friendList } from "#theme/data/friends.data";
 
 // experimental: i18n
-import { languageFile as zh } from "./src/lang/zh_CN";
-import { languageFile as en } from "./src/lang/en_US";
-const languageMap: Record<string, any> = {
-  zh: zh,
-  en: en,
-};
+import { languageFile as zh } from "#theme/lang/zh_CN";
+import { languageFile as en } from "#theme/lang/en_US";
+
+const languageMap: Record<string, any> = { zh, en };
 
 // hey !!! you !!!
 // change it to "zh" if you want to use Chinese
@@ -86,16 +83,16 @@ export const globalConfig = {
     {
       text: languageFile.articles,
       items: [
-        { text: languageFile.archive, link: "/src/pages/archive" },
-        { text: languageFile.moments, link: "/src/pages/moments" },
+        { text: languageFile.archives, link: "/archives" },
+        { text: languageFile.moments, link: "/moments" },
       ],
     },
     {
       text: languageFile.others,
       items: [
-        { text: languageFile.friends, link: "/src/pages/friends" },
-        { text: languageFile.manager, link: "/src/pages/manager" },
-        { text: languageFile.whiteboard, link: "/src/pages/whiteboard" },
+        { text: languageFile.friends, link: "/friends" },
+        { text: languageFile.manager, link: "/manager" },
+        { text: languageFile.whiteboard, link: "/whiteboard" },
       ],
     },
   ],
@@ -130,6 +127,5 @@ export const globalConfig = {
 
   friends: friendList, // friends (edit it in config/friends)
   moments: momentList, // moments (edit it in config/moments)
-  posts: postList, // post data (do not edit it!)
   lang: languageFile, // language (do not edit it!)
 };

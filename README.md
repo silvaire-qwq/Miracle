@@ -21,7 +21,7 @@ It's Miracle!!!!!
 
 ## Manage
 
-1. Go to `https://your.website.com/src/pages/manager`.
+1. Go to `https://your.website.com/manager`.
 2. Pick a tab:
     - Posts: Edit all your posts.
     - Moments: Edit all your moments.
@@ -37,7 +37,6 @@ It's Miracle!!!!!
 | `pnpm build`               | Build your production site to `./.vitepress/dist/`  |
 | `pnpm preview`             | Preview your build locally, before deploying        |
 | `pnpm clean`               | Delete all the posts, moments and links             |
-| `pnpm generate`            | Generate data for moments and links                 |
 
 
 ## License
