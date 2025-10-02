@@ -50,20 +50,14 @@ function emptyDir(dirPath) {
 }
 
 try {
-    const friendsDir = path.resolve("./src/config/friends");
-    const momentsDir = path.resolve("./src/config/moments");
-    const markdownDir = path.resolve("./src/markdown");
-    const generatedDir = path.resolve("./src/generated");
+    const friendsDir = path.resolve("./data/friends");
+    const momentsDir = path.resolve("./data/moments");
+    const markdownDir = path.resolve("./src/posts");
 
     log("miracle", "Clearing directories");
     emptyDir(friendsDir);
     emptyDir(momentsDir);
     emptyDir(markdownDir);
-
-    if (fs.existsSync(generatedDir)) {
-        fs.rmSync(generatedDir, { recursive: true, force: true });
-        log("miracle", "Removed generated directory", generatedDir, "warn");
-    }
 
     log("miracle", "Ensuring directories exist");
     ensureDir(friendsDir);
