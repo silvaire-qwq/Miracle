@@ -34,7 +34,7 @@ export const globalConfig = {
 
     // modules
     modules: {
-      banner: "https://youke1.picui.cn/s1/2025/09/24/68d3e9867b869.png", // img url or "avatar"
+      banner: "avatar", // img url or "avatar"
       about: true, // about
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
