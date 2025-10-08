@@ -13,7 +13,7 @@
       <div class="miniBar">
         <!-- 📖 新增：字数 -->
         <div v-if="postInfo.wordCount" class="words">
-          <Icon class="miniIcon" icon="material-symbols:notes-rounded" />
+          <Icon class="miniIcon" icon="ph:align-left-bold" />
           <span class="busuanzi"
             >{{ postInfo.wordCount }} {{ globalConfig.lang.words }}</span
           >
@@ -21,26 +21,19 @@
 
         <!-- ⏱️ 新增：阅读时间 -->
         <div v-if="postInfo.readingTime" class="reading">
-          <Icon class="miniIcon" icon="fluent:clock-12-regular" />
+          <Icon class="miniIcon" icon="ph:timer-bold" />
           <span class="busuanzi"
             >{{ postInfo.readingTime }} {{ globalConfig.lang.minutes }}</span
           >
         </div>
 
         <div v-if="frontmatter.origin" class="watch">
-          <Icon class="miniIcon" icon="fluent:link-square-12-regular" />
+          <Icon class="miniIcon" icon="ph:link-bold" />
           <a
             class="busuanzi"
             :href="frontmatter.origin"
             style="font-weight: 400"
             >{{ formatUrl(frontmatter.origin) }}</a
-          >
-        </div>
-        <div v-else class="person">
-          <Icon class="miniIcon" icon="fluent:person-12-regular" />
-          <span class="busuanzi"
-            ><span id="busuanzi_page_uv">0</span>
-            {{ globalConfig.lang.readers }}</span
           >
         </div>
       </div>
@@ -53,7 +46,7 @@
       <div class="anchorContainer">
         <Icon
           class="anchor"
-          icon="material-symbols:calendar-today-outline-rounded"
+          icon="ph:calendar-blank-duotone"
         />
       </div>
       <span class="categoryIcon">{{
@@ -61,7 +54,7 @@
       }}</span>
 
       <div class="anchorContainer">
-        <Icon class="anchor" icon="material-symbols:book-2-outline-rounded" />
+        <Icon class="anchor" icon="ph:book-bookmark-duotone" />
       </div>
       <a
         class="categoryIcon"

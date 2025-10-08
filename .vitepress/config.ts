@@ -24,6 +24,7 @@ const RSS: RSSOptions = {
 export default defineConfig({
   title: globalConfig.title,
   description: globalConfig.description,
+  // plz use vercel!!!!!!!
   cleanUrls: true,
   srcDir: "./src",
   vite: {
@@ -49,7 +50,7 @@ export default defineConfig({
     lightModeSwitchTitle: globalConfig.lang.lightModeSwitchTitle,
     darkModeSwitchTitle: globalConfig.lang.darkModeSwitchTitle,
     sidebarMenuLabel: globalConfig.lang.sidebarMenuLabel,
-    outline: { level: [2, 2], label: globalConfig.lang.outline },
+    outline: { level: [2, 3], label: globalConfig.lang.outline },
     returnToTopLabel: globalConfig.lang.returnToTopLabel,
     lastUpdated: { text: globalConfig.lang.lastUpdated },
 
@@ -60,7 +61,7 @@ export default defineConfig({
         ${
           globalConfig.lang.poweredBy
         } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
-        "${globalConfig.title}" ${
+        ${globalConfig.title} ${
         globalConfig.lang.hasExistedFor
       } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}
 

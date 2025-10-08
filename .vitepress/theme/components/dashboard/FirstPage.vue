@@ -14,13 +14,13 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
       <h1 class="author">{{ globalConfig.homePage.author }}</h1>
       <div class="btns">
         <div class="location btn">
-          <Icon icon="fluent:location-16-regular" />
+          <Icon icon="ph:bank-duotone" />
           {{ globalConfig.homePage.city }}
         </div>
         <a
           :href="`https://github.com/${globalConfig.github}`"
           class="github btn"
-          ><Icon icon="lucide:github" /> GitHub</a
+          ><Icon icon="ph:github-logo-duotone" /> GitHub</a
         >
       </div>
     </div>
@@ -100,5 +100,17 @@ div.btns {
   transition: all var(--vp-transition-time);
   /* position! bro! here! */
   object-position: center;
+}
+
+h1.author {
+  color: transparent;
+  background-image: linear-gradient(
+    120deg,
+    var(--vp-c-brand-1) 20%,
+    var(--vp-c-brand-sub)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: var(--vp-font-family-title);
 }
 </style>

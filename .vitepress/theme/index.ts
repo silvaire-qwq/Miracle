@@ -3,10 +3,28 @@ import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { Icon } from "@iconify/vue";
+import { globalConfig } from "#config";
+
+// func: set css var
+function setCssVar(name: string, value: string) {
+  document.documentElement.style.setProperty(name, value);
+}
+
+// vars
+setCssVar("--hue", globalConfig.styles.hue.toString());
+setCssVar("--vp-border-radius-1", globalConfig.styles.radius.toString() + "px");
+if (globalConfig.styles.uppercase == true) {
+  setCssVar("--vp-title-uppercase", "uppercase");
+} else {
+  setCssVar("--vp-title-uppercase", "capitalize");
+}
+
+// theme
 import "./styles/style.css";
-import "@catppuccin/vitepress/theme/mocha/lavender.css";
+import "./styles/gencolor.css";
 // enable it if you like it ;)
 // import "vitepress-theme-flexoki/index.css";
+// import "@catppuccin/vitepress/theme/mocha/lavender.css";
 
 // Dashboard
 import RecentPosts from "./components/dashboard/RecentPosts.vue";

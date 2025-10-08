@@ -19,16 +19,24 @@ export const globalConfig = {
   description: "Per Aspera Ad Astra", // description
   author: "Silvaire", // your name
   favicon:
-    "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508&mask=circle", // favicon
+    "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4&mask=circle", // favicon (suggest: circle mask)
   url: "https://qwq.blue", // main url
-  githubRepo: "silvaire-qwq/Miracle", // github repo
+  githubRepo: "silvaire-qwq/Miracle", // the github repo of ur blog
   dateCreated: "2024-08-23", // date created (YYYY-MM-DD)
 
-  // homepage setting
+  // theme setting
+  styles: {
+    hue: 290,
+    radius: 26, // n[px]
+    uppercase: true, // CATEGORIES / Categories
+  },
+
+  // homepage setting (when globalConfig.modules.banner is a url)
   homePage: {
-    avatar: "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508", // your avatar
+    avatar:
+      "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4", // your avatar
     author: "Silvaire", // your name
-    city: "Tianjin", // your location
+    city: "Hedong, Tianjin", // your location
     introduce:
       "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
 
@@ -105,11 +113,18 @@ export const globalConfig = {
       repo: "silvaire-qwq/Miracle",
       repoId: "R_kgDOPz1WLw",
       categoryId: "DIC_kwDOPz1WL84Cvsrq",
+      themes: {
+        light: "https://giscus.catppuccin.com/themes/latte.css",
+        dark: "https://giscus.catppuccin.com/themes/mocha.css",
+      },
     },
     twikoo: {
       env: "https://twikoo.qwq.blue",
     },
   },
+
+  // contact
+  contact: [],
 
   // waterfall
   waterfall: {
@@ -122,7 +137,8 @@ export const globalConfig = {
   friendWeights: {
     // example: -99, // "example" will be displayed at the top
     qwq: -50,
-    friends: 0, // "friends" will be displayed at the bottom
+    friends: -1,
+    unable: 0, // "unable" will be displayed at the bottom
   },
 
   friends: friendList, // friends (edit it in config/friends)

@@ -117,7 +117,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <Icon icon="material-symbols:book-2-outline-rounded" style="opacity: 0.4" />
+        <Icon icon="ph:book-bookmark-duotone" style="opacity: 0.4" />
         <span class="name">{{ " " + globalConfig.lang.categories }}</span>
       </a>
       <span

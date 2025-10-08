@@ -1,0 +1,98 @@
+:root {
+    /* Brand / Accent */
+    --vp-c-brand-1: oklch(0.54 0.22 var(--hue));
+    --vp-c-brand-sub: oklch(0.54 0.22 calc(var(--hue) - 90));
+    --vp-c-brand-2: oklch(0.58 0.22 var(--hue));
+    --vp-c-brand-3: oklch(0.62 0.20 var(--hue));
+    --vp-c-brand-soft: color-mix(in oklch, var(--vp-c-brand-1), transparent 90%);
+
+    /* Solid / semantic */
+    --vp-c-white: oklch(0.97 0.01 var(--hue));
+    --vp-c-black: oklch(0.15 0.02 var(--hue));
+    --vp-c-sponsor: oklch(0.50 0.18 calc(var(--hue) + 8));
+
+    /* Backgrounds */
+    --vp-c-bg: oklch(0.93 0.005 var(--hue));
+    /* 浅色主背景柔和偏暖灰 */
+    --vp-c-bg-alt: oklch(0.90 0.01 var(--hue));
+    /* 页面主背景略暗 */
+    --vp-c-bg-elv: oklch(0.86 0.01 var(--hue));
+    /* 卡片/浮层略暗 */
+    --vp-c-bg-soft: var(--vp-c-bg-alt);
+
+    /* Borders / dividers */
+    --vp-c-border: oklch(0.83 0.02 var(--hue));
+    /* 边框柔和 */
+    --vp-c-divider: var(--vp-c-border);
+    --vp-c-gutter: oklch(0.80 0.02 var(--hue));
+
+    /* Text scales */
+    --vp-c-text-1: oklch(0.20 0.02 var(--hue));
+    /* 主文本柔和灰 */
+    --vp-c-text-2: oklch(0.30 0.03 var(--hue));
+    --vp-c-text-3: oklch(0.38 0.04 var(--hue));
+
+    /* Callout / soft overlays */
+    --vp-c-tip-soft: hsla(var(--hue), 80%, 45%, 0.18);
+    --vp-c-warning-soft: hsla(calc(var(--hue) + 60), 75%, 45%, 0.18);
+    --vp-c-danger-soft: hsla(calc(var(--hue) - 120), 70%, 40%, 0.18);
+    --vp-c-caution-soft: hsla(calc(var(--hue) - 120), 70%, 40%, 0.18);
+    --vp-c-important-soft: hsla(calc(var(--hue) + 40), 75%, 50%, 0.18);
+
+    /* Custom blocks */
+    --vp-custom-block-info-bg: oklch(0.84 0.015 var(--hue));
+    --vp-custom-block-note-bg: oklch(0.86 0.015 var(--hue));
+    --vp-custom-block-details-bg: oklch(0.88 0.015 var(--hue));
+
+    /* Palette helpers */
+    --vp-c-gray-1: oklch(0.76 0.03 var(--hue));
+    --vp-c-gray-2: oklch(0.84 0.02 var(--hue));
+    --vp-c-gray-3: oklch(0.92 0.01 var(--hue));
+    --vp-c-gray-soft: hsla(0, 0%, 0%, 0.08);
+
+    /* Code highlight (line) */
+    --vp-code-line-highlight-color: hsla(var(--hue), 18%, 53%, 0.18);
+}
+
+.dark {
+    /* Brand / Accent */
+    --vp-c-brand-1: oklch(0.78 0.12 var(--hue));
+    --vp-c-brand-2: oklch(0.75 0.14 var(--hue));
+    --vp-c-brand-3: oklch(0.70 0.14 var(--hue));
+    --vp-c-brand-soft: color-mix(in oklch, var(--vp-c-brand-1), transparent 85%);
+
+    /* 主背景：深灰绿，非纯黑 */
+    --vp-c-bg: oklch(0.22 0.03 var(--hue));
+    --vp-c-bg-alt: oklch(0.21 0.03 var(--hue));
+    --vp-c-bg-elv: oklch(0.17 0.05 var(--hue));
+    --vp-c-bg-soft: var(--vp-c-bg-alt);
+
+    /* 文本：温和灰白 */
+    --vp-c-text-1: oklch(0.92 0.02 var(--hue));
+    --vp-c-text-2: oklch(0.85 0.02 var(--hue));
+    --vp-c-text-3: oklch(0.74 0.02 var(--hue));
+
+    /* 边框 / 分割线 */
+    --vp-c-border: color-mix(in oklch, var(--vp-c-bg), var(--vp-c-text-1) 12%);
+    --vp-c-divider: var(--vp-c-border);
+    --vp-c-gutter: oklch(0.42 0.015 var(--hue));
+
+    /* 代码块背景 */
+    --vp-code-line-highlight-color: hsla(var(--hue), 18%, 64%, 0.18);
+    --vp-code-block-bg: oklch(0.24 0.015 var(--hue));
+
+    /* 自定义块背景 */
+    --vp-custom-block-info-bg: oklch(0.28 0.015 var(--hue));
+    --vp-custom-block-note-bg: oklch(0.30 0.015 var(--hue));
+    --vp-custom-block-details-bg: oklch(0.33 0.015 var(--hue));
+
+    /* 灰度层次 */
+    --vp-c-gray-1: oklch(0.42 0.02 var(--hue));
+    --vp-c-gray-2: oklch(0.38 0.02 var(--hue));
+    --vp-c-gray-3: oklch(0.34 0.02 var(--hue));
+    --vp-c-gray-soft: hsla(0, 0%, 100%, 0.06);
+
+    /* 白黑基色 */
+    --vp-c-white: oklch(0.95 0.02 var(--hue));
+    --vp-c-black: oklch(0.25 0.015 var(--hue));
+}

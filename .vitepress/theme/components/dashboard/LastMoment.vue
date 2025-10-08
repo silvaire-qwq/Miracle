@@ -7,9 +7,14 @@
     @mouseleave="handleMouseLeave"
   >
     <div class="content">
-      <span class="content">{{ lastMoment?.content.slice(0,30) + "..." }}</span>
+      <span class="content">{{
+        lastMoment && lastMoment.content
+          ? lastMoment.content.slice(0, 30) +
+            (lastMoment.content.length > 30 ? "..." : "")
+          : ""
+      }}</span>
       <span class="datetime">{{
-        lastMoment?.date ? formatRelativeDate(lastMoment?.date) : ""
+        lastMoment && lastMoment.date ? formatRelativeDate(lastMoment.date) : ""
       }}</span>
     </div>
   </a>
