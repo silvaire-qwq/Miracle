@@ -1,23 +1,9 @@
 // https://vitepress.dev/guide/custom-theme
-import { h } from "vue";
+import { h, onMounted } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { Icon } from "@iconify/vue";
 import { globalConfig } from "#config";
-
-// func: set css var
-function setCssVar(name: string, value: string) {
-  document.documentElement.style.setProperty(name, value);
-}
-
-// vars
-setCssVar("--hue", globalConfig.styles.hue.toString());
-setCssVar("--vp-border-radius-1", globalConfig.styles.radius.toString() + "px");
-if (globalConfig.styles.uppercase == true) {
-  setCssVar("--vp-title-uppercase", "uppercase");
-} else {
-  setCssVar("--vp-title-uppercase", "capitalize");
-}
 
 // theme
 import "./styles/style.css";
@@ -72,6 +58,34 @@ export default {
     app.component("Tags", tags);
     app.component("Manager", Manager);
     app.component("Comments", afterDocs);
-    // ...
+
+    // ✅ 浏览器端才运行
+    if (typeof window !== "undefined") {
+      const applyCssVars = () => {
+        const root = document.documentElement;
+        const { styles } = globalConfig;
+
+        root.style.setProperty("--hue", styles.hue.toString());
+        root.style.setProperty("--vp-border-radius-1", `${styles.radius}px`);
+        root.style.setProperty(
+          "--vp-title-uppercase",
+          styles.uppercase ? "uppercase" : "capitalize"
+        );
+      };
+
+      // 首次加载时执行
+      if (document.readyState === "complete") {
+        applyCssVars();
+      } else {
+        window.addEventListener("DOMContentLoaded", applyCssVars, {
+          once: true,
+        });
+      }
+
+      // 切换页面时重设（SPA 模式下）
+      router.onAfterRouteChanged = () => {
+        applyCssVars();
+      };
+    }
   },
 } satisfies Theme;

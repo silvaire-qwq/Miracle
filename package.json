@@ -22,7 +22,7 @@
     "vitepress-theme-flexoki": "^0.0.1"
   },
   "scripts": {
-    "clean": "node scripts/setup.js",
+    "clean": "node .vitepress/theme/scripts/setup.js",
     "dev": "vitepress dev --port 4321",
     "build": "vitepress build",
     "preview": "vitepress preview --port 4321"
