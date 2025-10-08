@@ -1,5 +1,6 @@
 const maxMove = 9;
 const easing = 0.1;
+const tolerance = 0.01;
 
 interface CardState {
   currentX: number;
@@ -13,17 +14,29 @@ const cardStates = new WeakMap<HTMLElement, CardState>();
 
 function animateCard(el: HTMLElement) {
   const state = cardStates.get(el);
-  if (!state) return;
+  if (!state) {
+    cardStates.delete(el);
+    return;
+  }
 
   const { currentX, currentY, targetX, targetY, hovered } = state;
-  const nextX = currentX + (targetX - currentX) * easing;
-  const nextY = currentY + (targetY - currentY) * easing;
+  if (!hovered && !currentX && !currentY) {
+    el.style.transform = "";
+    cardStates.delete(el);
+    return;
+  }
 
-  state.currentX = nextX;
-  state.currentY = nextY;
+  const nextX = Math.abs(targetX - currentX) < tolerance
+    ? targetX
+    : currentX + (targetX - currentX) * easing;
+  const nextY = Math.abs(targetY - currentY) < tolerance
+    ? targetY
+    : currentY + (targetY - currentY) * easing;
 
   const scale = hovered ? 1.03 : 1;
   el.style.transform = `translate(${nextX}px, ${nextY}px) scale(${scale})`;
+  state.currentX = nextX;
+  state.currentY = nextY;
 
   requestAnimationFrame(() => animateCard(el));
 }
@@ -40,25 +53,17 @@ export function useCardHover() {
     const targetX = ((x - centerX) / centerX) * maxMove;
     const targetY = ((y - centerY) / centerY) * maxMove;
 
-    if (!cardStates.has(el)) {
-      cardStates.set(el, {
-        currentX: 0,
-        currentY: 0,
-        targetX,
-        targetY,
-        hovered: false,
-      });
-      animateCard(el);
-    } else {
-      const state = cardStates.get(el)!;
-      state.targetX = targetX;
-      state.targetY = targetY;
-    }
+    const state = cardStates.get(el);
+    if (!state) return;
+    state.targetX = targetX;
+    state.targetY = targetY;
   };
 
   const handleMouseEnter = (e: MouseEvent) => {
     const el = e.currentTarget as HTMLElement;
-    if (!cardStates.has(el)) {
+    if (cardStates.has(el)) {
+      cardStates.get(el)!.hovered = true;
+    } else {
       cardStates.set(el, {
         currentX: 0,
         currentY: 0,
@@ -67,8 +72,6 @@ export function useCardHover() {
         hovered: true,
       });
       animateCard(el);
-    } else {
-      cardStates.get(el)!.hovered = true;
     }
   };
 
@@ -76,9 +79,9 @@ export function useCardHover() {
     const el = e.currentTarget as HTMLElement;
     const state = cardStates.get(el);
     if (!state) return;
-    state.hovered = false;
     state.targetX = 0;
     state.targetY = 0;
+    state.hovered = false;
   };
 
   return { handleMouseMove, handleMouseEnter, handleMouseLeave };
