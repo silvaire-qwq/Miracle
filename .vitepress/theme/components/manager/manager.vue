@@ -167,13 +167,13 @@ const momentFileTemplate = `{
               <Icon icon="fluent:open-12-regular" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/edit/main/src${post.url}.md`"
+              :href="`https://github.com/${globalConfig.githubRepo}/edit/main/src/${post.filePath}`"
               target="_blank"
             >
               <Icon icon="fluent:edit-12-regular" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/delete/main/src${post.url}.md`"
+              :href="`https://github.com/${globalConfig.githubRepo}/delete/main/src/${post.filePath}`"
               target="_blank"
             >
               <Icon icon="fluent:delete-12-regular" class="delete" />
