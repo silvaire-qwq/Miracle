@@ -4,6 +4,7 @@ import { extractText, countWords, calcReadingTime } from "../utils/textAnalyzer"
 import { globalConfig } from "#config";
 
 interface Post {
+  filePath: string;
   title: string;
   url: string;
   description: string;
@@ -20,19 +21,22 @@ declare const data: Post[];
 
 export { data };
 
-export default createContentLoader("posts/*.md", {
+export default createContentLoader("posts/**/*.md", {
   includeSrc: true,
   transform(raw): Post[] {
     return raw
       .map(({ url, frontmatter, src }) => {
         const content = src ? extractText(src) : undefined;
         return {
+          filePath:
+            (url.startsWith("/") ? url.slice(1) : url) +
+            (url.endsWith("/") ? "index.md" : ".md"),
           title: frontmatter.title,
           url,
           description: frontmatter.description,
           originDate: frontmatter.published,
-          category: frontmatter.category || "Uncategorized",
-          tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+          category: frontmatter.category ?? "Uncategorized",
+          tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags],
 
           image: frontmatter.image
             ? /^(https?:\/\/)/.test(frontmatter.image)

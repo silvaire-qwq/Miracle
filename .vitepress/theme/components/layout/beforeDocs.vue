@@ -65,13 +65,11 @@
         <div class="anchorContainer">
           <Icon class="anchor" icon="material-symbols:tag-rounded" />
         </div>
-        <div class="tags" v-for="(tag, index) in frontmatter.tags" :key="tag">
+        <div class="tags" v-for="(tag, index) in tags" :key="tag">
           <a class="tag" :href="`/tags?tag=${tag}`">
             <span class="content">{{ tag }}</span>
           </a>
-          <span class="and" v-if="index !== frontmatter.tags.length - 1"
-            >/</span
-          >
+          <span class="and" v-if="index !== tags.length - 1">/</span>
         </div>
       </div>
     </div>
@@ -88,14 +86,15 @@ import { data as posts } from "../../data/posts.data";
 
 const { page } = useData();
 const frontmatter = page.value?.frontmatter || {};
-
-const postInfo = posts.find((p) => p.title === frontmatter.title);
+const postInfo = posts.find((p) => p.filePath === page.value?.filePath);
 
 const image = frontmatter.image
   ? /^(https?:\/\/)/.test(frontmatter.image)
     ? frontmatter.image
     : `${globalConfig.imgBed}${frontmatter.image}`
   : "";
+
+const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags];
 
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
