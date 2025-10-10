@@ -28,6 +28,7 @@ export default defineConfig({
   cleanUrls: true,
   srcDir: "./src",
   vite: {
+    publicDir: "../public",
     plugins: [RssPlugin(RSS)],
   },
   markdown: {
