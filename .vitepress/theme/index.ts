@@ -1,8 +1,9 @@
 // https://vitepress.dev/guide/custom-theme
-import { h, onMounted } from "vue";
+import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { Icon } from "@iconify/vue";
+import { handleEasterEgg } from "./utils/easterEgg";
 import { globalConfig } from "#config";
 
 // theme
@@ -86,6 +87,8 @@ export default {
       router.onAfterRouteChanged = () => {
         applyCssVars();
       };
+
+      document.addEventListener("keydown", ({ code }) => handleEasterEgg(code));
     }
   },
 } satisfies Theme;
