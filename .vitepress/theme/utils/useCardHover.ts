@@ -29,12 +29,14 @@ function animateCard(el: HTMLElement) {
     return;
   }
 
-  const nextX = Math.abs(targetX - currentX) < tolerance
-    ? targetX
-    : currentX + (targetX - currentX) * easing;
-  const nextY = Math.abs(targetY - currentY) < tolerance
-    ? targetY
-    : currentY + (targetY - currentY) * easing;
+  const nextX =
+    Math.abs(targetX - currentX) < tolerance
+      ? targetX
+      : currentX + (targetX - currentX) * easing;
+  const nextY =
+    Math.abs(targetY - currentY) < tolerance
+      ? targetY
+      : currentY + (targetY - currentY) * easing;
 
   const scale = hovered ? 1.03 : 1;
   el.style.transform = `translate(${nextX}px, ${nextY}px) scale(${scale})`;

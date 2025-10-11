@@ -26,16 +26,25 @@ export const globalConfig = {
 
   // theme setting
   styles: {
-    hue: 290,
-    radius: 26, // n[px]
-    uppercase: true, // CATEGORIES / Categories
+    color: {
+      hue: 300, // theme color
+      intensity: {
+        light: 0.2,
+        dark: 0.2, // 0.4: syberpunk!!
+      }, // color intensity
+    },
+    visual: {
+      transition: 10, // 0.x[s(second(s))] | e.g. 10 -> 0.1s (default)
+      radius: 26, // x[px]
+      uppercase: true, // CATEGORIES / Categories
+      mono: true, // use monospace font for title
+    }
   },
 
   // homepage setting (when globalConfig.modules.banner is a url)
   homePage: {
     avatar:
       "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4", // your avatar
-    author: "Silvaire", // your name
     city: "Hedong, Tianjin", // your location
     introduce:
       "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
@@ -122,9 +131,6 @@ export const globalConfig = {
       env: "https://twikoo.qwq.blue",
     },
   },
-
-  // contact
-  contact: [],
 
   // waterfall
   waterfall: {

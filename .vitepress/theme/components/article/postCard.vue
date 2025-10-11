@@ -155,7 +155,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   color: var(--vp-c-text-2);
   opacity: 0.8;
   background-color: var(--vp-c-border);
-  padding: 2px 8px;
+  padding: 2px 9px;
   border-radius: var(--vp-border-radius-1);
   font-size: 13px;
   &:hover {

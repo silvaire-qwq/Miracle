@@ -66,11 +66,32 @@ export default {
         const root = document.documentElement;
         const { styles } = globalConfig;
 
-        root.style.setProperty("--hue", styles.hue.toString());
-        root.style.setProperty("--vp-border-radius-1", `${styles.radius}px`);
+        root.style.setProperty("--hue", styles.color.hue.toString());
+        root.style.setProperty(
+          "--vp-color-intensity-dark",
+          styles.color.intensity.dark.toString()
+        );
+        root.style.setProperty(
+          "--vp-color-intensity-light",
+          styles.color.intensity.light.toString()
+        );
+        root.style.setProperty(
+          "--vp-border-radius-1",
+          `${styles.visual.radius}px`
+        );
+        root.style.setProperty(
+          "--vp-transition-time",
+          `${0.1 * (styles.visual.transition / 10)}s`
+        );
         root.style.setProperty(
           "--vp-title-uppercase",
-          styles.uppercase ? "uppercase" : "capitalize"
+          styles.visual.uppercase ? "uppercase" : "capitalize"
+        );
+        root.style.setProperty(
+          "--vp-use-mono",
+          styles.visual.mono
+            ? "var(--vp-font-family-mono)"
+            : "var(--vp-font-family-base)"
         );
       };
 

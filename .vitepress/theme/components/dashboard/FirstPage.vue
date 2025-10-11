@@ -9,9 +9,15 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
     class="first-page"
     v-if="globalConfig.homePage.modules.banner === 'avatar'"
   >
-    <img :src="globalConfig.homePage.avatar" class="avatar" />
+    <img
+      :src="globalConfig.homePage.avatar"
+      class="avatar"
+      @mouseenter="handleMouseEnter"
+      @mousemove="handleMouseMove"
+      @mouseleave="handleMouseLeave"
+    />
     <div class="self">
-      <h1 class="author">{{ globalConfig.homePage.author }}</h1>
+      <h1 class="author">{{ globalConfig.author }}</h1>
       <div class="btns">
         <div class="location btn">
           <Icon icon="ph:bank-duotone" />
@@ -52,6 +58,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   border-radius: 100%;
   border: 1px solid var(--vp-c-divider);
   padding: 4px;
+  transition: all var(--vp-transition-time);
 }
 
 div.self {

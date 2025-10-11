@@ -32,12 +32,6 @@
     --vp-border-radius-3: calc(var(--vp-border-radius-2) - 6px);
     --vp-border-radius-4: calc(var(--vp-border-radius-3) - 6px);
 
-    /* Transition Time */
-    --vp-transition-time: 0.1s;
-
-    /* Brand Color */
-    --vp-c-brand-soft-rgb: 180, 190, 254;
-
     /* Shadow */
     --vp-shadow: var(--vp-c-bg-alt) 0px 12px 25px -5px,
         var(--vp-c-bg-alt) 0px 7px 15px -7px;
@@ -57,6 +51,5 @@
 }
 
 .dark {
-    --vp-c-brand-soft: rgba(var(--vp-c-brand-soft-rgb), 0.1);
     --vp-mini-bg: var(--vp-c-border);
 }

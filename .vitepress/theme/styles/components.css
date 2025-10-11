@@ -52,7 +52,7 @@ div.VPLink.no-icon.VPFeature {
     h4,
     h5,
     h6 {
-        font-family: var(--vp-font-family-mono), var(--vp-font-family-base);
+        font-family: var(--vp-use-mono), var(--vp-font-family-base);
     }
 }
 
@@ -155,7 +155,7 @@ div.VPHero.has-image.VPHomeHero div.container {
 
 footer.VPFooter {
     margin-top: 50px;
-    font-family: var(--vp-font-family-mono);
+    font-family: var(--vp-use-mono);
     border-top: 0 !important;
 
     a {
@@ -324,7 +324,7 @@ a.header-anchor {
  * -------------------------------------------------------------------------- */
 
 .VPNav * {
-    font-family: var(--vp-font-family-mono);
+    font-family: var(--vp-use-mono);
     font-weight: 600;
     text-transform: var(--vp-title-uppercase);
 }
