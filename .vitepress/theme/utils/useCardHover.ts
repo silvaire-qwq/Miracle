@@ -1,3 +1,6 @@
+import { easterEggActive } from "./easterEgg";
+
+const maxFrame = 60;
 const maxMove = 9;
 const easing = 0.1;
 const tolerance = 0.01;
@@ -42,7 +45,13 @@ function animateCard(el: HTMLElement) {
 }
 
 export function useCardHover() {
+  let lastTime = 0;
+
   const handleMouseMove = (e: MouseEvent) => {
+    const time = performance.now();
+    if ((time - lastTime) < (1000 / maxFrame)) return;
+    lastTime = time;
+
     const el = e.currentTarget as HTMLElement;
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -55,8 +64,13 @@ export function useCardHover() {
 
     const state = cardStates.get(el);
     if (!state) return;
-    state.targetX = targetX;
-    state.targetY = targetY;
+    if (easterEggActive) {
+      state.targetX += targetX;
+      state.targetY += targetY;
+    } else {
+      state.targetX = targetX;
+      state.targetY = targetY;
+    }
   };
 
   const handleMouseEnter = (e: MouseEvent) => {
@@ -79,8 +93,10 @@ export function useCardHover() {
     const el = e.currentTarget as HTMLElement;
     const state = cardStates.get(el);
     if (!state) return;
-    state.targetX = 0;
-    state.targetY = 0;
+    if (!easterEggActive) {
+      state.targetX = 0;
+      state.targetY = 0;
+    }
     state.hovered = false;
   };
 
