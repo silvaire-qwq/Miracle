@@ -9,7 +9,7 @@ export interface Friend {
   desc?: string;
   img?: string;
   folder?: string;
-};
+}
 
 let data: Friend[];
 
@@ -23,5 +23,5 @@ export default defineLoader({
       const content = JSON.parse(readFileSync(file, "utf-8"));
       return { fileName, ...content };
     });
-  }
+  },
 });

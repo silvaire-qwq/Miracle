@@ -13,7 +13,7 @@
       <div class="miniBar">
         <!-- 📖 新增：字数 -->
         <div v-if="postInfo.wordCount" class="words">
-          <Icon class="miniIcon" icon="ph:align-left-bold" />
+          <Icon class="miniIcon" :icon="globalConfig.icon.words" />
           <span class="busuanzi"
             >{{ postInfo.wordCount }} {{ globalConfig.lang.words }}</span
           >
@@ -21,14 +21,14 @@
 
         <!-- ⏱️ 新增：阅读时间 -->
         <div v-if="postInfo.readingTime" class="reading">
-          <Icon class="miniIcon" icon="ph:timer-bold" />
+          <Icon class="miniIcon" :icon="globalConfig.icon.time" />
           <span class="busuanzi"
             >{{ postInfo.readingTime }} {{ globalConfig.lang.minutes }}</span
           >
         </div>
 
         <div v-if="frontmatter.origin" class="watch">
-          <Icon class="miniIcon" icon="ph:link-bold" />
+          <Icon class="miniIcon" :icon="globalConfig.icon.link" />
           <a
             class="busuanzi"
             :href="frontmatter.origin"
@@ -44,17 +44,14 @@
       <p class="desc">{{ frontmatter.description }}</p>
 
       <div class="anchorContainer">
-        <Icon
-          class="anchor"
-          icon="ph:calendar-blank-duotone"
-        />
+        <Icon class="anchor" :icon="globalConfig.icon.calendar" />
       </div>
       <span class="categoryIcon">{{
         formatRelativeDate(frontmatter.published)
       }}</span>
 
       <div class="anchorContainer">
-        <Icon class="anchor" icon="ph:book-bookmark-duotone" />
+        <Icon class="anchor" :icon="globalConfig.icon.category" />
       </div>
       <a
         class="categoryIcon"
@@ -63,7 +60,7 @@
       >
       <div v-if="frontmatter.tags" style="display: inline-block">
         <div class="anchorContainer">
-          <Icon class="anchor" icon="material-symbols:tag-rounded" />
+          <Icon class="anchor" :icon="globalConfig.icon.tag" />
         </div>
         <div class="tags" v-for="(tag, index) in tags" :key="tag">
           <a class="tag" :href="`/tags?tag=${tag}`">
@@ -94,12 +91,17 @@ const image = frontmatter.image
     : `${globalConfig.imgBed}${frontmatter.image}`
   : "";
 
-const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags];
+const tags = Array.isArray(frontmatter.tags)
+  ? frontmatter.tags
+  : [frontmatter.tags];
 
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 <style scoped>
 div.vp-doc.layout.beforeDocs {
+  display: block;
+  z-index: 9999;
+
   /* 提高文字区域的空间 */
   @media screen and (min-width: 600px) {
     .textArea {

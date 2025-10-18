@@ -47,8 +47,8 @@
       >
       </component>
     </div>
-    <div v-else>
-      <div id="twikoo"></div>
+    <div v-if="globalConfig.comments.type == 'twikoo'">
+      <Twikoo />
     </div>
   </div>
 </template>
@@ -56,33 +56,9 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
 import { globalConfig } from "#config";
+import Twikoo from "./twikoo.vue";
 // 获取当前配色方案
 const { isDark } = useData();
-
-import { onMounted, watch } from "vue";
-import { useRoute } from "vitepress";
-
-const route = useRoute();
-
-const initTwikoo = async () => {
-  // 判断是否在浏览器环境中
-  if (typeof window !== "undefined") {
-    const twikoo = await import("twikoo");
-    twikoo.init({
-      envId: globalConfig.comments.twikoo.env, // 换成你自己配置的域名
-      el: "#twikoo",
-    });
-  }
-};
-
-// 监听路由刷新评论
-watch(route, () => {
-  initTwikoo();
-});
-
-onMounted(() => {
-  initTwikoo();
-});
 
 interface CardProps {
   title: string;
@@ -93,7 +69,6 @@ const props = withDefaults(defineProps<CardProps>(), {
 });
 
 const { page } = useData();
-const frontmatter = page.value?.frontmatter || {};
 </script>
 
 <style scoped>

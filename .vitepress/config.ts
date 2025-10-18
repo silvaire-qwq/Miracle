@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { globalConfig } from "#config";
 import { getRunningTime } from "#theme/utils/getRunningTime";
@@ -31,10 +32,19 @@ export default defineConfig({
     publicDir: "../public",
     plugins: [RssPlugin(RSS)],
   },
+  sitemap: {
+    hostname: globalConfig.url,
+  },
   markdown: {
+    image: {
+      lazyLoading: true,
+    },
     theme: {
       light: "catppuccin-latte",
       dark: "catppuccin-mocha",
+    },
+    config(md) {
+      md.use(tabsMarkdownPlugin);
     },
   },
   head: [["link", { rel: "icon", href: globalConfig.favicon }]],
@@ -63,8 +73,8 @@ export default defineConfig({
           globalConfig.lang.poweredBy
         } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
         ${globalConfig.title} ${
-        globalConfig.lang.hasExistedFor
-      } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}
+          globalConfig.lang.hasExistedFor
+        } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}
 
         `,
     },

@@ -3,14 +3,13 @@
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
  */
 
-
-
 /**
  * CSS
  * -------------------------------------------------------------------------- */
 
 @import url("./default.css");
 @import url("./components.css");
+@import url("./twikoo.css");
 
 /**
  * Variables
@@ -18,38 +17,104 @@
 
 @import url("https://cdn-font.hyperos.mi.com/font/css?family=MiSans_VF:VF:Chinese_Simplify,Latin&display=swap");
 @import url("https://fonts.cdnfonts.com/css/sf-mono");
-@import url('https://fonts.font.im/css?family=Playwrite+MX&display=swap');
+@import url("https://fonts.font.im/css?family=Playwrite+MX&display=swap");
 
 :root {
-    /* font family */
-    --vp-font-family-base: "MiSans VF";
-    --vp-font-family-mono: "SF Mono", var(--vp-font-family-base);
-    /* only for title !!!!!! */
-    --vp-font-family-title: "Playwrite MX", var(--vp-font-family-mono), var(--vp-font-family-base);
+  /* font family */
+  --vp-font-family-base: "Inter-Local", "MiSans VF", system-ui, sans-serif;
+  --vp-font-family-mono: "SF Mono", var(--vp-font-family-base);
+  font-variant-alternates: styleset(
+    open-digits,
+    disambiguation,
+    round-quotes-and-commas
+  );
+  /* only for title !!!!!! */
+  --vp-font-family-title:
+    "Playwrite MX", var(--vp-font-family-mono), var(--vp-font-family-base);
 
-    /* Border Radius */
-    --vp-border-radius-2: calc(var(--vp-border-radius-1) - 6px);
-    --vp-border-radius-3: calc(var(--vp-border-radius-2) - 6px);
-    --vp-border-radius-4: calc(var(--vp-border-radius-3) - 6px);
+  /* Border Radius */
+  --vp-border-radius-2: calc(var(--vp-border-radius-1) - 6px);
+  --vp-border-radius-3: calc(var(--vp-border-radius-2) - 6px);
+  --vp-border-radius-4: calc(var(--vp-border-radius-3) - 6px);
 
-    /* Shadow */
-    --vp-shadow: var(--vp-c-bg-alt) 0px 12px 25px -5px,
-        var(--vp-c-bg-alt) 0px 7px 15px -7px;
-    --vp-shadow-brand: var(--vp-c-brand-soft) 0px 12px 25px -5px,
-        var(--vp-c-brand-soft) 0px 7px 15px -7px;
+  /* Shadow */
+  --vp-shadow:
+    var(--vp-c-bg-alt) 0px 12px 25px -5px, var(--vp-c-bg-alt) 0px 7px 15px -7px;
+  --vp-shadow-brand:
+    var(--vp-c-brand-soft) 0px 12px 25px -5px,
+    var(--vp-c-brand-soft) 0px 7px 15px -7px;
 
-    --vp-c-brand-soft: rgba(var(--vp-c-brand-soft-rgb), 0.4);
+  /* Blur */
+  --vp-blur: blur(5px);
 
-    /* Post Card Gap */
-    --vp-gap: 12px;
-
-    /* Blur */
-    --vp-blur: blur(5px);
-
-    /* Mini Icon Background */
-    --vp-mini-bg: var(--vp-c-bg-elv)
+  /* Mini Icon Background */
+  --vp-mini-bg: var(--vp-c-bg-elv);
 }
 
 .dark {
-    --vp-mini-bg: var(--vp-c-border);
+  --vp-mini-bg: var(--vp-c-border);
+}
+@font-feature-values Inter-Local {
+  @styleset {
+    open-digits: 1;
+    disambiguation: 2;
+    round-quotes-and-commas: 3;
+    disambiguation-except-zero: 4;
+    circled-characters: 5;
+    squared-characters: 6;
+    square-punctuation: 7;
+    square-quotes: 8;
+  }
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-weight: 600;
+  src: local("Inter Regular");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-style: italic;
+  font-weight: 600;
+  src: local("Inter Italic");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-weight: 700;
+  src: local("Inter Medium");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-style: italic;
+  font-weight: 700;
+  src: local("Inter Medium Italic");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-weight: 800;
+  src: local("Inter SemiBold");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-style: italic;
+  font-weight: 800;
+  src: local("Inter SemiBold Italic");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-weight: 900;
+  src: local("Inter Bold");
+}
+
+@font-face {
+  font-family: Inter-Local;
+  font-style: italic;
+  font-weight: 900;
+  src: local("Inter Bold Italic");
 }

@@ -3,37 +3,39 @@ import { ref, computed } from "vue";
 import { Icon } from "@iconify/vue";
 import { data as posts } from "../../data/posts.data";
 import { globalConfig } from "#config";
+import { useCardHover } from "../../utils/useCardHover";
+import { getDate, getTimeString } from "../../utils/getDate";
 
 const activeTab = ref("posts"); // 默认 POSTS
+const selectedCategory = ref("");
 
 // 分类
-const selectedCategory = ref("");
 const categories = computed(() => {
   const set = new Set<string>();
   posts.forEach((p) => p.category.split(",").forEach((c) => set.add(c.trim())));
   return Array.from(set);
 });
+
 const categoryCounts = computed(() => {
   const counts: Record<string, number> = {};
   posts.forEach((p) =>
     p.category.split(",").forEach((c) => {
       c = c.trim();
       counts[c] = (counts[c] || 0) + 1;
-    })
+    }),
   );
   return counts;
 });
 
-// 按年份分组 POSTS → 直接全部一起
+// 按日期排序 POSTS
 const groupedPosts = computed(() => {
   let filtered = posts;
   if (selectedCategory.value) {
     filtered = posts.filter((p) => p.category === selectedCategory.value);
   }
-  // 按日期倒序排序，但不分年份
   return filtered.sort(
     (a, b) =>
-      new Date(b.originDate).getTime() - new Date(a.originDate).getTime()
+      new Date(b.originDate).getTime() - new Date(a.originDate).getTime(),
   );
 });
 
@@ -45,11 +47,39 @@ const handleCategoryClick = (cat: string) => {
   window.history.pushState({}, "", url);
 };
 
-import { useCardHover } from "../../utils/useCardHover";
+// 卡片鼠标交互
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
-import { getDate, getTimeString } from "../../utils/getDate";
+// ✅ 通用 getRepoUrl（自动去掉重复 type 前缀）
+function getRepoUrl(
+  action: "new" | "edit" | "delete",
+  type: "posts" | "moments" | "friends",
+  fileName: string,
+  fileContent?: string,
+) {
+  const { blogBase } = globalConfig;
+  const basePath = type === "posts" ? `src/posts` : `data/${type}`;
 
+  // 去掉 fileName 开头多余的 type/
+  const cleanFileName = fileName.replace(new RegExp(`^${type}/`), "");
+
+  const url = {
+    github: {
+      new: `https://github.com/${blogBase.repo}/new/main/${basePath}?filename=${cleanFileName}&value=${fileContent || ""}`,
+      edit: `https://github.com/${blogBase.repo}/edit/main/${basePath}/${cleanFileName}`,
+      delete: `https://github.com/${blogBase.repo}/delete/main/${basePath}/${cleanFileName}`,
+    },
+    gitea: {
+      new: `${blogBase.giteaUrl}/${blogBase.repo}/_new/main/${basePath}?filename=${cleanFileName}&value=${fileContent || ""}`,
+      edit: `${blogBase.giteaUrl}/${blogBase.repo}/_edit/main/${basePath}/${cleanFileName}`,
+      delete: `${blogBase.giteaUrl}/${blogBase.repo}/_delete/main/${basePath}/${cleanFileName}`,
+    },
+  };
+
+  return url[blogBase.type][action];
+}
+
+// 新建模板
 const postFileTemplate = `---
 title:
 published: ${getDate()}
@@ -69,24 +99,23 @@ const friendFileTemplate = `{
 }`;
 
 const beijingNow = new Date(
-  new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" })
+  new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }),
 );
 
 const momentFileTemplate = `{
   "date": "${getDate()}",
-  "time": "${String(beijingNow.getHours()).padStart(2, "0")}:${String(
-  beijingNow.getMinutes()
-).padStart(2, "0")}",
+  "time": "${String(beijingNow.getHours()).padStart(2, "0")}:${String(beijingNow.getMinutes()).padStart(2, "0")}",
   "content": "",
   "image": ""
 }`;
 </script>
+
 <template>
   <div>
     <!-- 顶部标题 -->
     <h1 class="year">{{ globalConfig.lang[activeTab] }}</h1>
 
-    <!-- Tab 切换按钮 -->
+    <!-- Tab 切换 -->
     <div class="tags">
       <span
         class="tag"
@@ -96,8 +125,10 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
+        <Icon :icon="globalConfig.icon.recentPosts" />
         <span class="name">{{ globalConfig.lang.posts }}</span>
       </span>
+
       <span
         class="tag"
         :class="{ active: activeTab === 'moments' }"
@@ -106,8 +137,10 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
+        <Icon :icon="globalConfig.icon.moment" />
         <span class="name">{{ globalConfig.lang.moments }}</span>
       </span>
+
       <span
         class="tag"
         :class="{ active: activeTab === 'friends' }"
@@ -116,14 +149,15 @@ const momentFileTemplate = `{
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
+        <Icon :icon="globalConfig.icon.friends" />
         <span class="name">{{ globalConfig.lang.friends }}</span>
       </span>
     </div>
 
     <h1 class="year">{{ globalConfig.lang.contents }}</h1>
 
-    <!-- 统一卡片列表 -->
     <div class="posts-grid">
+      <!-- POSTS -->
       <div
         v-if="activeTab === 'posts'"
         class="post-card diary"
@@ -132,25 +166,28 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ globalConfig.lang.createANewPost}}</h3>
+          <div class="title">{{ globalConfig.lang.createANewPost }}</div>
           <div class="actions">
             <a
-              :href="`https://github.com/${
-                globalConfig.githubRepo
-              }/new/main/src/posts?filename=${getTimeString()}.md&value=${encodeURIComponent(
-                postFileTemplate
-              )}`"
+              :href="
+                getRepoUrl(
+                  'new',
+                  'posts',
+                  getTimeString() + '.md',
+                  encodeURIComponent(postFileTemplate),
+                )
+              "
               target="_blank"
             >
               <Icon
-                icon="material-symbols:create-new-folder-outline"
+                :icon="globalConfig.icon.new"
                 style="color: var(--vp-c-brand-1)"
               />
             </a>
           </div>
         </div>
       </div>
-      <!-- POSTS -->
+
       <div
         v-if="activeTab === 'posts'"
         v-for="post in groupedPosts"
@@ -161,22 +198,22 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ post.title }}</h3>
+          <div class="title">{{ post.title }}</div>
           <div class="actions">
             <a :href="`${globalConfig.url}${post.url}`" target="_blank">
-              <Icon icon="fluent:open-12-regular" />
+              <Icon :icon="globalConfig.icon.open" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/edit/main/src/${post.filePath}`"
+              :href="getRepoUrl('edit', 'posts', post.filePath)"
               target="_blank"
             >
-              <Icon icon="fluent:edit-12-regular" />
+              <Icon :icon="globalConfig.icon.edit" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/delete/main/src/${post.filePath}`"
+              :href="getRepoUrl('delete', 'posts', post.filePath)"
               target="_blank"
             >
-              <Icon icon="fluent:delete-12-regular" class="delete" />
+              <Icon :icon="globalConfig.icon.delete" class="delete" />
             </a>
           </div>
         </div>
@@ -191,24 +228,28 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ globalConfig.lang.createANewMoment }}</h3>
+          <div class="title">{{ globalConfig.lang.createANewMoment }}</div>
           <div class="actions">
             <a
-              :href="`https://github.com/${
-                globalConfig.githubRepo
-              }/new/main/data/moments?filename=${getTimeString()}.json&value=${encodeURIComponent(
-                momentFileTemplate
-              )}`"
+              :href="
+                getRepoUrl(
+                  'new',
+                  'moments',
+                  getTimeString() + '.json',
+                  encodeURIComponent(momentFileTemplate),
+                )
+              "
               target="_blank"
             >
               <Icon
-                icon="material-symbols:create-new-folder-outline"
+                :icon="globalConfig.icon.new"
                 style="color: var(--vp-c-brand-1)"
               />
             </a>
           </div>
         </div>
       </div>
+
       <div
         v-if="activeTab === 'moments'"
         v-for="m in globalConfig.moments"
@@ -219,26 +260,25 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ m.content }}</h3>
+          <div class="title">{{ m.content }}</div>
           <div class="actions">
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/edit/main/data/moments/${m.fileName}`"
+              :href="getRepoUrl('edit', 'moments', m.fileName)"
               target="_blank"
             >
-              <Icon icon="fluent:edit-12-regular" />
+              <Icon :icon="globalConfig.icon.edit" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/delete/main/data/moments/${m.fileName}`"
+              :href="getRepoUrl('delete', 'moments', m.fileName)"
               target="_blank"
             >
-              <Icon icon="fluent:delete-12-regular" class="delete" />
+              <Icon :icon="globalConfig.icon.delete" class="delete" />
             </a>
           </div>
         </div>
       </div>
 
       <!-- FRIENDS -->
-
       <div
         v-if="activeTab === 'friends'"
         class="post-card diary"
@@ -247,24 +287,28 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ globalConfig.lang.addANewLink }}</h3>
+          <div class="title">{{ globalConfig.lang.addANewLink }}</div>
           <div class="actions">
             <a
-              :href="`https://github.com/${
-                globalConfig.githubRepo
-              }/new/main/data/friends?filename=${getTimeString()}.json&value=${encodeURIComponent(
-                friendFileTemplate
-              )}`"
+              :href="
+                getRepoUrl(
+                  'new',
+                  'friends',
+                  getTimeString() + '.json',
+                  encodeURIComponent(friendFileTemplate),
+                )
+              "
               target="_blank"
             >
               <Icon
-                icon="material-symbols:create-new-folder-outline"
+                :icon="globalConfig.icon.new"
                 style="color: var(--vp-c-brand-1)"
               />
             </a>
           </div>
         </div>
       </div>
+
       <div
         v-if="activeTab === 'friends'"
         v-for="f in globalConfig.friends"
@@ -275,23 +319,23 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <h3 class="title">{{ f.title }}</h3>
+          <div class="title">{{ f.title }}</div>
           <p class="details">{{ f.desc }}</p>
           <div class="actions">
             <a :href="f.link" target="_blank">
-              <Icon icon="fluent:open-12-regular" />
+              <Icon :icon="globalConfig.icon.open" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/edit/main/data/friends/${f.fileName}`"
+              :href="getRepoUrl('edit', 'friends', f.fileName)"
               target="_blank"
             >
-              <Icon icon="fluent:edit-12-regular" />
+              <Icon :icon="globalConfig.icon.edit" />
             </a>
             <a
-              :href="`https://github.com/${globalConfig.githubRepo}/delete/main/data/friends/${f.fileName}`"
+              :href="getRepoUrl('delete', 'friends', f.fileName)"
               target="_blank"
             >
-              <Icon icon="fluent:delete-12-regular" class="delete" />
+              <Icon :icon="globalConfig.icon.delete" class="delete" />
             </a>
           </div>
         </div>
@@ -307,6 +351,7 @@ const momentFileTemplate = `{
   display: flex;
 }
 
+/* 原样保留你的所有样式 */
 .post-card {
   display: flex;
   margin-bottom: var(--vp-gap);
@@ -437,6 +482,16 @@ span.anchor {
     color: var(--vp-c-brand-2);
   }
 }
+.active .iconify {
+  color: var(--vp-c-brand-2);
+}
+.tag:hover .iconify {
+  color: var(--vp-c-brand-2);
+}
+.iconify {
+  margin-left: 0px !important;
+  margin-right: 10px;
+}
 .count {
   margin-left: 12px;
   border-radius: 100%;
@@ -453,11 +508,8 @@ div.tags,
 .iconify {
   margin-left: 8px;
   color: var(--vp-c-text-3);
-  opacity: 0.8;
+  opacity: 0.6;
   transition: all var(--vp-transition-time);
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .delete {

@@ -33,19 +33,18 @@ function shuffle(array: any[]) {
 
 const friends = shuffle(
   globalConfig.friends
-    .filter(friend => friend.folder !== "unable") // 排除掉 folder 为 "unable" 的好友
+    .filter((friend) => friend.folder !== "unable") // 排除掉 folder 为 "unable" 的好友
     .map((friend) => ({
       ...friend,
       img:
         friend.img ||
         "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c",
-    }))
+    })),
 );
 
 import { useCardHover } from "../../utils/useCardHover";
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
-
 
 <style scoped>
 .friend-grid {

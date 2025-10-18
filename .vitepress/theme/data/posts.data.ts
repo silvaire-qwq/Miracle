@@ -1,6 +1,10 @@
 import { createContentLoader } from "vitepress";
 import { formatRelativeDate } from "../utils/formatRelativeDate";
-import { extractText, countWords, calcReadingTime } from "../utils/textAnalyzer";
+import {
+  extractText,
+  countWords,
+  calcReadingTime,
+} from "../utils/textAnalyzer";
 import { globalConfig } from "#config";
 
 interface Post {
@@ -36,7 +40,9 @@ export default createContentLoader("posts/**/*.md", {
           description: frontmatter.description,
           originDate: frontmatter.published,
           category: frontmatter.category ?? "Uncategorized",
-          tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [frontmatter.tags],
+          tags: Array.isArray(frontmatter.tags)
+            ? frontmatter.tags
+            : [frontmatter.tags],
 
           image: frontmatter.image
             ? /^(https?:\/\/)/.test(frontmatter.image)
@@ -47,11 +53,9 @@ export default createContentLoader("posts/**/*.md", {
           date: formatRelativeDate(frontmatter.published),
 
           wordCount: content ? countWords(content) : undefined,
-          readingTime: content ? calcReadingTime(content) : undefined
-        }
+          readingTime: content ? calcReadingTime(content) : undefined,
+        };
       })
-      .sort((a, b) =>
-        Date.parse(b.originDate) - Date.parse(a.originDate)
-      );
+      .sort((a, b) => Date.parse(b.originDate) - Date.parse(a.originDate));
   },
 });

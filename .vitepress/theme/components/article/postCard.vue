@@ -6,6 +6,7 @@ interface CardProps {
   category: string;
   date: string;
   image?: string;
+  type?: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -15,16 +16,26 @@ const props = withDefaults(defineProps<CardProps>(), {
   category: "",
   date: "",
   image: "",
+  type: "",
 });
 
+import { computed } from "vue";
 import { useCardHover } from "../../utils/useCardHover";
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
+
+const link = computed(() => {
+  if (props.type === "project" && props.category) {
+    return `https://github.com/${props.category}`;
+  }
+  return props.url || "";
+});
 </script>
 
 <template>
   <a
     :href="props.url"
     v-if="props.url"
+    :type="props.type"
     class="diary"
     @mouseenter="handleMouseEnter"
     @mousemove="handleMouseMove"
@@ -35,22 +46,23 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
     </div>
     <div class="textPlace">
       <p class="title" v-if="props.title">{{ props.title }}</p>
-      
-      <p class="details" v-if="props.description && props.title">{{ props.description }}</p>
-      <p class="details notitle" v-else-if="props.description">{{ props.description }}</p>
+
+      <p class="details" v-if="props.description && props.title">
+        {{ props.description }}
+      </p>
+      <p class="details notitle" v-else-if="props.description">
+        {{ props.description }}
+      </p>
 
       <div class="meta">
         <!-- 修改此处，使得点击分类时跳转到相应的分类页面 -->
-        <a
-          class="category"
-          v-if="props.category"
-          :href="`/archives?category=${props.category}`"
-          >{{ props.category }}</a
+        <a class="category" v-if="props.category" :href="link">{{
+          props.category
+        }}</a
         >{{ props.date }}
       </div>
     </div>
   </a>
-
 
   <a
     v-else
@@ -64,9 +76,13 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
     </div>
     <div class="textPlace">
       <p class="title" v-if="props.title">{{ props.title }}</p>
-      
-      <p class="details" v-if="props.description && props.title">{{ props.description }}</p>
-      <p class="details notitle" v-else-if="props.description">{{ props.description }}</p>
+
+      <p class="details" v-if="props.description && props.title">
+        {{ props.description }}
+      </p>
+      <p class="details notitle" v-else-if="props.description">
+        {{ props.description }}
+      </p>
 
       <div class="meta">
         <!-- 修改此处，使得点击分类时跳转到相应的分类页面 -->
@@ -82,7 +98,6 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </template>
 
 <style scoped>
-
 .img-container img {
   border-radius: var(--vp-border-radius-1) var(--vp-border-radius-1) 0 0;
   border-bottom: 1px solid var(--vp-c-divider);
@@ -101,6 +116,11 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   will-change: transform;
   box-shadow: var(--vp-shadow);
   transition: all var(--vp-transition-time);
+}
+
+.diary[type="project"] .title {
+  text-transform: var(--vp-title-uppercase);
+  font-family: var(--vp-font-family-mono);
 }
 
 .diary:hover {
@@ -129,6 +149,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   line-height: 26px;
   font-weight: 600;
   margin: 0;
+  text-transform: capitalize;
   transition: all var(--vp-transition-time);
 }
 

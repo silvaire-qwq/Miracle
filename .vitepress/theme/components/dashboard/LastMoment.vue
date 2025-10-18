@@ -7,15 +7,16 @@
     @mouseleave="handleMouseLeave"
   >
     <div class="content">
-      <span class="content">{{
-        lastMoment && lastMoment.content
-          ? lastMoment.content.slice(0, 30) +
-            (lastMoment.content.length > 30 ? "..." : "")
-          : ""
-      }}</span>
-      <span class="datetime">{{
-        lastMoment && lastMoment.date ? formatRelativeDate(lastMoment.date) : ""
-      }}</span>
+      <span class="text">
+        {{ lastMoment && lastMoment.content ? lastMoment.content : "" }}
+      </span>
+      <span class="datetime">
+        {{
+          lastMoment && lastMoment.date
+            ? formatRelativeDate(lastMoment.date)
+            : ""
+        }}
+      </span>
     </div>
   </a>
 </template>
@@ -36,14 +37,9 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 const { moments } = globalConfig;
 
 const lastMoment = ref<Moment | null>(null);
-const loading = ref(true);
-const error = ref("");
 
-// 使用本地数据替代远程请求
 function loadLastMoment() {
-  loading.value = true;
-  lastMoment.value = moments[0];
-  loading.value = false;
+  lastMoment.value = moments[0] || null;
 }
 
 onMounted(() => {
@@ -53,38 +49,52 @@ onMounted(() => {
 
 <style scoped>
 .last-moment {
-  margin-bottom: var(--vp-gap);
-  font-size: 1rem;
   display: flex;
-  gap: var(--vp-gap);
+  justify-content: center; /* 水平居中 */
+  align-items: center;
+  padding: 15px 25px;
+  margin-bottom: var(--vp-gap);
   border-radius: var(--vp-border-radius-1);
   border: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
-  transition: all var(--vp-transition-time);
-  will-change: transform;
-  padding: 15px 20px;
-  box-shadow: var(--vp-shadow);
   text-decoration: none;
   overflow: hidden;
-  justify-content: center;
-  &:hover {
-    border-color: var(--vp-c-brand-1);
-    box-shadow: var(--vp-shadow-brand);
-    span.content {
-      color: var(--vp-c-brand-2);
-    }
-  }
+  white-space: nowrap; /* 一行显示 */
+  box-shadow: var(--vp-shadow);
+  transition: all var(--vp-transition-time);
+  will-change: transform;
+}
+
+.last-moment:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: var(--vp-shadow-brand);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%; /* 避免超出容器 */
+  overflow: hidden; /* 超出隐藏 */
+  justify-content: center; /* 内部内容居中 */
+}
+
+.text {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  text-overflow: ellipsis; /* 超出显示省略号 */
+  overflow: hidden;
+  white-space: nowrap;
+  transition: color var(--vp-transition-time);
+}
+
+.last-moment:hover .text {
+  color: var(--vp-c-brand-2);
 }
 
 .datetime {
+  flex-shrink: 0; /* 日期不收缩 */
   color: var(--vp-c-text-3);
-  margin-left: 10px;
   opacity: 0.8;
-}
-
-span.content {
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  transition: all var(--vp-transition-time);
 }
 </style>

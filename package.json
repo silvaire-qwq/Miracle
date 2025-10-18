@@ -7,8 +7,10 @@
   "devDependencies": {
     "@types/node": "^22.18.8",
     "iconify": "^1.4.0",
+    "prettier": "3.6.2",
     "vitepress": "^1.6.3",
     "vitepress-plugin-rss": "^0.3.1",
+    "vitepress-plugin-tabs": "^0.7.3",
     "vue": "^3.5.13"
   },
   "dependencies": {
@@ -17,7 +19,6 @@
     "chalk": "^5.6.2",
     "dayjs": "^1.11.18",
     "rss-parser": "^3.13.0",
-    "twikoo": "^1.6.44",
     "typed.js": "^2.1.0",
     "vitepress-theme-flexoki": "^0.0.1"
   },
@@ -25,6 +26,7 @@
     "clean": "node .vitepress/theme/scripts/setup.js",
     "dev": "vitepress dev --port 4321",
     "build": "vitepress build",
-    "preview": "vitepress preview --port 4321"
+    "preview": "vitepress preview --port 4321",
+    "format": "pnpm exec prettier . --write"
   }
 }

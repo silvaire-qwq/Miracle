@@ -5,13 +5,13 @@ import { data as posts } from "../../data/posts.data";
 const props = defineProps({
   maxItems: {
     type: Number,
-    default: 6
-  }
+    default: 6,
+  },
 });
 
 // 应用 maxItems 限制
 const articles = computed(() =>
-  (props.maxItems > 0) ? posts.slice(0, props.maxItems) : posts
+  props.maxItems > 0 ? posts.slice(0, props.maxItems) : posts,
 );
 </script>
 

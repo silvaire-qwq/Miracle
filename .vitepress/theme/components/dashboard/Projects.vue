@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { globalConfig } from "#config";
-const username = globalConfig.github
+const username = globalConfig.github;
 const posts = ref<any[]>([]);
 const loading = ref(true);
 const error = ref("");
@@ -23,11 +23,12 @@ async function fetchGithubData() {
       let committer = "";
       try {
         const commitsRes = await fetch(
-          `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`
+          `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`,
         );
         const commits = await commitsRes.json();
         lastCommit = commits[0]?.commit?.message || "";
-        committer = commits[0]?.commit?.author?.name || "";
+        // ✅ 使用 GitHub 登录名而非 commit 作者名字
+        committer = commits[0]?.author?.login || username;
       } catch {}
 
       return {
@@ -38,7 +39,7 @@ async function fetchGithubData() {
         committer,
         avatarUrl: repo.owner.avatar_url,
       };
-    })
+    }),
   );
 
   return projects;
@@ -91,23 +92,14 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   <div v-else-if="error">{{ error }}</div>
   <div v-else class="posts-grid">
     <div v-for="post in posts" :key="post.link" class="post-card">
-      <a
-        :href="post.link"
-        target="_blank"
-        class="diary"
-        @mouseenter="handleMouseEnter"
-        @mousemove="handleMouseMove"
-        @mouseleave="handleMouseLeave"
-      >
-        <div class="textPlace">
-          <h1 class="title">{{ post.title }}</h1>
-          <p class="details">{{ post.description ?? "No description" }}</p>
-          <div class="meta">
-            {{ post.lastCommit || "No commits yet" }}
-            <span v-if="post.committer" style="color: var(--vp-c-text-3); opacity: 0.4;"> by {{ post.committer }}</span>
-          </div>
-        </div>
-      </a>
+      <PostCard
+        :url="post.link"
+        :title="post.title"
+        :description="post.description"
+        :category="post.committer || 'Unknown'"
+        :date="post.lastCommit || 'No commits yet'"
+        :type="'project'"
+      />
     </div>
   </div>
 </template>

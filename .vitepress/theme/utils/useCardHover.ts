@@ -1,7 +1,7 @@
 import { easterEggActive } from "./easterEgg";
 
-const maxFrame = 60;
-const maxMove = 9;
+const maxFrame = 250;
+const maxMove = 8;
 const easing = 0.1;
 const tolerance = 0.01;
 
@@ -51,7 +51,7 @@ export function useCardHover() {
 
   const handleMouseMove = (e: MouseEvent) => {
     const time = performance.now();
-    if ((time - lastTime) < (1000 / maxFrame)) return;
+    if (time - lastTime < 1000 / maxFrame) return;
     lastTime = time;
 
     const el = e.currentTarget as HTMLElement;

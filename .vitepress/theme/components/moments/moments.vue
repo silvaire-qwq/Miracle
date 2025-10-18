@@ -16,15 +16,23 @@ onBeforeUnmount(() => {
 });
 
 // 🔹 瀑布流数据，按年份分组，动态列数
-const groupedMoments = computed(() =>
-  generateGrid(
+const groupedMoments = computed(() => {
+  const grid = generateGrid(
     globalConfig.moments,
     props.maxItems,
     (item: any) =>
       item.date ? new Date(item.date).getFullYear().toString() : "all",
-    columnCount.value
-  )
-);
+    columnCount.value,
+  );
+
+  // 倒序排序年份
+  return grid.sort((a, b) => {
+    // "all" 永远放最后
+    if (a.key === "all") return 1;
+    if (b.key === "all") return -1;
+    return Number(b.key) - Number(a.key);
+  });
+});
 </script>
 
 <template>

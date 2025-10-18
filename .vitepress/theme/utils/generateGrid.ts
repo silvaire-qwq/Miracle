@@ -2,7 +2,7 @@ export function generateGrid<T>(
   items: T[],
   maxItems?: number,
   groupFn?: (item: T) => string,
-  columnCount = 3
+  columnCount = 3,
 ) {
   let workingItems = items.slice();
   if (maxItems && maxItems > 0) {

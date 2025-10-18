@@ -1,5 +1,7 @@
+// DO NOT EDIT THESE LINES!!!!! ---------------------------------------------------
 import { data as momentList } from "#theme/data/moments.data";
 import { data as friendList } from "#theme/data/friends.data";
+import { data as iconList } from "#theme/configs/iconList";
 
 // experimental: i18n
 import { languageFile as zh } from "#theme/lang/zh_CN";
@@ -7,38 +9,48 @@ import { languageFile as en } from "#theme/lang/en_US";
 
 const languageMap: Record<string, any> = { zh, en };
 
+// LANGUAGES ----------------------------------------------------------------------
 // hey !!! you !!!
 // change it to "zh" if you want to use Chinese
 // website language (zh / en)
 const defaultLanguage = "en";
-
-// config area
 const languageFile = languageMap[defaultLanguage] || en; // do not edit it
+
+// CONFIGS ----------------------------------------------------------------------
 export const globalConfig = {
   title: "Silvaire's Blog", // title
   description: "Per Aspera Ad Astra", // description
   author: "Silvaire", // your name
   favicon:
     "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4&mask=circle", // favicon (suggest: circle mask)
-  url: "https://qwq.blue", // main url
-  githubRepo: "silvaire-qwq/Miracle", // the github repo of ur blog
+  url: "https://qwq.blue", // main url (https://xxxx.xxx)
+  blogBase: {
+    type: "github", // github / gitea
+    giteaUrl: "https://gitea.com", // if the type is gitea, fill in the gitea url like: https://gitea.com
+    repo: "silvaire-qwq/Miracle", // the repo of ur blog
+  },
   dateCreated: "2024-08-23", // date created (YYYY-MM-DD)
 
   // theme setting
   styles: {
     color: {
-      hue: 300, // theme color
+      hue: 300,
       intensity: {
-        light: 0.2,
-        dark: 0.2, // 0.4: syberpunk!!
-      }, // color intensity
+        light: 20, // suggestion: 20
+        dark: 20, // suggestion: 20
+      },
+      lightness: {
+        light: 55, // suggestion: 55
+        dark: 55, // suggestion: 55 (it looks like catppuccin + mauve when hue is 300)
+      },
     },
     visual: {
-      transition: 10, // 0.x[s(second(s))] | e.g. 10 -> 0.1s (default)
+      transition: 10, // x[s(second(s))] / 100 | e.g. 10 -> 0.1s (default)
+      gap: 12, // x[px]
       radius: 26, // x[px]
       uppercase: true, // CATEGORIES / Categories
       mono: true, // use monospace font for title
-    }
+    },
   },
 
   // homepage setting (when globalConfig.modules.banner is a url)
@@ -117,7 +129,7 @@ export const globalConfig = {
   // comments
   comments: {
     enable: true,
-    type: "giscus",
+    type: "twikoo",
     giscus: {
       repo: "silvaire-qwq/Miracle",
       repoId: "R_kgDOPz1WLw",
@@ -142,12 +154,14 @@ export const globalConfig = {
   // the higher the weight, the lower the friend will be displayed
   friendWeights: {
     // example: -99, // "example" will be displayed at the top
-    qwq: -50,
+    qwq: -99,
     friends: -1,
     unable: 0, // "unable" will be displayed at the bottom
   },
 
-  friends: friendList, // friends (edit it in config/friends)
-  moments: momentList, // moments (edit it in config/moments)
-  lang: languageFile, // language (do not edit it!)
+  // DO NOT EDIT THESE VALUES!!!!!
+  friends: friendList,
+  moments: momentList,
+  lang: languageFile,
+  icon: iconList,
 };

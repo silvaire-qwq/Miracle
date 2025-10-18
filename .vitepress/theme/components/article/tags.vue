@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from "vue";
+import {
+  ref,
+  computed,
+  watch,
+  nextTick,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
 import { Icon } from "@iconify/vue";
 import PostCard from "./postCard.vue";
 import { generateGrid } from "../../utils/generateGrid";
@@ -31,7 +38,7 @@ watch(
     } else {
       articles.value = posts;
     }
-  }
+  },
 );
 
 // 监听 selectedTag 变化
@@ -52,7 +59,7 @@ onMounted(() => {
   if (selectedTag.value) {
     nextTick(() => {
       articles.value = posts.filter((post) =>
-        post.tags?.includes(selectedTag.value!)
+        post.tags?.includes(selectedTag.value!),
       );
     });
   }
@@ -64,12 +71,14 @@ onBeforeUnmount(() => {
 
 // 按年份分组 + 瀑布流
 const groupedArticles = computed(() => {
-  return generateGrid(
+  const grid = generateGrid(
     articles.value,
     undefined,
     (post) => new Date(post.originDate).getFullYear().toString(),
-    columnCount.value // ✅ 传入列数
+    columnCount.value,
   );
+  // 按年份倒序
+  return grid.sort((a, b) => Number(b.key) - Number(a.key));
 });
 
 // 提取所有唯一标签
@@ -117,7 +126,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <Icon icon="ph:book-bookmark-duotone" style="opacity: 0.4" />
+        <Icon :icon="globalConfig.icon.category" style="opacity: 0.4" />
         <span class="name">{{ " " + globalConfig.lang.categories }}</span>
       </a>
       <span

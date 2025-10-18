@@ -8,7 +8,7 @@ export interface Moment {
   time: string;
   content: string;
   image?: string;
-};
+}
 
 let data: Moment[];
 
@@ -23,8 +23,9 @@ export default defineLoader({
         const content = JSON.parse(readFileSync(file, "utf-8"));
         return { fileName, ...content };
       })
-      .sort((a, b) =>
-        Date.parse(`${b.date} ${b.time}`) - Date.parse(`${a.date} ${a.time}`)
+      .sort(
+        (a, b) =>
+          Date.parse(`${b.date} ${b.time}`) - Date.parse(`${a.date} ${a.time}`),
       );
-  }
+  },
 });

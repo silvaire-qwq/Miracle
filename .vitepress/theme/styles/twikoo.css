@@ -1,0 +1,207 @@
+:root {
+  /* Text & Content */
+  --tk-text: var(--vp-c-text-2);
+  --code-block-text: var(--vp-c-text-3);
+
+  /* Buttons */
+  --btn-regular-bg: var(--vp-c-brand-soft);
+  --btn-content: var(--vp-c-brand-1);
+  --primary: var(--vp-c-brand-1);
+
+  /* Backgrounds */
+  --page-bg: var(--vp-c-bg);
+}
+
+/* Dark mode */
+html.dark {
+  --tk-text: var(--vp-c-text-2);
+}
+
+/* Comments container */
+.tk-comments {
+  color: var(--tk-text);
+}
+
+.tk-comments *:not(pre, code) {
+  font-family: var(--vp-font-family-base);
+}
+
+.tk-comments pre {
+  padding: 15px 25px !important;
+}
+
+.tk-action-icon,
+.tk-icon {
+  color: var(--vp-c-brand-1) !important;
+}
+
+.tk-extra-text {
+  color: var(--vp-c-text-3) !important;
+}
+
+.tk-expand {
+  background-color: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+
+  border-radius: var(--vp-border-radius-1);
+  margin-top: 10px;
+  box-shadow: var(--vp-shadow);
+  transition: all var(--vp-transition-time) !important;
+
+  &:hover {
+    background-color: var(--vp-c-bg-alt) !important;
+  }
+}
+
+.tk-preview {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+.tk-preview-container {
+  margin-top: 8px !important;
+  border-radius: var(--vp-border-radius-1) !important;
+  border: 1px solid var(--vp-c-border) !important;
+  box-shadow: var(--vp-shadow);
+  padding: 15px 25px !important;
+}
+
+/* Comment box */
+.tk-row .tk-col {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.tk-row .tk-col .tk-input textarea {
+  border-radius: var(--vp-border-radius-1);
+  padding: 1rem 1.5rem;
+  box-shadow: var(--vp-shadow);
+  min-height: 150px;
+  border: 1px solid var(--vp-c-border);
+  outline: none;
+}
+
+.tk-row .tk-col .tk-input textarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--vp-shadow-brand);
+}
+
+/* Buttons */
+.tk-row.actions {
+  width: 100%;
+}
+
+.tk-meta-input {
+  margin-top: 8px;
+}
+
+.tk-row.actions .__markdown {
+  display: none;
+}
+
+.el-input-group__prepend {
+  border-radius: var(--vp-border-radius-1) 0 0 var(--vp-border-radius-1) !important;
+  box-shadow: var(--vp-shadow);
+}
+
+.tk-comments-container {
+  margin-top: 2rem !important;
+}
+
+.el-input__inner {
+  border-radius: 0 var(--vp-border-radius-1) var(--vp-border-radius-1) 0 !important;
+  box-shadow: var(--vp-shadow);
+
+  &:focus {
+    border-color: var(--vp-c-brand-1) !important;
+    box-shadow: var(--vp-shadow-brand) !important;
+  }
+}
+
+.tk-row.actions .tk-preview,
+.tk-row.actions .tk-send,
+.tk-row.actions .tk-cancel {
+  border: none;
+  border-radius: var(--vp-border-radius-1);
+  background-color: var(--btn-regular-bg);
+  color: var(--btn-content);
+  cursor: pointer;
+}
+
+.tk-row-actions-start {
+  display: none !important;
+}
+
+.tk-row.actions .tk-preview:disabled,
+.tk-row.actions .tk-send:disabled,
+.tk-row.actions .tk-cancel:disabled {
+  background-color: var(--btn-regular-bg);
+  color: rgba(255, 255, 255, 0.63);
+  min-height: 32px;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: var(--vp-c-brand-soft) !important;
+  }
+}
+
+.tk-send {
+  background-color: var(--vp-c-brand-1) !important;
+  color: var(--vp-c-bg) !important;
+}
+
+.tk-cancel {
+  background-color: var(--vp-c-brand-soft) !important;
+  color: var(--vp-c-brand-1) !important;
+}
+
+.tk-row.actions {
+  margin: 0 !important;
+}
+
+/* Comment border */
+/* 普通评论框阴影 */
+.tk-comment {
+  border: 1px solid var(--vp-c-border);
+  padding: 1rem;
+  border-radius: var(--vp-border-radius-1);
+  transition: all var(--vp-transition-time) ease-in-out;
+  box-shadow: var(--vp-shadow);
+}
+
+/* 鼠标悬停时使用品牌色阴影 */
+.tk-comment:hover {
+  border-color: var(--primary);
+  box-shadow: var(--vp-shadow-brand);
+}
+
+/* Code block */
+.twikoo .code-block pre:not([class]) {
+  background-color: var(--vp-code-block-bg, var(--vp-c-bg-elv));
+  overflow: auto;
+  padding: 0.5rem;
+  color: var(--code-block-text);
+  border-radius: var(--vp-border-radius-1);
+}
+
+/* Images inside comment content */
+.tk-content img {
+  display: inline;
+  vertical-align: bottom;
+}
+
+/* Links inside comment content */
+.tk-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Replies */
+.tk-replies .tk-comment {
+  background-color: var(--page-bg);
+}
+
+.tk-replies .tk-comment .tk-content > span:first-of-type {
+  font-size: 0.75rem;
+}

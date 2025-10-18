@@ -20,13 +20,13 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
       <h1 class="author">{{ globalConfig.author }}</h1>
       <div class="btns">
         <div class="location btn">
-          <Icon icon="ph:bank-duotone" />
+          <Icon :icon="globalConfig.icon.location" />
           {{ globalConfig.homePage.city }}
         </div>
         <a
           :href="`https://github.com/${globalConfig.github}`"
           class="github btn"
-          ><Icon icon="ph:github-logo-duotone" /> GitHub</a
+          ><Icon :icon="globalConfig.icon.github" /> GitHub</a
         >
       </div>
     </div>
@@ -75,7 +75,7 @@ div.btns {
 }
 
 .iconify {
-  margin-right: 3px;
+  margin-right: 1px;
 }
 
 .btn {
