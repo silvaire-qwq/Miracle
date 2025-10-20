@@ -2,8 +2,8 @@ import path from "path";
 import { defineConfig } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
-import { globalConfig } from "#/config";
-import { getRunningTime } from "#theme/utils/getRunningTime";
+import { globalConfig } from "../config";
+import { getRunningTime } from "./theme/utils/getRunningTime";
 import type { RSSOptions } from "vitepress-plugin-rss";
 
 // RSS feed configuration
@@ -32,7 +32,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        "#": path.join(import.meta.dirname, ".."),
+        "#": path.resolve(import.meta.dirname, ".."),
         "#theme": import.meta.dirname,
       },
     },
@@ -73,14 +73,11 @@ export default defineConfig({
     lastUpdated: { text: globalConfig.lang.lastUpdated },
 
     footer: {
-      message: `© ${new Date().getFullYear()} ${globalConfig.author}${
-        globalConfig.lang.allRightsReserved
-      }<br>
-        ${
-          globalConfig.lang.poweredBy
+      message: `© ${new Date().getFullYear()} ${globalConfig.author}${globalConfig.lang.allRightsReserved
+        }<br>
+        ${globalConfig.lang.poweredBy
         } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
-        ${globalConfig.title} ${
-          globalConfig.lang.hasExistedFor
+        ${globalConfig.title} ${globalConfig.lang.hasExistedFor
         } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}
 
         `,
