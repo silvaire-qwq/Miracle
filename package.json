@@ -1,11 +1,8 @@
 {
   "type": "module",
-  "imports": {
-    "#*": "./*.ts",
-    "#theme/*": "./.vitepress/theme/*.ts"
-  },
   "devDependencies": {
     "@types/node": "^22.18.8",
+    "@zinkawaii/tsconfig": "^0.0.2",
     "iconify": "^1.4.0",
     "prettier": "3.6.2",
     "vitepress": "^1.6.3",

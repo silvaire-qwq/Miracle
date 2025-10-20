@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import { Icon } from "@iconify/vue";
 import { data as posts } from "../../data/posts.data";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 import { useCardHover } from "../../utils/useCardHover";
 import { getDate, getTimeString } from "../../utils/getDate";
 

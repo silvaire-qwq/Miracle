@@ -1,5 +1,5 @@
 // ./setup/applyCssVars.ts
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 
 export function applyCssVars() {
   const root = document.documentElement;

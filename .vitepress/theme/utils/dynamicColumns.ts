@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 
 export const columnCount = ref(3);
 

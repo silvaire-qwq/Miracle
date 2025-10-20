@@ -76,7 +76,7 @@
 <script setup>
 import { useData } from "vitepress";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 import { formatUrl } from "../../utils/formatUrl";
 import { useCardHover } from "../../utils/useCardHover";
 import { data as posts } from "../../data/posts.data";

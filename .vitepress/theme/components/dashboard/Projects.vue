@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 const username = globalConfig.github;
 const posts = ref<any[]>([]);
 const loading = ref(true);

@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 
 function shuffle(array: any[]) {
   return array

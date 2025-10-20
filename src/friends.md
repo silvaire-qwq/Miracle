@@ -7,7 +7,7 @@ footer: false
 import { computed, onMounted, onBeforeUnmount } from "vue";
 import { generateGrid } from "#theme/utils/generateGrid";
 import { columnCount, updateColumns } from "#theme/utils/dynamicColumns";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 
 // 可自定义分组权重：值越大越靠后（Friends 始终置底）
 const friendWeights: Record<string, number> = globalConfig.friendWeights

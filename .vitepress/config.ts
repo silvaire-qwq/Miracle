@@ -1,7 +1,8 @@
+import path from "path";
 import { defineConfig } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 import { getRunningTime } from "#theme/utils/getRunningTime";
 import type { RSSOptions } from "vitepress-plugin-rss";
 
@@ -29,6 +30,12 @@ export default defineConfig({
   cleanUrls: true,
   srcDir: "./src",
   vite: {
+    resolve: {
+      alias: {
+        "#": path.join(import.meta.dirname, ".."),
+        "#theme": import.meta.dirname,
+      },
+    },
     publicDir: "../public",
     plugins: [RssPlugin(RSS)],
   },

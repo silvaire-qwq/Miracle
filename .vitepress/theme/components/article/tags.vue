@@ -13,7 +13,7 @@ import { generateGrid } from "../../utils/generateGrid";
 import { useCardHover } from "../../utils/useCardHover";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
 import { data as posts } from "../../data/posts.data";
-import { globalConfig } from "#config";
+import { globalConfig } from "#/config";
 
 const props = defineProps({
   maxItems: {
