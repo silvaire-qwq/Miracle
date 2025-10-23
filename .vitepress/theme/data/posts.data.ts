@@ -5,7 +5,7 @@ import {
   countWords,
   calcReadingTime,
 } from "../utils/textAnalyzer";
-import { globalConfig } from "../../../config";
+import { globalConfig } from "#config";
 
 interface Post {
   filePath: string;

@@ -25,7 +25,7 @@
 import { ref, onMounted } from "vue";
 import { useCardHover } from "../../utils/useCardHover";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 
 interface Moment {
   date: string;

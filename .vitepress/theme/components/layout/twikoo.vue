@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vitepress";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 
 const envId = globalConfig.comments.twikoo.env;
 const twikooJs = ref(null);

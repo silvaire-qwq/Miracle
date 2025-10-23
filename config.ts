@@ -1,11 +1,11 @@
 // DO NOT EDIT THESE LINES!!!!! ---------------------------------------------------
-import { data as momentList } from "./.vitepress/theme/data/moments.data";
-import { data as friendList } from "./.vitepress/theme/data/friends.data";
-import { data as iconList } from "./.vitepress/theme/configs/iconList";
+import { data as momentList } from "#theme/data/moments.data";
+import { data as friendList } from "#theme/data/friends.data";
+import { data as iconList } from "#theme/configs/iconList";
 
 // experimental: i18n
-import { languageFile as zh } from "./.vitepress/theme/lang/zh_CN";
-import { languageFile as en } from "./.vitepress/theme/lang/en_US";
+import { languageFile as zh } from "#theme/lang/zh_CN";
+import { languageFile as en } from "#theme/lang/en_US";
 
 const languageMap: Record<string, any> = { zh, en };
 

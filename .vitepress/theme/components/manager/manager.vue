@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import { Icon } from "@iconify/vue";
 import { data as posts } from "../../data/posts.data";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 import { useCardHover } from "../../utils/useCardHover";
 import { getDate, getTimeString } from "../../utils/getDate";
 
@@ -55,7 +55,7 @@ function getRepoUrl(
   action: "new" | "edit" | "delete",
   type: "posts" | "moments" | "friends",
   fileName: string,
-  fileContent?: string,
+  fileContent = "",
 ) {
   const { blogBase } = globalConfig;
   const basePath = type === "posts" ? `src/posts` : `data/${type}`;
@@ -63,14 +63,17 @@ function getRepoUrl(
   // 去掉 fileName 开头多余的 type/
   const cleanFileName = fileName.replace(new RegExp(`^${type}/`), "");
 
-  const url = {
+  const url: Record<
+    string,
+    Record<typeof action, string>
+  > = {
     github: {
-      new: `https://github.com/${blogBase.repo}/new/main/${basePath}?filename=${cleanFileName}&value=${fileContent || ""}`,
+      new: `https://github.com/${blogBase.repo}/new/main/${basePath}?filename=${cleanFileName}&value=${fileContent}`,
       edit: `https://github.com/${blogBase.repo}/edit/main/${basePath}/${cleanFileName}`,
       delete: `https://github.com/${blogBase.repo}/delete/main/${basePath}/${cleanFileName}`,
     },
     gitea: {
-      new: `${blogBase.giteaUrl}/${blogBase.repo}/_new/main/${basePath}?filename=${cleanFileName}&value=${fileContent || ""}`,
+      new: `${blogBase.giteaUrl}/${blogBase.repo}/_new/main/${basePath}?filename=${cleanFileName}&value=${fileContent}`,
       edit: `${blogBase.giteaUrl}/${blogBase.repo}/_edit/main/${basePath}/${cleanFileName}`,
       delete: `${blogBase.giteaUrl}/${blogBase.repo}/_delete/main/${basePath}/${cleanFileName}`,
     },

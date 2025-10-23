@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 
 const stacks = ref(globalConfig.homePage.stacks);
 

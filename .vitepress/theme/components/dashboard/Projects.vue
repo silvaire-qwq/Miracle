@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 const username = globalConfig.github;
 const posts = ref<any[]>([]);
 const loading = ref(true);
@@ -82,9 +82,6 @@ async function loadProjects() {
 onMounted(() => {
   loadProjects();
 });
-
-import { useCardHover } from "../../utils/useCardHover";
-const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 
 <template>

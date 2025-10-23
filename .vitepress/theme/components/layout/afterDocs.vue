@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 import Twikoo from "./twikoo.vue";
 // 获取当前配色方案
 const { isDark } = useData();
@@ -67,8 +67,6 @@ interface CardProps {
 const props = withDefaults(defineProps<CardProps>(), {
   title: "true",
 });
-
-const { page } = useData();
 </script>
 
 <style scoped>

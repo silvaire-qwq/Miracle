@@ -36,7 +36,7 @@ footer: false
 </div>
 
 <script setup lang="ts">
-    import { globalConfig } from "#/config";
+    import { globalConfig } from "#config";
 </script>
 
 <style>

@@ -4,10 +4,10 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 interface CardProps {
   title: string;
-  link: string;
-  desc: string;
-  img: string;
-  folder: string;
+  link?: string;
+  desc?: string;
+  img?: string;
+  folder?: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {

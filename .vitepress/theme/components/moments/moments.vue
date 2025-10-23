@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount } from "vue";
-import { globalConfig } from "#/config";
+import { globalConfig } from "#config";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
 import { generateGrid } from "../../utils/generateGrid";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
