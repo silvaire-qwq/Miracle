@@ -67,8 +67,6 @@ interface CardProps {
 const props = withDefaults(defineProps<CardProps>(), {
   title: "true",
 });
-
-const { page } = useData();
 </script>
 
 <style scoped>

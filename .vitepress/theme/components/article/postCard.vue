@@ -1,10 +1,10 @@
 <script setup lang="ts">
 interface CardProps {
-  title: string;
-  url: string;
-  description: string;
-  category: string;
-  date: string;
+  title?: string;
+  url?: string;
+  description?: string;
+  category?: string;
+  date?: string;
   image?: string;
   type?: string;
 }

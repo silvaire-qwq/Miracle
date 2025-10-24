@@ -82,9 +82,6 @@ async function loadProjects() {
 onMounted(() => {
   loadProjects();
 });
-
-import { useCardHover } from "../../utils/useCardHover";
-const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 
 <template>

@@ -4,9 +4,9 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 interface CardProps {
   title: string;
-  link: string;
-  desc: string;
-  img: string;
+  link?: string;
+  desc?: string;
+  img?: string;
   folder?: string;
   type?: string;
 }

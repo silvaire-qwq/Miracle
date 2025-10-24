@@ -9,7 +9,7 @@ const router = useRouter();
 
 function initTwikoo() {
   try {
-    twikoo.init({
+    window.twikoo.init({
       envId,
       onCommentLoaded: initLightGallery,
     });

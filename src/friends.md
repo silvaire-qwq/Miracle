@@ -62,14 +62,13 @@ const groupedFriends = computed(() => {
               :title="friend.title"
               :link="friend.link"
               :desc="friend.desc"
-              :img="friend.folder === 'unable' ? defaultImg : (friend.img || defaultImg)"
+              :img="friend.folder === 'unable' ? defaultImg : (friend.img ?? defaultImg)"
               :folder="friend.folder"
             />
           </div>
         </div>
       </div>
     </div>
-
   </ClientOnly>
 </div>
 

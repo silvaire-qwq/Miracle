@@ -1,4 +1,4 @@
-// ./setup/applyCssVars.ts
+// ./configs/applyCssVars.ts
 import { globalConfig } from "#config";
 
 export function applyCssVars() {

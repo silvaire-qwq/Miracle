@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vitepress";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
@@ -29,6 +30,12 @@ export default defineConfig({
   cleanUrls: true,
   srcDir: "./src",
   vite: {
+    resolve: {
+      alias: {
+        "#": path.resolve(import.meta.dirname, ".."),
+        "#theme": path.resolve(import.meta.dirname, "theme"),
+      },
+    },
     publicDir: "../public",
     plugins: [RssPlugin(RSS)],
   },
