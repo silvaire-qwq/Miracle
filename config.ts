@@ -34,13 +34,13 @@ export const globalConfig = {
   // theme setting
   styles: {
     color: {
-      hue: 300,
+      hue: 285,
       intensity: {
         light: 20, // suggestion: 20
-        dark: 20, // suggestion: 20
+        dark: 15, // suggestion: 15 ~ 20
       },
       lightness: {
-        light: 55, // suggestion: 55
+        light: 50, // suggestion: 50
         dark: 55, // suggestion: 55 (it looks like catppuccin + mauve when hue is 300)
       },
     },
@@ -68,6 +68,7 @@ export const globalConfig = {
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
       projects: true, // projects (very sloooooow)
+      musics: true, // music list
       techStack: true, // tech stack
       friends: true, // friends
     },
@@ -120,6 +121,8 @@ export const globalConfig = {
       text: languageFile.others,
       items: [
         { text: languageFile.friends, link: "/friends" },
+        // enable / disable music list
+        { text: languageFile.musics, link: "/musics" },
         { text: languageFile.manager, link: "/manager" },
         { text: languageFile.whiteboard, link: "/whiteboard" },
       ],
@@ -158,6 +161,9 @@ export const globalConfig = {
     friends: -1,
     unable: 0, // "unable" will be displayed at the bottom
   },
+
+  // netease music list
+  musicList: "7761179667",
 
   // DO NOT EDIT THESE VALUES!!!!!
   friends: friendList,

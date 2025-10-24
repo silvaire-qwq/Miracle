@@ -25,6 +25,11 @@ footer: false
     <Projects />
 </div>
 
+<div v-if="globalConfig.homePage.modules.musics">
+    <h2><Icon :icon="globalConfig.icon.musics" /> {{ globalConfig.lang.musics }}</h2>
+    <Musics />
+</div>
+
 <div v-if="globalConfig.homePage.modules.techStack">
     <h2><Icon :icon="globalConfig.icon.techStack" /> {{ globalConfig.lang.techStack }}</h2>
     <TechStack />
@@ -34,6 +39,8 @@ footer: false
     <h2><Icon :icon="globalConfig.icon.friends" /> {{ globalConfig.lang.friends }}</h2>
     <Friends />
 </div>
+
+
 
 <script setup lang="ts">
     import { globalConfig } from "#config";

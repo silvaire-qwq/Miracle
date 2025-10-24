@@ -7,6 +7,7 @@ import Tags from "../components/article/tags.vue";
 import FirstPage from "../components/dashboard/FirstPage.vue";
 import Friends from "../components/dashboard/Friends.vue";
 import LastMoment from "../components/dashboard/LastMoment.vue";
+import Musics from "../components/dashboard/Musics.vue";
 import Projects from "../components/dashboard/Projects.vue";
 import RecentPosts from "../components/dashboard/RecentPosts.vue";
 import TechStack from "../components/dashboard/TechStack.vue";
@@ -37,8 +38,9 @@ const components = {
   Icon,
   Comments,
   Twikoo,
-  File
-}
+  Musics,
+  File,
+};
 
 type GlobalComponentTypes = typeof components;
 

@@ -18,4 +18,5 @@ export const data = {
   github: "ph:github-logo-duotone",
   location: "ph:bank-duotone",
   heart: "ph:heartbeat-duotone",
+  musics: "ph:music-notes-duotone",
 };

@@ -36,4 +36,5 @@ export const languageFile = {
   outline: "目录",
   returnToTopLabel: "返回顶部",
   lastUpdated: "更新于",
+  musics: "音乐",
 };
