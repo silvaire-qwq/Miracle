@@ -51,6 +51,7 @@ export function registerComponents(app: App) {
     Twikoo: defineAsyncComponent(
       () => import("../components/layout/twikoo.vue"),
     ),
+    Musics: defineAsyncComponent(() => import("../components/dashboard/Musics.vue")),
     File: defineAsyncComponent(() => import("../components/utils/file.vue")),
   };
 

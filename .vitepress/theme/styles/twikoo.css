@@ -205,3 +205,7 @@ html.dark {
 .tk-replies .tk-comment .tk-content > span:first-of-type {
   font-size: 0.75rem;
 }
+
+a.tk-nick strong {
+  background: unset !important;
+}

@@ -28,8 +28,8 @@ export default {
 
     const init = () => {
       applyCssVars();
-      applyPangu(); // 初始内容
-      observePangu(); // 监听动态内容
+      // applyPangu(); // 初始内容
+      // observePangu(); // 监听动态内容
     };
     if (document.readyState === "complete") init();
     else window.addEventListener("DOMContentLoaded", init, { once: true });

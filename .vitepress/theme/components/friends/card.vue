@@ -7,7 +7,8 @@ interface CardProps {
   link: string;
   desc: string;
   img: string;
-  folder: string;
+  folder?: string;
+  type?: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -16,6 +17,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   desc: "",
   img: "",
   folder: "",
+  type: "",
 });
 </script>
 
@@ -27,9 +29,9 @@ const props = withDefaults(defineProps<CardProps>(), {
     @mouseleave="handleMouseLeave"
   >
     <a :href="props.link" target="_blank" class="card-link" rel="nofollow">
-      <div class="cardInfo">
+      <div class="cardInfo" :class="props.type">
         <div class="img-container" v-if="props.img">
-          <img class="img" :src="props.img" />
+          <img class="img" :src="props.img" :class="props.type"/>
         </div>
         <div class="textInfo">
           <div class="title">{{ props.title }}</div>
@@ -51,6 +53,13 @@ const props = withDefaults(defineProps<CardProps>(), {
   transition: all var(--vp-transition-time);
 }
 
+.cardInfo.square {
+  flex-direction: column !important;
+  .img-container {
+    align-self: flex-start !important;
+  }
+}
+
 .card:hover {
   border-color: var(--vp-c-brand-1);
   box-shadow: var(--vp-shadow-brand);
@@ -60,7 +69,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   height: 100%;
   padding: 25px;
   display: flex;
-  gap: 10px;
+  gap: var(--vp-gap);
 }
 
 .title {
@@ -91,6 +100,9 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 .img {
   border-radius: 100%;
+}
+.img.square {
+  border-radius: var(--vp-border-radius-3);
 }
 
 .textInfo {

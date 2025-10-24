@@ -36,4 +36,5 @@ export const languageFile = {
   outline: "Menu",
   returnToTopLabel: "Return to Top",
   lastUpdated: "Last Updated",
+  musics: "Musics",
 };

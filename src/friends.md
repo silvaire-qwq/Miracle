@@ -94,7 +94,7 @@ const groupedFriends = computed(() => {
     line-height: 110px;
     font-size: 100px;
     position: relative;
-    top: 40px;
+    top: 30px;
     font-weight: bold;
     color: var(--vp-c-gutter);
     opacity: 0.7;
