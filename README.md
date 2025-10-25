@@ -10,6 +10,9 @@ It's Miracle!!!!!
 <span>A lovely VitePress theme QwQ</span>
 </p>
 
+> [!NOTE]
+> You can join our QQ group: 324504099!
+
 ## Getting Started
 
 1. Create your blog repository:
