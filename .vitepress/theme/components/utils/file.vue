@@ -1,13 +1,13 @@
 <script setup lang="ts">
 interface CardProps {
   url: string;
-  name?: string;
+  text?: string;
   icon: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
   url: "",
-  name: "",
+  text: "",
   icon: "",
 });
 
@@ -20,7 +20,7 @@ function getFileName(url: string) {
 <template>
   <a :href="url" target="_blank" class="nocss">
     <Icon :icon="props.icon"></Icon>
-    <span>{{ name ? name : getFileName(url) }}</span>
+    <span>{{ text ? text : getFileName(url) }}</span>
   </a>
 </template>
 
@@ -42,7 +42,7 @@ a {
   }
   &:hover {
     box-shadow: var(--vp-shadow-brand);
-    border-color: var(--vp-c-brand-1);
+    border-color: var(--vp-c-brand-2);
     span,
     .iconify {
       color: var(--vp-c-brand-1) !important;

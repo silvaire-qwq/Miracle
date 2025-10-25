@@ -21,6 +21,8 @@ export const languageFile = {
   poweredBy: "使用",
   allRightsReserved: " 版权所有",
   allPosts: "所有文章",
+  allArtists: "所有歌手",
+  artists: "歌手",
   tags: "标签",
   categories: "分类",
   posts: "文章",

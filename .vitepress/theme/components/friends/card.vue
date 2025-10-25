@@ -53,13 +53,6 @@ const props = withDefaults(defineProps<CardProps>(), {
   transition: all var(--vp-transition-time);
 }
 
-.cardInfo.square {
-  flex-direction: column !important;
-  .img-container {
-    align-self: flex-start !important;
-  }
-}
-
 .card:hover {
   border-color: var(--vp-c-brand-1);
   box-shadow: var(--vp-shadow-brand);
@@ -95,7 +88,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   margin-right: 5px;
   width: 48px;
   height: 48px;
-  align-self: center;
+  align-self: center !important;
 }
 
 .img {

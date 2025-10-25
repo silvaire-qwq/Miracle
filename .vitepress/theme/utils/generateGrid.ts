@@ -9,22 +9,33 @@ export function generateGrid<T>(
     workingItems = workingItems.slice(0, maxItems);
   }
 
-  // 🔹 分配函数（参考 grid 思路）
   const distribute = (arr: T[]) => {
     const columns: T[][] = Array.from({ length: columnCount }, () => []);
-    arr.forEach((item, i) => {
-      // 这里按列数动态取余，类似 grid 的 repeat()
-      columns[i % columnCount].push(item);
+    const heights = Array(columnCount).fill(0);
+
+    arr.forEach((item) => {
+      const h = estimateHeight(item);
+      // 🔹 总是放到当前最矮列，无论列数
+      const target = heights.indexOf(Math.min(...heights));
+      columns[target].push(item);
+      heights[target] += h;
     });
+
     return columns;
   };
 
-  // 如果没有 groupFn，就默认只有一组
+  function estimateHeight(item: T) {
+    const str =
+      (item as any).desc || (item as any).content || (item as any).title || "";
+    const base = 80;
+    const factor = 5;
+    return base + Math.min(String(str).length, 50) * factor;
+  }
+
   if (!groupFn) {
     return [{ key: "all", columns: distribute(workingItems) }];
   }
 
-  // 按 groupFn 分组
   const map: Record<string, T[]> = {};
   workingItems.forEach((item) => {
     const key = groupFn(item);

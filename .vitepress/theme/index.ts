@@ -3,7 +3,6 @@ import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { handleEasterEgg } from "./utils/easterEgg";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
-import { applyPangu, observePangu } from "./utils/pangu";
 import "./styles/style.css";
 import "./styles/gencolor.css";
 
@@ -28,13 +27,10 @@ export default {
 
     const init = () => {
       applyCssVars();
-      // applyPangu(); // 初始内容
-      // observePangu(); // 监听动态内容
     };
     if (document.readyState === "complete") init();
     else window.addEventListener("DOMContentLoaded", init, { once: true });
 
-    router.onAfterRouteChanged = () => applyPangu();
 
     if (document.readyState === "complete") init();
     else window.addEventListener("DOMContentLoaded", init, { once: true });

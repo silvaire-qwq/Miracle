@@ -21,6 +21,8 @@ export const languageFile = {
   poweredBy: "Powered by",
   allRightsReserved: ". All Rights Reserved.",
   allPosts: "All Posts",
+  allArtists: "All Artists",
+  artists: "Artists",
   tags: "Tags",
   categories: "Categories",
   posts: "Posts",

@@ -18,17 +18,11 @@
 @import url("https://cdn-font.hyperos.mi.com/font/css?family=MiSans_VF:VF:Chinese_Simplify,Latin&display=swap");
 @import url("https://fonts.cdnfonts.com/css/sf-mono");
 @import url("https://fonts.font.im/css?family=Playwrite+MX&display=swap");
-@import url("https://rsms.me/inter/inter.css");
 
 :root {
   /* font family */
-  --vp-font-family-base: "Inter-Local", "MiSans VF", system-ui, sans-serif;
+  --vp-font-family-base: "OPPO Sans", "MiSans VF", system-ui, sans-serif;
   --vp-font-family-mono: "SF Mono", var(--vp-font-family-base);
-  font-variant-alternates: styleset(
-    open-digits,
-    disambiguation,
-    round-quotes-and-commas
-  );
   /* only for title !!!!!! */
   --vp-font-family-title:
     "Playwrite MX", var(--vp-font-family-mono), var(--vp-font-family-base);
@@ -55,67 +49,27 @@
 .dark {
   --vp-mini-bg: var(--vp-c-border);
 }
-@font-feature-values Inter-Local {
-  @styleset {
-    open-digits: 1;
-    disambiguation: 2;
-    round-quotes-and-commas: 3;
-    disambiguation-except-zero: 4;
-    circled-characters: 5;
-    squared-characters: 6;
-    square-punctuation: 7;
-    square-quotes: 8;
-  }
-}
 
 @font-face {
-  font-family: Inter-Local;
-  font-weight: 600;
-  src: local("Inter Regular");
-}
-
-@font-face {
-  font-family: Inter-Local;
-  font-style: italic;
-  font-weight: 600;
-  src: local("Inter Italic");
-}
-
-@font-face {
-  font-family: Inter-Local;
+  font-family: "OPPO Sans";
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2") format("woff2");
   font-weight: 700;
-  src: local("Inter Medium");
 }
 
 @font-face {
-  font-family: Inter-Local;
-  font-style: italic;
-  font-weight: 700;
-  src: local("Inter Medium Italic");
+  font-family: "OPPO Sans";
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2") format("woff2");
+  font-weight: 600;
 }
 
 @font-face {
-  font-family: Inter-Local;
-  font-weight: 800;
-  src: local("Inter SemiBold");
+  font-family: "OPPO Sans";
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Medium.woff2") format("woff2");
+  font-weight: 500;
 }
 
 @font-face {
-  font-family: Inter-Local;
-  font-style: italic;
-  font-weight: 800;
-  src: local("Inter SemiBold Italic");
-}
-
-@font-face {
-  font-family: Inter-Local;
-  font-weight: 900;
-  src: local("Inter Bold");
-}
-
-@font-face {
-  font-family: Inter-Local;
-  font-style: italic;
-  font-weight: 900;
-  src: local("Inter Bold Italic");
+  font-family: "OPPO Sans";
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Regular.woff2") format("woff2");
+  font-weight: 400;
 }

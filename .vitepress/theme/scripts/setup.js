@@ -70,6 +70,7 @@ try {
     link: "https://github.com/silvaire-qwq/miracle",
     desc: "A lovely VitePress theme QwQ",
     img: "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c",
+    folder: "miracle"
   };
   fs.writeFileSync(
     path.join(friendsDir, "friend-template.json"),
