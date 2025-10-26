@@ -17,7 +17,7 @@ const defaultImg =
 onMounted(async () => {
   try {
     const response = await fetch(
-      `https://meting.qjqq.cn/?type=playlist&id=${globalConfig.musicList}`
+      `https://meting.qjqq.cn/?type=playlist&id=${globalConfig.musicList}`,
     );
     const data = await response.json();
     playlist.value = data;
@@ -45,11 +45,7 @@ const limitedSongs = computed(() => {
 <template>
   <div class="songs-grid">
     <ClientOnly>
-      <div
-        v-for="song in limitedSongs"
-        :key="song.url"
-        class="song-card"
-      >
+      <div v-for="song in limitedSongs" :key="song.url" class="song-card">
         <FriendCard
           :title="song.name"
           :link="song.url"

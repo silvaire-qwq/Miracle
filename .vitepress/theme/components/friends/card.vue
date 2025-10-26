@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<CardProps>(), {
     <a :href="props.link" target="_blank" class="card-link" rel="nofollow">
       <div class="cardInfo" :class="props.type">
         <div class="img-container" v-if="props.img">
-          <img class="img" :src="props.img" :class="props.type"/>
+          <img class="img" :src="props.img" :class="props.type" />
         </div>
         <div class="textInfo">
           <div class="title">{{ props.title }}</div>

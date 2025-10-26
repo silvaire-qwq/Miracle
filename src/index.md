@@ -40,8 +40,6 @@ footer: false
     <Friends />
 </div>
 
-
-
 <script setup lang="ts">
     import { globalConfig } from "#config";
 </script>

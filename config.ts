@@ -48,7 +48,7 @@ export const globalConfig = {
       transition: 10, // x[s(second(s))] / 100 | e.g. 10 -> 0.1s (default)
       gap: 12, // x[px]
       radius: 26, // x[px]
-      uppercase: true, // CATEGORIES / Categories
+      uppercase: false, // CATEGORIES / Categories
       mono: true, // use monospace font for title
     },
   },
@@ -99,12 +99,6 @@ export const globalConfig = {
     ],
   },
 
-  // image bed url
-  // frontmatter: test.png = [https://your.site/path/to/]test.png
-  // frontmatter: https://example.com/test.png => https://example.com/test.png
-  // do not use https://xxxx !!!
-  // plz use https://xxxx/ !!!!!
-  imgBed: false,
   github: "silvaire-qwq", // your github username
 
   // navigation items
@@ -124,6 +118,7 @@ export const globalConfig = {
         // enable / disable music list
         { text: languageFile.musics, link: "/musics" },
         { text: languageFile.manager, link: "/manager" },
+        // enable / disable comments
         { text: languageFile.whiteboard, link: "/whiteboard" },
       ],
     },

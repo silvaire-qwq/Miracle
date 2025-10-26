@@ -45,7 +45,6 @@ div.VPLink.no-icon.VPFeature {
  * -------------------------------------------------------------------------- */
 
 .VPHome {
-
   h1,
   h2,
   h3,
@@ -92,7 +91,8 @@ blockquote {
  * -------------------------------------------------------------------------- */
 
 main .vp-doc a:not(a.nocss) {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 2px;
   text-decoration: none;
   padding: 1px 4px;
   transition: var(--vp-transition-time);
@@ -100,7 +100,8 @@ main .vp-doc a:not(a.nocss) {
 
 main .vp-doc a:hover:not(a.nocss) {
   border-radius: var(--vp-border-radius-4);
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 100%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 100%;
 }
 
 /**
@@ -118,7 +119,6 @@ small {
  * -------------------------------------------------------------------------- */
 
 div.VPHero.has-image.VPHomeHero div.container {
-
   &,
   .content-body {
     align-items: center;
@@ -581,7 +581,6 @@ div.VPDocAside {
  * -------------------------------------------------------------------------- */
 
 main.main div.vp-doc div {
-
   li::marker,
   ol::marker {
     color: var(--vp-c-brand-2);
@@ -589,31 +588,33 @@ main.main div.vp-doc div {
 
   h3 {
     display: inline-block;
-    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 0.7rem;
+    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+      no-repeat center bottom / 100% 0.7rem;
   }
 }
 
 strong {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 0.7rem;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
+    no-repeat center bottom / 100% 0.7rem;
 }
 
 /* stylelint-disable selector-class-pattern */
-.VPMenuGroup>.title {
+.VPMenuGroup > .title {
   font-size: 0.7em;
 }
 
-.VPSwitch>.check {
+.VPSwitch > .check {
   bottom: 1px;
   width: auto;
   height: auto;
   aspect-ratio: 1;
 }
 
-.vp-doc>div> :where(h4, h5, h6) {
+.vp-doc > div > :where(h4, h5, h6) {
   margin: 1.4em 0 0.5em;
 }
 
-.vp-doc blockquote>p {
+.vp-doc blockquote > p {
   margin: 1em 0;
 }
 
@@ -697,7 +698,7 @@ details.details.custom-block {
   box-shadow: var(--vp-shadow);
   padding: 0;
 
-  &>*:not(summary) {
+  & > *:not(summary) {
     margin: 18px 24px !important;
   }
 }

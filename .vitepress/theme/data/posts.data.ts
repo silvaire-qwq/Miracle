@@ -44,11 +44,7 @@ export default createContentLoader("posts/**/*.md", {
             ? frontmatter.tags
             : [frontmatter.tags],
 
-          image: frontmatter.image
-            ? /^(https?:\/\/)/.test(frontmatter.image)
-              ? frontmatter.image
-              : `${globalConfig.imgBed}${frontmatter.image}`
-            : "",
+          image: frontmatter.image,
 
           date: formatRelativeDate(frontmatter.published),
 

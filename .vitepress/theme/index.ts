@@ -31,7 +31,6 @@ export default {
     if (document.readyState === "complete") init();
     else window.addEventListener("DOMContentLoaded", init, { once: true });
 
-
     if (document.readyState === "complete") init();
     else window.addEventListener("DOMContentLoaded", init, { once: true });
 

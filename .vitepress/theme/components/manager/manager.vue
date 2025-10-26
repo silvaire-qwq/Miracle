@@ -63,10 +63,7 @@ function getRepoUrl(
   // 去掉 fileName 开头多余的 type/
   const cleanFileName = fileName.replace(new RegExp(`^${type}/`), "");
 
-  const url: Record<
-    string,
-    Record<typeof action, string>
-  > = {
+  const url: Record<string, Record<typeof action, string>> = {
     github: {
       new: `https://github.com/${blogBase.repo}/new/main/${basePath}?filename=${cleanFileName}&value=${fileContent}`,
       edit: `https://github.com/${blogBase.repo}/edit/main/${basePath}/${cleanFileName}`,
@@ -422,7 +419,7 @@ const momentFileTemplate = `{
   opacity: 0.7;
   z-index: -1;
   mask-image: linear-gradient(var(--vp-c-gutter) 20%, transparent);
-  text-transform: uppercase;
+  text-transform: var(--vp-title-uppercase);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
