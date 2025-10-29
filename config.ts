@@ -6,8 +6,9 @@ import { data as iconList } from "#theme/configs/iconList";
 // experimental: i18n
 import { languageFile as zh } from "#theme/lang/zh_CN";
 import { languageFile as en } from "#theme/lang/en_US";
+import { languageFile as ja } from "#theme/lang/ja";
 
-const languageMap: Record<string, any> = { zh, en };
+const languageMap: Record<string, any> = { zh, en, ja };
 
 // LANGUAGES ----------------------------------------------------------------------
 // hey !!! you !!!
