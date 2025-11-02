@@ -51,7 +51,7 @@
 
   /* Borders / dividers */
   --vp-c-border: oklch(
-    calc(var(--vp-color-lightness-light) + 0.33)
+    calc(var(--vp-color-lightness-light) + 0.35)
       calc(var(--vp-color-intensity-light) / 10 * 2) var(--hue)
   );
   /* 边框柔和 */
@@ -167,7 +167,7 @@
 
   /* 边框 / 分割线 */
   --vp-c-border: oklch(
-    calc(var(--vp-color-lightness-dark) - 0.18)
+    calc(var(--vp-color-lightness-dark) - 0.20)
       calc(var(--vp-color-intensity-dark) / 10 * 2) var(--hue)
   );
   --vp-c-divider: var(--vp-c-border);

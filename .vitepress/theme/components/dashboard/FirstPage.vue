@@ -51,6 +51,11 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   gap: 18px;
   margin: 125px 0px;
 }
+
+.iconify {
+  opacity: 0.8;
+}
+
 .avatar {
   height: 112px;
   width: 112px;

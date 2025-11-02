@@ -319,8 +319,9 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
+          <img :src="f.img" class="avatar"/>
           <div class="title">{{ f.title }}</div>
-          <p class="details">{{ f.desc }}</p>
+          <p class="details">{{ f.desc }}></p>
           <div class="actions">
             <a :href="f.link" target="_blank">
               <Icon :icon="globalConfig.icon.open" />
@@ -349,6 +350,14 @@ const momentFileTemplate = `{
   margin-left: auto;
   z-index: 50;
   display: flex;
+}
+
+.avatar {
+  aspect-ratio: 1 !important;
+  width: 24px;
+  border-radius: var(--vp-border-radius-1);
+  align-self: center;
+  margin-right: var(--vp-gap);
 }
 
 /* 原样保留你的所有样式 */
@@ -442,7 +451,7 @@ const momentFileTemplate = `{
 }
 .tag {
   font-family: var(--vp-font-family-mono);
-  text-transform: uppercase;
+  text-transform: var(--vp-title-uppercase);
   transition: all var(--vp-transition-time);
   padding: 12px 24px;
   color: var(--vp-c-text-1);

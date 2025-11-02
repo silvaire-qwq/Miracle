@@ -52,28 +52,24 @@
 
 @font-face {
   font-family: "OPPO Sans";
-  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2")
-    format("woff2");
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2") format("woff2");
   font-weight: 700;
 }
 
 @font-face {
   font-family: "OPPO Sans";
-  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2")
-    format("woff2");
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Bold.woff2") format("woff2");
   font-weight: 600;
 }
 
 @font-face {
   font-family: "OPPO Sans";
-  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Medium.woff2")
-    format("woff2");
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Medium.woff2") format("woff2");
   font-weight: 500;
 }
 
 @font-face {
   font-family: "OPPO Sans";
-  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Regular.woff2")
-    format("woff2");
+  src: url("https://www.oppo.com/content/dam/statics/fonts/cn/OPPOSans3.0cn-Regular.woff2") format("woff2");
   font-weight: 400;
 }

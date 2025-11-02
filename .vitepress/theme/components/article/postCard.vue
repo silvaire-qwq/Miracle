@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useCardHover } from "../../utils/useCardHover";
+import { globalConfig } from "#config";
+
 interface CardProps {
   title?: string;
   url?: string;
@@ -19,22 +23,34 @@ const props = withDefaults(defineProps<CardProps>(), {
   type: "",
 });
 
-import { computed } from "vue";
-import { useCardHover } from "../../utils/useCardHover";
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
+// 计算最终跳转链接
 const link = computed(() => {
   if (props.type === "project" && props.category) {
     return `https://github.com/${props.category}`;
   }
   return props.url || "";
 });
+
+// 处理换行符
+const descriptionText = computed(() => {
+  if (!props.description) return "";
+  return props.description
+    .replace(/\\\\n/g, "\n")
+    .replace(/\\n/g, "\n")
+    .replace(/\r\n/g, "\n");
+});
+
+// 判断是否可点击
+const isClickable = computed(() => !!link.value);
 </script>
 
 <template>
-  <a
-    :href="props.url"
-    v-if="props.url"
+  <!-- 用 a 或 div 动态渲染 -->
+  <component
+    :is="isClickable ? 'a' : 'div'"
+    :href="isClickable ? link : undefined"
     :type="props.type"
     class="diary"
     @mouseenter="handleMouseEnter"
@@ -44,57 +60,54 @@ const link = computed(() => {
     <div v-if="props.image" class="img-container">
       <img :src="props.image" />
     </div>
+
     <div class="textPlace">
       <p class="title" v-if="props.title">{{ props.title }}</p>
 
+      <!-- 支持换行 -->
       <p class="details" v-if="props.description && props.title">
-        {{ props.description }}
+        {{ descriptionText }}
       </p>
       <p class="details notitle" v-else-if="props.description">
-        {{ props.description }}
+        {{ descriptionText }}
       </p>
 
       <div class="meta">
-        <!-- 修改此处，使得点击分类时跳转到相应的分类页面 -->
-        <a class="category" v-if="props.category" :href="link">{{
-          props.category
-        }}</a
-        >{{ props.date }}
+        <!-- 分类显示 -->
+        <template v-if="props.category">
+          <a
+            v-if="props.type === 'project'"
+            class="category"
+            :href="link"
+          >
+            <Icon
+              :icon="globalConfig.icon.friends"
+            />
+            {{ props.category }}
+          </a>
+          <a
+            v-else
+            class="category"
+            :href="`/archives?category=${props.category}`"
+          >
+            <Icon
+              :icon="globalConfig.icon.new"
+            />
+            {{ props.category }}
+          </a>
+        </template>
+
+        <span class="date">
+          <Icon
+            v-if="!props.category"
+            :icon="globalConfig.icon.calendar"
+            style="margin-right: 3px; bottom: 0px;"
+          />
+          {{ props.date }}
+        </span>
       </div>
     </div>
-  </a>
-
-  <a
-    v-else
-    class="diary"
-    @mouseenter="handleMouseEnter"
-    @mousemove="handleMouseMove"
-    @mouseleave="handleMouseLeave"
-  >
-    <div v-if="props.image" class="img-container">
-      <img :src="props.image" />
-    </div>
-    <div class="textPlace">
-      <p class="title" v-if="props.title">{{ props.title }}</p>
-
-      <p class="details" v-if="props.description && props.title">
-        {{ props.description }}
-      </p>
-      <p class="details notitle" v-else-if="props.description">
-        {{ props.description }}
-      </p>
-
-      <div class="meta">
-        <!-- 修改此处，使得点击分类时跳转到相应的分类页面 -->
-        <a
-          class="category"
-          v-if="props.category"
-          :href="`/archives?category=${props.category}`"
-          >{{ props.category }}</a
-        >{{ props.date }}
-      </div>
-    </div>
-  </a>
+  </component>
 </template>
 
 <style scoped>
@@ -104,6 +117,11 @@ const link = computed(() => {
   height: 200px;
   width: 100%;
   object-fit: cover;
+}
+
+.iconify {
+  position: relative;
+  bottom: 1px;
 }
 
 .diary {
@@ -116,6 +134,7 @@ const link = computed(() => {
   will-change: transform;
   box-shadow: var(--vp-shadow);
   transition: all var(--vp-transition-time);
+  z-index: 1;
 }
 
 .diary[type="project"] .title {
@@ -140,6 +159,10 @@ const link = computed(() => {
   font-size: 13px;
   color: var(--vp-c-text-3);
   opacity: 0.8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 .title {
@@ -157,14 +180,15 @@ const link = computed(() => {
   color: var(--vp-c-brand-2);
 }
 
+/* ✅ 关键：换行 + 自动换行 */
 .details {
   color: var(--vp-c-text-2);
   font-size: 14px;
   line-height: 20px;
   margin: 0 0 10px 0;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  font-weight: 500;
 }
 
 .notitle {
@@ -172,16 +196,16 @@ const link = computed(() => {
 }
 
 .category {
-  margin-right: 8px;
+  margin-right: 5px;
   color: var(--vp-c-text-2);
   opacity: 0.8;
   background-color: var(--vp-c-border);
   padding: 2px 9px;
   border-radius: var(--vp-border-radius-1);
   font-size: 13px;
-  &:hover {
-    color: var(--vp-c-text-1);
-    opacity: 1;
-  }
+}
+.category:hover {
+  color: var(--vp-c-text-1);
+  opacity: 1;
 }
 </style>

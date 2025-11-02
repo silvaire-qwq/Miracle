@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCardHover } from "../../utils/useCardHover";
+import { globalConfig } from "#config";
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 interface CardProps {
@@ -35,7 +36,7 @@ const props = withDefaults(defineProps<CardProps>(), {
         </div>
         <div class="textInfo">
           <div class="title">{{ props.title }}</div>
-          <div class="details">{{ props.desc }}</div>
+          <div class="details"><Icon :icon="globalConfig.icon.singer" v-if="props.type" style="margin-right: 4px;"/>{{ props.desc }}</div>
         </div>
       </div>
     </a>

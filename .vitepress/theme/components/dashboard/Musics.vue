@@ -21,9 +21,9 @@ onMounted(async () => {
     );
     const data = await response.json();
     playlist.value = data;
-    console.log("🎵 已加载歌单数据:", playlist.value);
+    console.log(playlist.value);
   } catch (error) {
-    console.error("❌ 获取歌单失败:", error);
+    console.error(error);
   }
 });
 

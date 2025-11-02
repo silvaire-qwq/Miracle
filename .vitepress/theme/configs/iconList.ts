@@ -10,7 +10,7 @@ export const data = {
   calendar: "ph:calendar-blank-duotone",
   category: "ph:book-bookmark-duotone",
   tag: "ph:tag-duotone",
-  new: "ph:folder-duotone",
+  new: "ph:folder-notch-duotone",
   open: "ph:link-duotone",
   edit: "ph:pen-duotone",
   delete: "ph:trash-duotone",
@@ -19,4 +19,5 @@ export const data = {
   location: "ph:bank-duotone",
   heart: "ph:heartbeat-duotone",
   musics: "ph:music-notes-duotone",
+  singer: "ph:microphone-stage-duotone",
 };

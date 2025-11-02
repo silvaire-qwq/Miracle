@@ -1,8 +1,9 @@
 import { easterEggActive } from "./easterEgg";
+import { globalConfig } from "#config";
 
 const maxFrame = 250;
-const maxMove = 8;
-const easing = 0.1;
+const maxMove = globalConfig.styles.visual.cardHover.maxMove;
+const easing = globalConfig.styles.visual.cardHover.easing;
 const tolerance = 0.01;
 
 interface CardState {
@@ -38,8 +39,9 @@ function animateCard(el: HTMLElement) {
       ? targetY
       : currentY + (targetY - currentY) * easing;
 
-  const scale = hovered ? 1.03 : 1;
+  const scale = hovered ? globalConfig.styles.visual.cardHover.scale : 1;
   el.style.transform = `translate(${nextX}px, ${nextY}px) scale(${scale})`;
+
   state.currentX = nextX;
   state.currentY = nextY;
 
@@ -77,6 +79,16 @@ export function useCardHover() {
 
   const handleMouseEnter = (e: MouseEvent) => {
     const el = e.currentTarget as HTMLElement;
+
+    // 🚀 确保有定位，否则 z-index 无效
+    const computedStyle = window.getComputedStyle(el);
+    if (computedStyle.position === "static") {
+      el.style.position = "relative";
+    }
+
+    // 提升 z-index
+    el.style.zIndex = "9";
+
     if (cardStates.has(el)) {
       cardStates.get(el)!.hovered = true;
     } else {
@@ -95,6 +107,10 @@ export function useCardHover() {
     const el = e.currentTarget as HTMLElement;
     const state = cardStates.get(el);
     if (!state) return;
+
+    // 恢复 z-index
+    el.style.zIndex = "";
+
     if (!easterEggActive) {
       state.targetX = 0;
       state.targetY = 0;

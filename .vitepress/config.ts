@@ -43,9 +43,6 @@ export default defineConfig({
     hostname: globalConfig.url,
   },
   markdown: {
-    image: {
-      lazyLoading: true,
-    },
     theme: {
       light: "catppuccin-latte",
       dark: "catppuccin-mocha",

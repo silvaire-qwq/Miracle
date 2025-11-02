@@ -34,7 +34,7 @@ export const globalConfig = {
   // theme setting
   styles: {
     color: {
-      hue: 285,
+      hue: 275,
       intensity: {
         light: 20, // suggestion: 20
         dark: 15, // suggestion: 15 ~ 20
@@ -48,8 +48,14 @@ export const globalConfig = {
       transition: 10, // x[s(second(s))] / 100 | e.g. 10 -> 0.1s (default)
       gap: 12, // x[px]
       radius: 26, // x[px]
+      transparent: false, // transparent? (for year & artist)
       uppercase: false, // CATEGORIES / Categories
       mono: true, // use monospace font for title
+      cardHover: {
+        scale: 1.03,
+        maxMove: 8,
+        easing: 0.3,
+      }
     },
   },
 

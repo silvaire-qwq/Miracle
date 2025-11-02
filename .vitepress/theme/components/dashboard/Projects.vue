@@ -108,66 +108,7 @@ onMounted(() => {
   gap: var(--vp-gap);
 }
 
-.post-card {
-  display: flex;
-  perspective: 1000px;
-}
-
 .diary {
-  flex: 1;
-  display: flex;
-  gap: var(--vp-gap);
-  border-radius: var(--vp-border-radius-1);
-  border: 1px solid var(--vp-c-divider);
-  background-color: var(--vp-c-bg);
-  transition: all var(--vp-transition-time);
-  will-change: transform;
-  box-shadow: var(--vp-shadow);
-  text-decoration: none;
-  overflow: hidden;
-}
-
-.diary:hover {
-  border-color: var(--vp-c-brand-1);
-  box-shadow: var(--vp-shadow-brand);
-}
-
-.textPlace {
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.title {
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 1.3;
-  text-transform: capitalize;
-  color: var(--vp-c-text-1);
-  margin: 0;
-  transition: all var(--vp-transition-time);
-}
-
-.diary:hover .title {
-  color: var(--vp-c-brand-2);
-}
-
-.details {
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--vp-c-text-2);
-  margin: 8px 0px 10px 0px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.meta {
-  margin-top: auto;
-  font-size: 13px;
-  color: var(--vp-c-text-3);
-  opacity: 0.8;
+  height: 100% !important;
 }
 </style>

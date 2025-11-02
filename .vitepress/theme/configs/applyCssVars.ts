@@ -20,6 +20,9 @@ export function applyCssVars() {
     "--vp-use-mono": styles.visual.mono
       ? "var(--vp-font-family-mono)"
       : "var(--vp-font-family-base)",
+    "--vp-transparent": styles.visual.transparent
+      ? "transparent"
+      : "var(--vp-c-gutter)",
   };
 
   Object.entries(vars).forEach(([k, v]) =>

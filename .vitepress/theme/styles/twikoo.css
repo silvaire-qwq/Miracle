@@ -72,6 +72,10 @@ html.dark {
   flex-direction: column-reverse;
 }
 
+.tk-action-count {
+  color: var(--vp-c-brand-1);
+}
+
 .tk-row .tk-col .tk-input textarea {
   border-radius: var(--vp-border-radius-1);
   padding: 1rem 1.5rem;
@@ -208,4 +212,8 @@ html.dark {
 
 a.tk-nick strong {
   background: unset !important;
+}
+
+.tk-footer {
+  display: none !important;
 }

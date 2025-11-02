@@ -45,6 +45,7 @@ div.VPLink.no-icon.VPFeature {
  * -------------------------------------------------------------------------- */
 
 .VPHome {
+
   h1,
   h2,
   h3,
@@ -70,7 +71,7 @@ main .vp-doc h2,
     display: block;
     height: 20px;
     border-radius: 100px;
-    border: 2px solid var(--vp-c-brand);
+    border: 2px solid var(--vp-c-brand-3);
     margin-right: 14px;
   }
 }
@@ -91,8 +92,7 @@ blockquote {
  * -------------------------------------------------------------------------- */
 
 main .vp-doc a:not(a.nocss) {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 2px;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 2px;
   text-decoration: none;
   padding: 1px 4px;
   transition: var(--vp-transition-time);
@@ -100,8 +100,7 @@ main .vp-doc a:not(a.nocss) {
 
 main .vp-doc a:hover:not(a.nocss) {
   border-radius: var(--vp-border-radius-4);
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 100%;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 100%;
 }
 
 /**
@@ -119,6 +118,7 @@ small {
  * -------------------------------------------------------------------------- */
 
 div.VPHero.has-image.VPHomeHero div.container {
+
   &,
   .content-body {
     align-items: center;
@@ -194,6 +194,7 @@ a {
 .custom-block.tip {
   border: 1px solid var(--vp-c-green-2);
   background-color: var(--vp-c-green-soft);
+
   p {
     color: var(--vp-c-green-1) !important;
   }
@@ -202,6 +203,7 @@ a {
 .custom-block.warning {
   border: 1px solid var(--vp-c-yellow-2);
   background-color: var(--vp-c-yellow-soft);
+
   p {
     color: var(--vp-c-yellow-1) !important;
   }
@@ -210,6 +212,7 @@ a {
 .custom-block.danger {
   border: 1px solid var(--vp-c-red-2);
   background-color: var(--vp-c-red-soft);
+
   p {
     color: var(--vp-c-red-1) !important;
   }
@@ -218,6 +221,7 @@ a {
 .custom-block.important {
   border: 1px solid var(--vp-c-purple-1);
   background-color: var(--vp-c-purple-soft);
+
   p {
     color: var(--vp-c-purple-1) !important;
   }
@@ -232,6 +236,7 @@ a {
 div.info.custom-block.github-alert {
   border: 1px solid var(--vp-c-indigo-1);
   background-color: var(--vp-c-indigo-soft);
+
   p {
     color: var(--vp-c-indigo-1) !important;
   }
@@ -325,6 +330,7 @@ blockquote {
 svg:where(.iconify) {
   display: inline-block;
   flex-shrink: 0;
+  position: relative;
   font-size: 1.2em;
   vertical-align: sub;
 }
@@ -505,6 +511,7 @@ div.VPLocalNav {
 @media screen and (min-width: 768px) {
   div.shell {
     border-radius: var(--vp-border-radius-1) !important;
+    border: 1px solid var(--vp-c-divider);
   }
 }
 
@@ -581,6 +588,7 @@ div.VPDocAside {
  * -------------------------------------------------------------------------- */
 
 main.main div.vp-doc div {
+
   li::marker,
   ol::marker {
     color: var(--vp-c-brand-2);
@@ -588,33 +596,31 @@ main.main div.vp-doc div {
 
   h3 {
     display: inline-block;
-    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-      no-repeat center bottom / 100% 0.7rem;
+    background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 0.7rem;
   }
 }
 
 strong {
-  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
-    no-repeat center bottom / 100% 0.7rem;
+  background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft)) no-repeat center bottom / 100% 0.7rem;
 }
 
 /* stylelint-disable selector-class-pattern */
-.VPMenuGroup > .title {
+.VPMenuGroup>.title {
   font-size: 0.7em;
 }
 
-.VPSwitch > .check {
+.VPSwitch>.check {
   bottom: 1px;
   width: auto;
   height: auto;
   aspect-ratio: 1;
 }
 
-.vp-doc > div > :where(h4, h5, h6) {
+.vp-doc>div> :where(h4, h5, h6) {
   margin: 1.4em 0 0.5em;
 }
 
-.vp-doc blockquote > p {
+.vp-doc blockquote>p {
   margin: 1em 0;
 }
 
@@ -698,7 +704,7 @@ details.details.custom-block {
   box-shadow: var(--vp-shadow);
   padding: 0;
 
-  & > *:not(summary) {
+  &>*:not(summary) {
     margin: 18px 24px !important;
   }
 }
@@ -719,4 +725,14 @@ summary {
   padding: 18px 24px !important;
   border-radius: var(--vp-border-radius-2) var(--vp-border-radius-2) 0 0 !important;
   border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/**
+ * Stroke
+ * -------------------------------------------------------------------------- */
+
+h1.year,
+h1.artist {
+  color: var(--vp-transparent) !important;
+  -webkit-text-stroke: 1px var(--vp-c-gutter);
 }
