@@ -116,7 +116,7 @@ div.vp-doc.layout.beforeDocs {
       gap: 0.5rem 0.5rem;
     }
     .textArea {
-      margin-top: 0px;
+      margin-top: 30px;
       margin-bottom: 48px;
     }
   }
