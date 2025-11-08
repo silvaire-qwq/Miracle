@@ -102,6 +102,12 @@ div.vp-doc.layout.beforeDocs {
   display: block;
   z-index: 9999;
 
+  img {
+    height: 40vh !important;
+    object-fit: cover;
+    background-repeat: no-repeat;
+  }
+
   /* 提高文字区域的空间 */
   @media screen and (min-width: 600px) {
     .textArea {
