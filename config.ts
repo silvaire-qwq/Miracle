@@ -22,7 +22,7 @@ export const globalConfig = {
   description: "Per Aspera Ad Astra", // description
   author: "Silvaire", // your name
   favicon:
-    "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4&mask=circle", // favicon (suggest: circle mask)
+    "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4&mask=circle", // favicon (suggest: circle mask)
   url: "https://qwq.blue", // main url (https://xxxx.xxx)
   blogBase: {
     type: "github", // github / gitea
@@ -34,10 +34,10 @@ export const globalConfig = {
   // theme setting
   styles: {
     color: {
-      hue: 275,
+      hue: 280,
       intensity: {
         light: 20, // suggestion: 20
-        dark: 15, // suggestion: 15 ~ 20
+        dark: 20, // suggestion: 15 ~ 20
       },
       lightness: {
         light: 50, // suggestion: 50
@@ -62,7 +62,7 @@ export const globalConfig = {
   // homepage setting (when globalConfig.modules.banner is a url)
   homePage: {
     avatar:
-      "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=256&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4", // your avatar
+      "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4", // your avatar
     city: "Hedong, Tianjin", // your location
     introduce:
       "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
@@ -70,7 +70,7 @@ export const globalConfig = {
     // modules
     modules: {
       banner: "avatar", // img url or "avatar"
-      about: true, // about
+      about: false, // about
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
       projects: true, // projects (very sloooooow)

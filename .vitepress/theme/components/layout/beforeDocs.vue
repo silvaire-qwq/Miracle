@@ -103,6 +103,7 @@ div.vp-doc.layout.beforeDocs {
   z-index: 9999;
 
   img {
+    width: 100% !important;
     height: 40vh !important;
     object-fit: cover;
     background-repeat: no-repeat;
