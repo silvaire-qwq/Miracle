@@ -5,7 +5,6 @@ import {
   countWords,
   calcReadingTime,
 } from "../utils/textAnalyzer";
-import { globalConfig } from "#config";
 
 interface Post {
   filePath: string;
@@ -17,6 +16,7 @@ interface Post {
   category: string;
   image?: string;
   tags: string[];
+  negative: boolean;
   wordCount?: number;
   readingTime?: number;
 }
@@ -40,6 +40,7 @@ export default createContentLoader("posts/**/*.md", {
           description: frontmatter.description,
           originDate: frontmatter.published,
           category: frontmatter.category ?? "Uncategorized",
+          negative: frontmatter.negative ?? false,
           tags: Array.isArray(frontmatter.tags)
             ? frontmatter.tags
             : [frontmatter.tags],

@@ -11,6 +11,14 @@
     <div v-else style="height: 50px"></div>
     <div class="textArea">
       <div class="miniBar">
+
+        <div v-if="frontmatter.negative" class="watch negative negativeAll">
+          <Icon class="miniIcon negative negativeIcon" :icon="globalConfig.icon.negative" />
+          <span class="busuanzi negative negativeText"
+            >{{ globalConfig.lang.negative }}</span
+          >
+        </div>
+
         <!-- 📖 新增：字数 -->
         <div v-if="postInfo.wordCount" class="words">
           <Icon class="miniIcon" :icon="globalConfig.icon.words" />
@@ -219,5 +227,10 @@ div.vp-doc.layout.beforeDocs {
     border: 3px solid var(--vp-c-brand);
     margin-right: 14px;
   }
+}
+
+.negativeIcon {
+  color: var(--vp-c-warning-1);
+  background-color: var(--vp-c-warning-soft) !important;
 }
 </style>

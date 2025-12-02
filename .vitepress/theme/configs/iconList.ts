@@ -20,4 +20,5 @@ export const data = {
   heart: "ph:heartbeat-duotone",
   musics: "ph:music-notes-duotone",
   singer: "ph:microphone-stage-duotone",
+  negative: "ph:smiley-sad-duotone",
 };

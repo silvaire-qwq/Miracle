@@ -171,6 +171,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
               :description="post.description"
               :category="post.category"
               :date="post.date"
+              :negative="post.negative"
             />
           </div>
         </div>

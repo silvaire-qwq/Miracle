@@ -39,4 +39,5 @@ export const languageFile = {
   returnToTopLabel: "Return to Top",
   lastUpdated: "Last Updated",
   musics: "Musics",
+  negative: "Negative"
 };

@@ -11,6 +11,7 @@ interface CardProps {
   date?: string;
   image?: string;
   type?: string;
+  negative?: boolean;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   date: "",
   image: "",
   type: "",
+  negative: false,
 });
 
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
@@ -75,25 +77,25 @@ const isClickable = computed(() => !!link.value);
       <div class="meta">
         <!-- 分类显示 -->
         <template v-if="props.category">
-          <a
-            v-if="props.type === 'project'"
-            class="category"
-            :href="link"
-          >
-            <Icon
-              :icon="globalConfig.icon.friends"
-            />
+          <a v-if="props.type === 'project'" class="category" :href="link">
+            <Icon :icon="globalConfig.icon.friends" />
             {{ props.category }}
           </a>
+
           <a
             v-else
             class="category"
             :href="`/archives?category=${props.category}`"
+            :style="props.negative ? 'background-color: var(--vp-c-warning-soft);' : ''"
           >
-            <Icon
-              :icon="globalConfig.icon.new"
-            />
-            {{ props.category }}
+            <span v-if="props.negative"  style="color: var(--vp-c-warning-1);">
+              <Icon :icon="globalConfig.icon.negative" style="color: var(--vp-c-warning-1);"/>
+              {{ props.category }}
+            </span>
+            <span v-else>
+              <Icon :icon="globalConfig.icon.new" />
+              {{ props.category }}
+            </span>
           </a>
         </template>
 
@@ -101,7 +103,7 @@ const isClickable = computed(() => !!link.value);
           <Icon
             v-if="!props.category"
             :icon="globalConfig.icon.calendar"
-            style="margin-right: 3px; bottom: 0px;"
+            style="margin-right: 3px; bottom: 0px"
           />
           {{ props.date }}
         </span>
@@ -118,6 +120,8 @@ const isClickable = computed(() => !!link.value);
   width: 100%;
   object-fit: cover;
 }
+
+
 
 .iconify {
   position: relative;

@@ -24,6 +24,7 @@ const articles = computed(() =>
         :description="post.description"
         :category="post.category"
         :date="post.date"
+        :negative="post.negative"
       />
     </div>
   </div>

@@ -78,7 +78,7 @@
 
   /* Callout / soft overlays */
   --vp-c-tip-soft: hsla(var(--hue), 80%, 45%, 0.18);
-  --vp-c-warning-soft: hsla(calc(var(--hue) + 60), 75%, 45%, 0.18);
+  --vp-c-warning-soft: #f9b44e77;
   --vp-c-danger-soft: hsla(calc(var(--hue) - 120), 70%, 40%, 0.18);
   --vp-c-caution-soft: hsla(calc(var(--hue) - 120), 70%, 40%, 0.18);
   --vp-c-important-soft: hsla(calc(var(--hue) + 40), 75%, 50%, 0.18);
@@ -221,4 +221,6 @@
     calc(var(--vp-color-lightness-dark) - 0.25)
       calc(var(--vp-color-intensity-dark) / 10) var(--hue)
   );
+
+--vp-c-warning-soft: #f9b44e33;
 }
