@@ -16,7 +16,7 @@ import Twikoo from "../components/layout/twikoo.vue";
 import Manager from "../components/manager/manager.vue";
 import Moments from "../components/moments/moments.vue";
 import File from "../components/utils/file.vue";
-import Musics from "../components/dashboard/musics.vue";
+import Musics from "../components/dashboard/Musics.vue";
 
 const components = {
   // Dashboard
