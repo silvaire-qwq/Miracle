@@ -7,7 +7,6 @@ import Tags from "../components/article/tags.vue";
 import FirstPage from "../components/dashboard/FirstPage.vue";
 import Friends from "../components/dashboard/Friends.vue";
 import LastMoment from "../components/dashboard/LastMoment.vue";
-import Musics from "../components/dashboard/Musics.vue";
 import Projects from "../components/dashboard/Projects.vue";
 import RecentPosts from "../components/dashboard/RecentPosts.vue";
 import TechStack from "../components/dashboard/TechStack.vue";
@@ -17,6 +16,7 @@ import Twikoo from "../components/layout/twikoo.vue";
 import Manager from "../components/manager/manager.vue";
 import Moments from "../components/moments/moments.vue";
 import File from "../components/utils/file.vue";
+import Musics from "../components/dashboard/musics.vue";
 
 const components = {
   // Dashboard
@@ -26,6 +26,7 @@ const components = {
   TechStack,
   Friends,
   LastMoment,
+  Musics,
   // Components
   PostCard,
   FriendCard,
@@ -38,7 +39,6 @@ const components = {
   Icon,
   Comments,
   Twikoo,
-  Musics,
   File,
 };
 

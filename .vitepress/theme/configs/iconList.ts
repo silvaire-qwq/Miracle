@@ -21,4 +21,5 @@ export const data = {
   musics: "ph:music-notes-duotone",
   singer: "ph:microphone-stage-duotone",
   negative: "ph:smiley-sad-duotone",
+  unableFriends: "ph:wifi-slash-duotone",
 };

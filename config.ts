@@ -16,6 +16,8 @@ const languageMap: Record<string, any> = { zh, en };
 const defaultLanguage = "en";
 const languageFile = languageMap[defaultLanguage] || en; // do not edit it
 
+// [!TODO] 相对日期汉化
+
 // CONFIGS ----------------------------------------------------------------------
 export const globalConfig = {
   title: "Silvaire's Blog", // title
@@ -36,13 +38,17 @@ export const globalConfig = {
     color: {
       hue: 280,
       intensity: {
-        light: 20, // suggestion: 20
-        dark: 20, // suggestion: 15 ~ 20
+        light: 17, // suggestion: 20
+        dark: 15, // suggestion: 15 ~ 20
       },
       lightness: {
-        light: 50, // suggestion: 50
-        dark: 55, // suggestion: 55 (it looks like catppuccin + mauve when hue is 300)
+        light: 54, // suggestion: 50
+        dark: 47, // suggestion: 55 (it looks like catppuccin + mauve when hue is 300)
       },
+      rainbow: {
+        enabled: false, // hue will be cycled
+        speed: 3, // hue is (getCurrentHue() + x) % 360......(updateHue, 100);
+      }, // copied from 2nd easter egg updated in 2026. (just for fun)
     },
     visual: {
       transition: 10, // x[s(second(s))] / 100 | e.g. 10 -> 0.1s (default)
@@ -50,30 +56,34 @@ export const globalConfig = {
       radius: 26, // x[px]
       transparent: false, // transparent? (for year & artist)
       uppercase: false, // CATEGORIES / Categories
-      mono: true, // use monospace font for title
+      mono: false, // use monospace font for title
       cardHover: {
-        scale: 1.03,
+        scale: 1.02,
         maxMove: 8,
         easing: 0.3,
-      }
+      },
     },
   },
 
   // homepage setting (when globalConfig.modules.banner is a url)
   homePage: {
     avatar:
-      "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=4", // your avatar
+      "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=3", // your avatar
     city: "Hedong, Tianjin", // your location
-    introduce:
-      "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
+    // introduce: (you cannot use it now)
+    // "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
 
     // modules
     modules: {
-      banner: "avatar", // img url or "avatar"
-      about: false, // about
+      banner: {
+        type: "avatar", // "image" or "avatar"
+        imgurl: "", // only work when type is image, e.g. "https://cdn.jsdelivr.net/gh/silvaire-qwq/Miracle@main/src/assets/banner.png"
+        image: "65vh", // only work when type is "image", e.g. "65vh"
+        avatar: "50vh", // only work when type is "avatar", e.g. "100vh"
+      },
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
-      projects: true, // projects (very sloooooow)
+      projects: true, // projects (may be very sloooooow)
       musics: true, // music list
       techStack: true, // tech stack
       friends: true, // friends
@@ -133,7 +143,7 @@ export const globalConfig = {
   // comments
   comments: {
     enable: true,
-    type: "twikoo",
+    type: "giscus",
     giscus: {
       repo: "silvaire-qwq/Miracle",
       repoId: "R_kgDOPz1WLw",
@@ -164,7 +174,7 @@ export const globalConfig = {
   },
 
   // netease music list
-  musicList: "7761179667",
+  musicList: "17942010185",
 
   // DO NOT EDIT THESE VALUES!!!!!
   friends: friendList,

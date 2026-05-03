@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { data as posts } from "../../data/posts.data";
+import PostCard from "../article/postCard.vue";
 
 const props = defineProps({
   maxItems: {
@@ -23,7 +24,7 @@ const articles = computed(() =>
         :title="post.title"
         :description="post.description"
         :category="post.category"
-        :date="post.date"
+        :originDate="post.originDate"
         :negative="post.negative"
       />
     </div>

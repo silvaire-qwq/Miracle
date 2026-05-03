@@ -7,11 +7,6 @@ footer: false
 
 <FirstPage />
 
-<div v-if="globalConfig.homePage.modules.about">
-    <h2><Icon :icon="globalConfig.icon.about" /> {{ globalConfig.lang.about }}</h2>
-    {{ globalConfig.homePage.introduce }}
-</div>
-
 <div v-if="globalConfig.homePage.modules.recentPosts">
     <h2><Icon :icon="globalConfig.icon.recentPosts" /> {{ globalConfig.lang.recentPosts }}</h2>
     <div v-if="globalConfig.homePage.modules.lastMoment">
@@ -20,14 +15,14 @@ footer: false
     <RecentPosts />
 </div>
 
-<div v-if="globalConfig.homePage.modules.projects">
-    <h2><Icon :icon="globalConfig.icon.projects" /> {{ globalConfig.lang.projects }}</h2>
-    <Projects />
-</div>
-
 <div v-if="globalConfig.homePage.modules.musics">
     <h2><Icon :icon="globalConfig.icon.musics" /> {{ globalConfig.lang.musics }}</h2>
     <Musics />
+</div>
+
+<div v-if="globalConfig.homePage.modules.projects">
+    <h2><Icon :icon="globalConfig.icon.projects" /> {{ globalConfig.lang.projects }}</h2>
+    <Projects />
 </div>
 
 <div v-if="globalConfig.homePage.modules.techStack">

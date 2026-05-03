@@ -39,7 +39,7 @@
   );
   /* 浅色主背景柔和偏暖灰 */
   --vp-c-bg-alt: oklch(
-    calc(var(--vp-color-lightness-light) + 0.4)
+    calc(var(--vp-color-lightness-light) + 0.41)
       calc(var(--vp-color-intensity-light) / 15 + 0.005) var(--hue)
   );
   /* 页面主背景略暗 */
@@ -167,7 +167,7 @@
 
   /* 边框 / 分割线 */
   --vp-c-border: oklch(
-    calc(var(--vp-color-lightness-dark) - 0.20)
+    calc(var(--vp-color-lightness-dark) - 0.2)
       calc(var(--vp-color-intensity-dark) / 10 * 2) var(--hue)
   );
   --vp-c-divider: var(--vp-c-border);
@@ -222,5 +222,5 @@
       calc(var(--vp-color-intensity-dark) / 10) var(--hue)
   );
 
---vp-c-warning-soft: #f9b44e33;
+  --vp-c-warning-soft: #f9b44e33;
 }

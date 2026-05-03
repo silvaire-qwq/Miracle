@@ -47,7 +47,7 @@ export default createContentLoader("posts/**/*.md", {
 
           image: frontmatter.image,
 
-          date: formatRelativeDate(frontmatter.published),
+          // date: formatRelativeDate(frontmatter.published), // 移除构建时计算
 
           wordCount: content ? countWords(content) : undefined,
           readingTime: content ? calcReadingTime(content) : undefined,

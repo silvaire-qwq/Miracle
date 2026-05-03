@@ -25,7 +25,7 @@ onMounted(async () => {
 
   // 获取歌单数据
   try {
-    const response = await fetch(`https://meting.qjqq.cn/?type=playlist&id=${globalConfig.musicList}`);
+    const response = await fetch(`https://api.injahow.cn/meting/?type=playlist&id=${globalConfig.musicList}`);
     const data = await response.json();
     playlist.value = data;
     console.log('歌单数据:', playlist.value);

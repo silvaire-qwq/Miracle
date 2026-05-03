@@ -23,6 +23,8 @@ export function applyCssVars() {
     "--vp-transparent": styles.visual.transparent
       ? "transparent"
       : "var(--vp-c-gutter)",
+    "--vp-avatar-home-vh-height": globalConfig.homePage.modules.banner.avatar,
+    "--vp-image-home-vh-height": globalConfig.homePage.modules.banner.image,
   };
 
   Object.entries(vars).forEach(([k, v]) =>

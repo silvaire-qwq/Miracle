@@ -5,6 +5,7 @@ import { handleEasterEgg } from "./utils/easterEgg";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import "./styles/style.css";
 import "./styles/gencolor.css";
+import "./utils/rainbow";
 
 import beforeDocs from "./components/layout/beforeDocs.vue";
 import { registerComponents } from "./configs/registerComponents";

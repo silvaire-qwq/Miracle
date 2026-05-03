@@ -8,6 +8,7 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { Icon } from "@iconify/vue";
+import { formatRelativeDate } from "../../utils/formatRelativeDate";
 import PostCard from "./postCard.vue";
 import { generateGrid } from "../../utils/generateGrid";
 import { useCardHover } from "../../utils/useCardHover";
@@ -173,7 +174,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
               :title="post.title"
               :description="post.description"
               :category="post.category"
-              :date="post.date"
+              :originDate="post.originDate"
               :negative="post.negative"
             />
           </div>

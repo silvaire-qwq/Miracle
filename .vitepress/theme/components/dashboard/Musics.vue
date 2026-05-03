@@ -17,7 +17,7 @@ const defaultImg =
 onMounted(async () => {
   try {
     const response = await fetch(
-      `https://meting.qjqq.cn/?type=playlist&id=${globalConfig.musicList}`,
+      `https://api.injahow.cn/meting/?type=playlist&id=${globalConfig.musicList}`,
     );
     const data = await response.json();
     playlist.value = data;

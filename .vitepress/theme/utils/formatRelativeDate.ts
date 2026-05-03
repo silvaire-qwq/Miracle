@@ -1,5 +1,9 @@
 export function formatRelativeDate(dateString: string): string {
+  if (!dateString) return "";
+
   const date = new Date(dateString);
+  if (isNaN(date.getTime())) return "Invalid Date";
+
   const now = new Date();
   const diffTime = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 3600 * 24));

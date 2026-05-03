@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, onBeforeUnmount } from "vue";
 import { globalConfig } from "#config";
-import { formatRelativeDate } from "../../utils/formatRelativeDate";
 import { generateGrid } from "../../utils/generateGrid";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
+import PostCard from "../article/postCard.vue";
 
 const props = defineProps<{ maxItems?: number }>();
 
@@ -48,7 +48,7 @@ const groupedMoments = computed(() => {
           <PostCard
             :key="moment.fileName"
             :description="moment.content"
-            :date="formatRelativeDate(moment.date)"
+            :originDate="moment.date"
             :image="moment.image"
           />
         </div>

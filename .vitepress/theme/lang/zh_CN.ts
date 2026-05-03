@@ -29,7 +29,7 @@ export const languageFile = {
   createANewPost: "新建文章",
   createANewMoment: "新建动态",
   addANewLink: "添加友链",
-  contents: "内容",
+  contents: "大纲",
   langMenuLabel: "切换语言",
   darkModeSwitchLabel: "主题",
   lightModeSwitchTitle: "切换到浅色模式",
@@ -39,5 +39,5 @@ export const languageFile = {
   returnToTopLabel: "返回顶部",
   lastUpdated: "更新于",
   musics: "音乐",
-  negative: "负面"
+  negative: "负面",
 };

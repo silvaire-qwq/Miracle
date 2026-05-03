@@ -31,12 +31,23 @@ const props = withDefaults(defineProps<CardProps>(), {
   >
     <a :href="props.link" target="_blank" class="card-link" rel="nofollow">
       <div class="cardInfo" :class="props.type">
-        <div class="img-container" v-if="props.img">
+        <div
+          class="img-container"
+          v-if="
+            props.img && props.folder !== 'unable' && props.folder !== 'Unable'
+          "
+        >
           <img class="img" :src="props.img" :class="props.type" />
         </div>
         <div class="textInfo">
           <div class="title">{{ props.title }}</div>
-          <div class="details"><Icon :icon="globalConfig.icon.singer" v-if="props.type" style="margin-right: 4px;"/>{{ props.desc }}</div>
+          <div class="details">
+            <Icon
+              :icon="globalConfig.icon.singer"
+              v-if="props.type"
+              style="margin-right: 4px"
+            />{{ props.desc }}
+          </div>
         </div>
       </div>
     </a>
@@ -63,6 +74,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   height: 100%;
   padding: 25px;
   display: flex;
+  flex-direction: row; /* point 1 */
   gap: var(--vp-gap);
 }
 
@@ -89,7 +101,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   margin-right: 5px;
   width: 48px;
   height: 48px;
-  align-self: center !important;
+  align-self: center !important; /* point 2 */
 }
 
 .img {

@@ -34,6 +34,7 @@ function shuffle(array: any[]) {
 const friends = shuffle(
   globalConfig.friends
     .filter((friend) => friend.folder !== "unable") // 排除掉 folder 为 "unable" 的好友
+    .filter((friend) => friend.folder !== "Unable") // 排除掉 folder 为 "Unable" 的好友
     .map((friend) => ({
       ...friend,
       img:

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { globalConfig } from "#config";
+import PostCard from "../article/postCard.vue";
 const username = globalConfig.github;
 const posts = ref<any[]>([]);
 const loading = ref(true);
@@ -15,8 +16,10 @@ async function fetchGithubData() {
   const data = await res.json();
 
   // 过滤掉 Public Archive
-  const filteredRepos = data.filter((repo: any) => !repo.archived);
-
+  const filteredRepos = data.filter(
+    (repo: any) =>
+      !repo.archived && repo.name.toLowerCase() !== username.toLowerCase(),
+  );
   const projects = await Promise.all(
     filteredRepos.map(async (repo: any) => {
       let lastCommit = "";

@@ -7,7 +7,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 <template>
   <div
     class="first-page"
-    v-if="globalConfig.homePage.modules.banner === 'avatar'"
+    v-if="globalConfig.homePage.modules.banner.type === 'avatar'"
   >
     <img
       :src="globalConfig.homePage.avatar"
@@ -38,7 +38,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
-    <img :src="globalConfig.homePage.modules.banner" />
+    <img :src="globalConfig.homePage.modules.banner.imgurl" />
   </div>
 </template>
 
@@ -49,7 +49,8 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   justify-content: center;
   align-items: center;
   gap: 18px;
-  margin: 125px 0px;
+  /*margin: 125px 0px;*/
+  height: calc(var(--vp-avatar-home-vh-height) - var(--vp-nav-height));
 }
 
 .iconify {
@@ -91,7 +92,7 @@ div.btns {
 .image-page {
   width: 100% !important;
   margin: 20px 0px;
-  height: calc(65vh - var(--vp-nav-height));
+  height: calc(var(--vp-image-home-vh-height) - var(--vp-nav-height));
   transition: all var(--vp-transition-time);
   border-radius: var(--vp-border-radius-1);
   box-shadow: var(--vp-shadow);

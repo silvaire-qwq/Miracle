@@ -2,13 +2,14 @@
 import { computed } from "vue";
 import { useCardHover } from "../../utils/useCardHover";
 import { globalConfig } from "#config";
+import { formatRelativeDate } from "../../utils/formatRelativeDate";
 
 interface CardProps {
   title?: string;
   url?: string;
   description?: string;
   category?: string;
-  date?: string;
+  originDate?: string;
   image?: string;
   type?: string;
   negative?: boolean;
@@ -19,7 +20,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   url: "",
   description: "",
   category: "",
-  date: "",
+  originDate: "",
   image: "",
   type: "",
   negative: false,
@@ -86,10 +87,17 @@ const isClickable = computed(() => !!link.value);
             v-else
             class="category"
             :href="`/archives?category=${props.category}`"
-            :style="props.negative ? 'background-color: var(--vp-c-warning-soft);' : ''"
+            :style="
+              props.negative
+                ? 'background-color: var(--vp-c-warning-soft);'
+                : ''
+            "
           >
-            <span v-if="props.negative"  style="color: var(--vp-c-warning-1);">
-              <Icon :icon="globalConfig.icon.negative" style="color: var(--vp-c-warning-1);"/>
+            <span v-if="props.negative" style="color: var(--vp-c-warning-1)">
+              <Icon
+                :icon="globalConfig.icon.negative"
+                style="color: var(--vp-c-warning-1)"
+              />
               {{ props.category }}
             </span>
             <span v-else>
@@ -105,7 +113,7 @@ const isClickable = computed(() => !!link.value);
             :icon="globalConfig.icon.calendar"
             style="margin-right: 3px; bottom: 0px"
           />
-          {{ props.date }}
+          {{ props.originDate ? formatRelativeDate(props.originDate) : "" }}
         </span>
       </div>
     </div>
@@ -120,8 +128,6 @@ const isClickable = computed(() => !!link.value);
   width: 100%;
   object-fit: cover;
 }
-
-
 
 .iconify {
   position: relative;
@@ -143,7 +149,7 @@ const isClickable = computed(() => !!link.value);
 
 .diary[type="project"] .title {
   text-transform: var(--vp-title-uppercase);
-  font-family: var(--vp-font-family-mono);
+  font-family: var(--vp-use-mono);
 }
 
 .diary:hover {

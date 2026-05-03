@@ -4,7 +4,6 @@ import { Icon } from "@iconify/vue";
 import { data as posts } from "../../data/posts.data";
 import { globalConfig } from "#config";
 import { useCardHover } from "../../utils/useCardHover";
-import { getDate, getTimeString } from "../../utils/getDate";
 
 const activeTab = ref("posts"); // 默认 POSTS
 const selectedCategory = ref("");
@@ -50,6 +49,27 @@ const handleCategoryClick = (cat: string) => {
 // 卡片鼠标交互
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
+// 生成当前时间字符串
+const getCurrentTimeString = () => {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(now);
+
+  const get = (type: string) =>
+    parts.find((p) => p.type === type)?.value ?? "00";
+
+  return `${get("year")}-${get("month")}-${get("day")}_${get("hour")}${get(
+    "minute",
+  )}`;
+};
+
 // ✅ 通用 getRepoUrl（自动去掉重复 type 前缀）
 function getRepoUrl(
   action: "new" | "edit" | "delete",
@@ -80,15 +100,30 @@ function getRepoUrl(
 }
 
 // 新建模板
-const postFileTemplate = `---
+const postFileTemplate = () => {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+
+  const get = (type: string) =>
+    parts.find((p) => p.type === type)?.value ?? "00";
+
+  const date = `${get("year")}-${get("month")}-${get("day")}`;
+
+  return `---
 title:
-published: ${getDate()}
+published: ${date}
 description: 
 tags: []
 category: 
 origin: ""
 image: ""
 ---`;
+};
 
 const friendFileTemplate = `{
   "title": "",
@@ -98,16 +133,31 @@ const friendFileTemplate = `{
   "folder": ""
 }`;
 
-const beijingNow = new Date(
-  new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }),
-);
+const momentFileTemplate = () => {
+  const now = new Date();
+  const dateParts = new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
 
-const momentFileTemplate = `{
-  "date": "${getDate()}",
+  const getDatePart = (type: string) =>
+    dateParts.find((p) => p.type === type)?.value ?? "00";
+
+  const date = `${getDatePart("year")}-${getDatePart("month")}-${getDatePart("day")}`;
+
+  const beijingNow = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }),
+  );
+
+  return `{
+  "date": "${date}",
   "time": "${String(beijingNow.getHours()).padStart(2, "0")}:${String(beijingNow.getMinutes()).padStart(2, "0")}",
   "content": "",
   "image": ""
 }`;
+};
 </script>
 
 <template>
@@ -173,8 +223,8 @@ const momentFileTemplate = `{
                 getRepoUrl(
                   'new',
                   'posts',
-                  getTimeString() + '.md',
-                  encodeURIComponent(postFileTemplate),
+                  getCurrentTimeString() + '.md',
+                  encodeURIComponent(postFileTemplate()),
                 )
               "
               target="_blank"
@@ -235,8 +285,8 @@ const momentFileTemplate = `{
                 getRepoUrl(
                   'new',
                   'moments',
-                  getTimeString() + '.json',
-                  encodeURIComponent(momentFileTemplate),
+                  getCurrentTimeString() + '.json',
+                  encodeURIComponent(momentFileTemplate()),
                 )
               "
               target="_blank"
@@ -294,7 +344,7 @@ const momentFileTemplate = `{
                 getRepoUrl(
                   'new',
                   'friends',
-                  getTimeString() + '.json',
+                  getCurrentTimeString() + '.json',
                   encodeURIComponent(friendFileTemplate),
                 )
               "
@@ -319,9 +369,14 @@ const momentFileTemplate = `{
         @mouseleave="handleMouseLeave"
       >
         <div class="textPlace">
-          <img :src="f.img" class="avatar"/>
+          <img
+            :src="f.img"
+            class="avatar"
+            v-if="f.folder !== 'unable' && f.folder !== 'Unable'"
+          />
+          <Icon :icon="globalConfig.icon.unableFriends" class="avatar" v-else />
           <div class="title">{{ f.title }}</div>
-          <p class="details">{{ f.desc }}></p>
+          <p class="details">{{ f.desc }}</p>
           <div class="actions">
             <a :href="f.link" target="_blank">
               <Icon :icon="globalConfig.icon.open" />
