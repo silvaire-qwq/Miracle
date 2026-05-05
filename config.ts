@@ -16,8 +16,6 @@ const languageMap: Record<string, any> = { zh, en };
 const defaultLanguage = "en";
 const languageFile = languageMap[defaultLanguage] || en; // do not edit it
 
-// [!TODO] 相对日期汉化
-
 // CONFIGS ----------------------------------------------------------------------
 export const globalConfig = {
   title: "Silvaire's Blog", // title
@@ -36,6 +34,7 @@ export const globalConfig = {
   // theme setting
   styles: {
     color: {
+      // [1] Use your own color scheme by adjusting the hue, intensity, and lightness values.
       hue: 280,
       intensity: {
         light: 17, // suggestion: 20
@@ -48,7 +47,14 @@ export const globalConfig = {
       rainbow: {
         enabled: false, // hue will be cycled
         speed: 3, // hue is (getCurrentHue() + x) % 360......(updateHue, 100);
-      }, // copied from 2nd easter egg updated in 2026. (just for fun)
+      }, // copied from 2nd easter egg updated in 2026. (just for fun).
+      // [2] If you are a catppuccin lover, you can enable catppuccin color scheme (hue will be ignored when enabled).
+      // [WARN] You cannot use it with hue settings.
+      catppuccin: {
+        enabled: true, // use catppuccin color scheme (hue will be ignored when enabled)
+        flavor: "macchiato", // catppuccin flavor when using dark mode (frappe / macchiato / mocha)
+        color: "lavender", // catppuccin color (rosewater / flamingo / pink / mauve / red / maroon / peach / yellow / green / teal / sapphire / blue / lavender)
+      },
     },
     visual: {
       transition: 10, // x[s(second(s))] / 100 | e.g. 10 -> 0.1s (default)
@@ -58,9 +64,11 @@ export const globalConfig = {
       uppercase: false, // CATEGORIES / Categories
       mono: false, // use monospace font for title
       cardHover: {
-        scale: 1.02,
+        scale: 1.03,
         maxMove: 8,
+        maxRotate: 3, // 3d effect |  set 0 to disable 3D
         easing: 0.3,
+        shadowStrength: 2, // shadow strength when hovered (default: 2)
       },
     },
   },
@@ -168,7 +176,6 @@ export const globalConfig = {
   // the higher the weight, the lower the friend will be displayed
   friendWeights: {
     // example: -99, // "example" will be displayed at the top
-    qwq: -99,
     friends: -1,
     unable: 0, // "unable" will be displayed at the bottom
   },

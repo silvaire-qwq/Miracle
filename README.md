@@ -1,6 +1,6 @@
 <h3 align="center">
 
-<img src="https://youke1.picui.cn/s1/2025/09/21/68cf67b6de065.png" width="200"/>
+<img src="https://raw.githubusercontent.com/Ender-Wiggin2019/ServiceLogos/main/Vite/Vite.png" width="200"/>
 
 It's Miracle!!!!!
 
@@ -11,7 +11,7 @@ It's Miracle!!!!!
 </p>
 
 > [!NOTE]
-> You can join our QQ group: 324504099!
+> You can join our QQ group 1093244717
 
 ## Getting Started
 

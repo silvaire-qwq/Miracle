@@ -39,5 +39,15 @@ export const languageFile = {
   returnToTopLabel: "Return to Top",
   lastUpdated: "Last Updated",
   musics: "Musics",
-  negative: "Negative"
+  negative: "Negative",
+  today: "Today",
+  yesterday: "Yesterday",
+  weeksAgo: "weeks ago",
+  sunday: "Sunday",
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
 };

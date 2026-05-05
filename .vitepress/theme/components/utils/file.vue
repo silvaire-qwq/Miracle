@@ -27,12 +27,13 @@ function getFileName(url: string) {
 <style lang="css" scoped>
 a {
   background-color: var(--vp-c-bg-alt) !important;
-  padding: 5px 13px !important;
-  margin: 0px 7px;
+  padding: 1px 13px !important;
+  margin: 0px 2px;
   border-radius: var(--vp-border-radius-3);
   border: 1px solid var(--vp-c-divider);
   transition: all var(--vp-transition-time) !important;
   box-shadow: var(--vp-shadow);
+  display: inline-block;
   span,
   .iconify {
     color: var(--vp-c-text-1) !important;
