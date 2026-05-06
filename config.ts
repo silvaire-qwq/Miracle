@@ -67,7 +67,7 @@ export const globalConfig = {
         scale: 1.03,
         maxMove: 8,
         maxRotate: 3, // 3d effect |  set 0 to disable 3D
-        easing: 0.3,
+        easing: 0.5,
         shadowStrength: 2, // shadow strength when hovered (default: 2)
       },
     },
@@ -176,12 +176,15 @@ export const globalConfig = {
   // the higher the weight, the lower the friend will be displayed
   friendWeights: {
     // example: -99, // "example" will be displayed at the top
+    "=ᗜωᗜ=": -99,
+    UwU: -98,
     friends: -1,
     unable: 0, // "unable" will be displayed at the bottom
   },
 
   // netease music list
   musicList: "17942010185",
+  musicSlice: 20, // how many singer to display in music list (default: 20, set 0 to display all)
 
   // DO NOT EDIT THESE VALUES!!!!!
   friends: friendList,

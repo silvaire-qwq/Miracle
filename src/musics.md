@@ -66,7 +66,12 @@ const singers = computed(() => {
     .sort((a, b) => a.sort - b.sort)
     .map(({ a }) => a);
 
-  return shuffled.slice(0, 20); // ✅ 随机选 20 个
+    if(globalConfig.musicSlice == 0) {
+        return shuffled;
+    } else {
+  return shuffled.slice(0, globalConfig.musicSlice);
+
+    }
 });
 
 // 🔹 处理歌手分组（仅显示这 20 个随机歌手的歌曲）

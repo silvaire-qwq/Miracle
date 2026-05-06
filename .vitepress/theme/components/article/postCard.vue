@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<CardProps>(), {
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 
 // 计算最终跳转链接
-const link = computed(() => {
+const clink = computed(() => {
   if (props.type === "project" && props.category) {
     return `https://github.com/${props.category}`;
   }
@@ -46,14 +46,14 @@ const descriptionText = computed(() => {
 });
 
 // 判断是否可点击
-const isClickable = computed(() => !!link.value);
+const isClickable = computed(() => !!clink.value);
 </script>
 
 <template>
   <!-- 用 a 或 div 动态渲染 -->
   <component
     :is="isClickable ? 'a' : 'div'"
-    :href="isClickable ? link : undefined"
+    :href="isClickable ? url : undefined"
     :type="props.type"
     class="diary"
     @mouseenter="handleMouseEnter"
@@ -78,7 +78,7 @@ const isClickable = computed(() => !!link.value);
       <div class="meta">
         <!-- 分类显示 -->
         <template v-if="props.category">
-          <a v-if="props.type === 'project'" class="category" :href="link">
+          <a v-if="props.type === 'project'" class="category" :href="clink">
             <Icon :icon="globalConfig.icon.friends" />
             {{ props.category }}
           </a>
