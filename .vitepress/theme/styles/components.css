@@ -679,7 +679,9 @@ strong {
 
 .vp-doc img {
   width: 100%;
+  border-radius: var(--vp-border-radius-1);
   margin: var(--vp-gap) 0;
+  border: var(--vp-c-divider) 1px solid;
 }
 
 /**
