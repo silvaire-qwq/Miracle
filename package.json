@@ -5,17 +5,28 @@
     "#theme/*": "./.vitepress/theme/*.ts"
   },
   "devDependencies": {
+    "@mdit/plugin-align": "^0.24.2",
+    "@mdit/plugin-container": "^0.23.2",
+    "@mdit/plugin-sub": "^0.24.2",
     "@types/node": "^24.9.1",
     "@zinkawaii/tsconfig": "^0.0.2",
     "iconify": "^1.4.0",
+    "markdown-it": "^14.1.1",
+    "markdown-it-katex": "^2.0.3",
+    "mermaid": "^11.14.0",
     "prettier": "3.6.2",
     "vitepress": "^1.6.4",
+    "vitepress-plugin-mermaid": "^2.0.17",
     "vitepress-plugin-rss": "^0.3.2",
     "vitepress-plugin-tabs": "^0.7.3",
     "vue": "^3.5.22"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
+    "@mdit/plugin-footnote": "^0.23.2",
+    "@mdit/plugin-mark": "^0.23.2",
+    "@mdit/plugin-sup": "^0.24.2",
+    "@mdit/plugin-tasklist": "^0.23.2",
     "chalk": "^5.6.2",
     "dayjs": "^1.11.18",
     "exif-parser": "^0.1.12",

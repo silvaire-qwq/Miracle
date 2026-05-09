@@ -90,7 +90,7 @@ blockquote {
  * a
  * -------------------------------------------------------------------------- */
 
-main .vp-doc a:not(a.nocss) {
+main .vp-doc a:not(a.nocss, .footnote-item *, sup *) {
   background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
     no-repeat center bottom / 100% 2px;
   text-decoration: none;
@@ -98,7 +98,7 @@ main .vp-doc a:not(a.nocss) {
   transition: var(--vp-transition-time);
 }
 
-main .vp-doc a:hover:not(a.nocss) {
+main .vp-doc a:hover:not(a.nocss, .footnote-item *, sup *) {
   border-radius: var(--vp-border-radius-4);
   background: linear-gradient(var(--vp-c-brand-soft), var(--vp-c-brand-soft))
     no-repeat center bottom / 100% 100%;
@@ -630,13 +630,17 @@ strong {
 }
 
 .vp-doc s {
-  opacity: 0.6;
   text-decoration: none;
-  filter: blur(2.5px);
   transition: all var(--vp-transition-time);
+  background-color: black;
+  color: black;
+  padding: 0 3px;
+  margin: 0 1px;
+  user-select: none;
+  border-radius: calc(var(--vp-border-radius-4) / 2);
 
   &:hover {
-    filter: blur(0);
+    color: white;
   }
 }
 
@@ -736,4 +740,13 @@ h1.year,
 h1.artist {
   color: var(--vp-transparent) !important;
   -webkit-text-stroke: 1px var(--vp-c-gutter);
+}
+
+/**
+ * mark
+ * -------------------------------------------------------------------------- */
+
+mark {
+  background-color: var(--vp-c-yellow-soft) !important;
+  color: var(--vp-c-text-1) !important;
 }

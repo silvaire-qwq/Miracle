@@ -113,3 +113,39 @@ export default {
   },
 } satisfies Theme;
 ```
+
+$[-2^{15}, 2^{15} - 1]$
+H~2~O
+H^2^O
+
+Footnote 1 link[^first].
+
+[^first]: Footnote can reference [^second].
+
+[^second]: Other footnote.
+
+- [ ] 1
+- [x] 2
+
+==powerful==
+
+::: left
+Contents to align left
+:::
+
+::: center
+Contents to align center
+:::
+
+::: right
+Contents to align right
+:::
+
+::: justify
+Contents to align justify
+:::
+
+```mermaid
+flowchart TD
+  Start --> Stop
+```

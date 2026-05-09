@@ -2,7 +2,6 @@ import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import { inBrowser } from "vitepress";
-
 import { handleEasterEgg } from "./utils/easterEgg";
 import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 
@@ -16,13 +15,12 @@ import Comments from "./components/layout/afterDocs.vue";
 import { registerComponents } from "./configs/registerComponents";
 import { applyCssVars } from "./configs/applyCssVars";
 import { globalConfig } from "#config";
-
 /* =========================
  * Catppuccin Runtime Engine
  * ========================= */
 
 const catppuccinMap = import.meta.glob("./styles/catppuccin/**/*.css", {
-  as: "raw",
+  query: "raw",
 });
 
 let styleEl: HTMLStyleElement | null = null;
@@ -95,7 +93,6 @@ export default {
   enhanceApp({ app, router }) {
     enhanceAppWithTabs(app);
     registerComponents(app);
-
     if (!inBrowser) return;
 
     const init = async () => {

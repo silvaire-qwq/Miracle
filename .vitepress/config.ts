@@ -1,9 +1,18 @@
 import path from "path";
-import { defineConfig } from "vitepress";
+import { withMermaid } from "vitepress-plugin-mermaid";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
 import { globalConfig } from "#config";
 import { getRunningTime } from "#theme/utils/getRunningTime";
+import { sub } from "@mdit/plugin-sub";
+import markdownItKatex from "markdown-it-katex";
+import { footnote } from "@mdit/plugin-footnote";
+import { mark } from "@mdit/plugin-mark";
+import { sup } from "@mdit/plugin-sup";
+import { container } from "@mdit/plugin-container";
+import { align } from "@mdit/plugin-align";
+import { tasklist } from "@mdit/plugin-tasklist";
+
 import type { RSSOptions } from "vitepress-plugin-rss";
 
 // RSS feed configuration
@@ -23,7 +32,7 @@ const RSS: RSSOptions = {
 };
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid({
   title: globalConfig.title,
   description: globalConfig.description,
   // plz use vercel!!!!!!!
@@ -47,8 +56,21 @@ export default defineConfig({
       light: "catppuccin-latte",
       dark: "catppuccin-mocha",
     },
+    image: {
+      lazyLoading: true,
+    },
     config(md) {
       md.use(tabsMarkdownPlugin);
+      md.use(markdownItKatex);
+      md.use(sub);
+      md.use(footnote);
+      md.use(mark);
+      md.use(sup);
+      md.use(tasklist);
+      md.use(align);
+      md.use(container, {
+        name: "Align",
+      });
     },
   },
   head: [["link", { rel: "icon", href: globalConfig.favicon }]],

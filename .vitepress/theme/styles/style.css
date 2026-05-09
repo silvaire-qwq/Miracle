@@ -10,6 +10,7 @@
 @import url("./default.css");
 @import url("./components.css");
 @import url("./twikoo.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css");
 
 /**
  * Variables
