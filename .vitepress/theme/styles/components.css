@@ -707,7 +707,7 @@ details.details.custom-block {
   border: 1px solid var(--vp-c-divider);
   border-radius: var(--vp-border-radius-2) !important;
   box-shadow: var(--vp-shadow);
-  padding: 0;
+  padding: 0 !important;
 
   & > *:not(summary) {
     margin: 18px 24px !important;
