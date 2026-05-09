@@ -149,3 +149,14 @@ Contents to align justify
 flowchart TD
   Start --> Stop
 ```
+
+asdasda
+
+![idk](https://agxcoy.shimakaze.org/assets/bottles_main-DQsJgB38.webp)
+![2](https://agxcoy.shimakaze.org/assets/bottles_new_venv-Fo3s9gYU.webp)
+
+asdasdasda
+
+::: details
+asdfhjkasfhkjdfsakhjlfsdahkjlfdsakjhlfds
+:::

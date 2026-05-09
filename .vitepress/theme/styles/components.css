@@ -671,6 +671,11 @@ strong {
   transform: translateY(-0.1em);
 }
 
+.vp-doc img {
+  width: 100%;
+  margin: var(--vp-gap) 0;
+}
+
 /**
  * Tabs
  * -------------------------------------------------------------------------- */
