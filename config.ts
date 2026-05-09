@@ -35,7 +35,7 @@ export const globalConfig = {
   styles: {
     color: {
       // [1] Use your own color scheme by adjusting the hue, intensity, and lightness values.
-      hue: 280,
+      hue: 0,
       intensity: {
         light: 17, // suggestion: 20
         dark: 15, // suggestion: 15 ~ 20
