@@ -126,8 +126,11 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
       >
-        <Icon :icon="globalConfig.icon.category" style="opacity: 0.4" />
-        <span class="name">{{ " " + globalConfig.lang.categories }}</span>
+        <Icon
+          :icon="globalConfig.icon.category"
+          style="opacity: 0.4; margin-right: 10px"
+        />
+        <span class="name">{{ globalConfig.lang.categories }}</span>
       </a>
       <span
         class="tag"
