@@ -580,7 +580,7 @@ const groupedPhotos = computed(() => {
   gap: var(--vp-gap);
 }
 .tag {
-  font-family: var(--vp-font-family-mono);
+  font-family: var(--vp-use-mono);
   text-transform: var(--vp-title-uppercase);
   transition: all var(--vp-transition-time);
   padding: 12px 24px;
