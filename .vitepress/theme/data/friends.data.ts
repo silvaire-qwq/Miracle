@@ -16,7 +16,7 @@ let data: Friend[];
 export { data };
 
 export default defineLoader({
-  watch: "data/friends/*.json",
+  watch: "public/data/friends/*.json",
   load(files) {
     return files.map((file) => {
       const fileName = path.basename(file);

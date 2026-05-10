@@ -22,4 +22,5 @@ export const data = {
   singer: "ph:microphone-stage-duotone",
   negative: "ph:smiley-sad-duotone",
   unableFriends: "ph:wifi-slash-duotone",
+  photos: "ph:picture-in-picture-duotone",
 };

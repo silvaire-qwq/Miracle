@@ -50,4 +50,7 @@ export const languageFile = {
   thursday: "星期四",
   friday: "星期五",
   saturday: "星期六",
+  allPhotos: "所有照片",
+  photos: "图库",
+  previewTree: "预览文件库",
 };

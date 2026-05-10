@@ -264,7 +264,7 @@ div.info.custom-block.github-alert {
   }
 }
 
-div.vp-adaptive-theme {
+blocks > div.vp-adaptive-theme {
   margin: 0px !important;
 }
 

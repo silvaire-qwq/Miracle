@@ -13,6 +13,7 @@ interface CardProps {
   image?: string;
   type?: string;
   negative?: boolean;
+  meta?: string;
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   image: "",
   type: "",
   negative: false,
+  meta: "true",
 });
 
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
@@ -61,21 +63,31 @@ const isClickable = computed(() => !!clink.value);
     @mouseleave="handleMouseLeave"
   >
     <div v-if="props.image" class="img-container">
-      <img :src="props.image" />
+      <div v-if="props.image" class="img-container">
+        <img :src="props.image" />
+      </div>
     </div>
 
     <div class="textPlace">
       <p class="title" v-if="props.title">{{ props.title }}</p>
 
       <!-- 支持换行 -->
-      <p class="details" v-if="props.description && props.title">
+      <p
+        class="details"
+        v-if="props.description && props.title"
+        :style="props.meta === 'true' ? 'margin: 0 0 10px 0' : 'margin:0'"
+      >
         {{ descriptionText }}
       </p>
-      <p class="details notitle" v-else-if="props.description">
+      <p
+        class="details notitle"
+        v-else-if="props.description"
+        :style="props.meta === 'true' ? 'margin: 0 0 10px 0' : 'margin:0'"
+      >
         {{ descriptionText }}
       </p>
 
-      <div class="meta">
+      <div class="meta" v-if="props.meta === 'true'">
         <!-- 分类显示 -->
         <template v-if="props.category">
           <a v-if="props.type === 'project'" class="category" :href="clink">
@@ -195,7 +207,6 @@ const isClickable = computed(() => !!clink.value);
   color: var(--vp-c-text-2);
   font-size: 14px;
   line-height: 20px;
-  margin: 0 0 10px 0;
   white-space: pre-line;
   overflow-wrap: break-word;
   font-weight: 500;

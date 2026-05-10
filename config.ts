@@ -2,6 +2,7 @@
 import { data as momentList } from "#theme/data/moments.data";
 import { data as friendList } from "#theme/data/friends.data";
 import { data as iconList } from "#theme/configs/iconList";
+import { data as photoList } from "#theme/data/photos.data";
 
 // experimental: i18n
 import { languageFile as zh } from "#theme/lang/zh_CN";
@@ -142,6 +143,7 @@ export const globalConfig = {
         { text: languageFile.friends, link: "/friends" },
         // enable / disable music list
         { text: languageFile.musics, link: "/musics" },
+        { text: languageFile.photos, link: "/photos" },
         { text: languageFile.manager, link: "/manager" },
         // enable / disable comments
         { text: languageFile.whiteboard, link: "/whiteboard" },
@@ -190,6 +192,7 @@ export const globalConfig = {
   // DO NOT EDIT THESE VALUES!!!!!
   friends: friendList,
   moments: momentList,
+  photos: photoList,
   lang: languageFile,
   icon: iconList,
 };

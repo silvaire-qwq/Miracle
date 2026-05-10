@@ -15,7 +15,7 @@ let data: Moment[];
 export { data };
 
 export default defineLoader({
-  watch: "data/moments/*.json",
+  watch: "public/data/moments/*.json",
   load(files) {
     return files
       .map((file) => {

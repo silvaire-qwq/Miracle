@@ -37,6 +37,7 @@ footer: false
 
 <script setup lang="ts">
     import { globalConfig } from "#config";
+    console.log(globalConfig.photos)
 </script>
 
 <style>

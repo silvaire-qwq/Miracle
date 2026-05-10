@@ -72,26 +72,28 @@ const getCurrentTimeString = () => {
 
 // ✅ 通用 getRepoUrl（自动去掉重复 type 前缀）
 function getRepoUrl(
-  action: "new" | "edit" | "delete",
-  type: "posts" | "moments" | "friends",
-  fileName: string,
+  action: "new" | "edit" | "delete" | "preview",
+  type: "posts" | "moments" | "friends" | "photos",
+  fileName?: string,
   fileContent = "",
 ) {
   const { blogBase } = globalConfig;
-  const basePath = type === "posts" ? `src/posts` : `data/${type}`;
+  const basePath = type === "posts" ? `src/posts` : `public/data/${type}`;
 
   // 去掉 fileName 开头多余的 type/
-  const cleanFileName = fileName.replace(new RegExp(`^${type}/`), "");
+  const cleanFileName = fileName?.replace(new RegExp(`^${type}/`), "");
 
   const url: Record<string, Record<typeof action, string>> = {
     github: {
       new: `https://github.com/${blogBase.repo}/new/main/${basePath}?filename=${cleanFileName}&value=${fileContent}`,
       edit: `https://github.com/${blogBase.repo}/edit/main/${basePath}/${cleanFileName}`,
+      preview: `https://github.com/${blogBase.repo}/tree/main/${basePath}`,
       delete: `https://github.com/${blogBase.repo}/delete/main/${basePath}/${cleanFileName}`,
     },
     gitea: {
       new: `${blogBase.giteaUrl}/${blogBase.repo}/_new/main/${basePath}?filename=${cleanFileName}&value=${fileContent}`,
       edit: `${blogBase.giteaUrl}/${blogBase.repo}/_edit/main/${basePath}/${cleanFileName}`,
+      preview: `${blogBase.giteaUrl}/${blogBase.repo}/src/branch/main/${basePath}`,
       delete: `${blogBase.giteaUrl}/${blogBase.repo}/_delete/main/${basePath}/${cleanFileName}`,
     },
   };
@@ -158,6 +160,17 @@ const momentFileTemplate = () => {
   "image": ""
 }`;
 };
+
+// 🔹 图片管理（Photos）
+import { data as photos } from "#theme/data/photos.data";
+
+const groupedPhotos = computed(() => {
+  let filtered = photos;
+  if (selectedCategory.value) {
+    filtered = photos.filter((p) => p.category === selectedCategory.value);
+  }
+  return filtered.sort((a, b) => a.category.localeCompare(b.category));
+});
 </script>
 
 <template>
@@ -189,6 +202,18 @@ const momentFileTemplate = () => {
       >
         <Icon :icon="globalConfig.icon.moment" />
         <span class="name">{{ globalConfig.lang.moments }}</span>
+      </span>
+
+      <span
+        class="tag"
+        :class="{ active: activeTab === 'photos' }"
+        @click="activeTab = 'photos'"
+        @mouseenter="handleMouseEnter"
+        @mousemove="handleMouseMove"
+        @mouseleave="handleMouseLeave"
+      >
+        <Icon :icon="globalConfig.icon.photos" />
+        <span class="name">{{ globalConfig.lang.photos }}</span>
       </span>
 
       <span
@@ -320,6 +345,56 @@ const momentFileTemplate = () => {
             </a>
             <a
               :href="getRepoUrl('delete', 'moments', m.fileName)"
+              target="_blank"
+            >
+              <Icon :icon="globalConfig.icon.delete" class="delete" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHOTOS -->
+      <div
+        v-if="activeTab === 'photos'"
+        class="post-card diary"
+        @mouseenter="handleMouseEnter"
+        @mousemove="handleMouseMove"
+        @mouseleave="handleMouseLeave"
+      >
+        <div class="textPlace">
+          <div class="title">{{ globalConfig.lang.previewTree }}</div>
+          <div class="actions">
+            <a :href="getRepoUrl('preview', 'photos')" target="_blank">
+              <Icon
+                :icon="globalConfig.icon.new"
+                style="color: var(--vp-c-brand-1)"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="activeTab === 'photos'"
+        v-for="p in groupedPhotos"
+        :key="p.path"
+        class="post-card diary"
+        @mouseenter="handleMouseEnter"
+        @mousemove="handleMouseMove"
+        @mouseleave="handleMouseLeave"
+      >
+        <div class="textPlace">
+          <img :src="p.path" class="avatar" />
+          <div class="title">{{ p.fileName }}</div>
+          <p class="details">{{ p.category }}</p>
+          <div class="actions">
+            <a :href="p.path" target="_blank">
+              <Icon :icon="globalConfig.icon.open" />
+            </a>
+            <!-- 删除 -->
+            <a
+              :href="
+                getRepoUrl('delete', 'photos', `${p.category}/${p.fileName}`)
+              "
               target="_blank"
             >
               <Icon :icon="globalConfig.icon.delete" class="delete" />
