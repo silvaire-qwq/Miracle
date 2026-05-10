@@ -29,7 +29,7 @@ export default defineLoader({
       const formattedName = nameWithoutExt.replace(/[-_]/g, " ").toUpperCase(); // 替换 - 和 _ 为空格
 
       result.push({
-        fileName: formattedName,
+        fileName, //: formattedName,
         category,
         path: `/data/photos/${category}/${fileName}`,
       });
