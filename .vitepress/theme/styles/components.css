@@ -249,7 +249,7 @@ div.info.custom-block.github-alert {
 }
 
 .custom-block-title {
-  display: none;
+  display: var(--vp-show-title);
 }
 
 .custom-block {
@@ -262,6 +262,10 @@ div.info.custom-block.github-alert {
     margin: 16px 0px !important;
     font-size: 16px !important;
   }
+}
+
+div.vp-adaptive-theme {
+  margin: 0px !important;
 }
 
 /**
@@ -635,7 +639,7 @@ strong {
   font-variant-numeric: tabular-nums;
 }
 
-.vp-doc s {
+.vp-doc .spoiler {
   text-decoration: none;
   transition: all var(--vp-transition-time);
   background-color: black;

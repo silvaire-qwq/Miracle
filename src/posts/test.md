@@ -39,7 +39,7 @@ negative: true
 
 [Normal Link](https://github.com/silvaire-qwq/Miracle/archive/refs/heads/main.zip). Or you can try to download <File text="This File" url="https://github.com/silvaire-qwq/Miracle/archive/refs/heads/main.zip" icon="ph:file-archive-duotone"/>.
 
-**Bold** _Italic_ **_Both_** ~~Delete~~
+**Bold** _Italic_ **_Both_** ~~Delete~~ ++ins++
 
 ```typescript
 import { h } from "vue";
@@ -152,11 +152,55 @@ flowchart TD
 
 asdasda
 
-![idk](https://agxcoy.shimakaze.org/assets/bottles_main-DQsJgB38.webp)
+![idk =100x100](https://agxcoy.shimakaze.org/assets/bottles_main-DQsJgB38.webp)
 ![2](https://agxcoy.shimakaze.org/assets/bottles_new_venv-Fo3s9gYU.webp)
 
 asdasdasda
 
 ::: details
 asdfhjkasfhkjdfsakhjlfsdahkjlfdsakjhlfds
+:::
+
+::: tabs
+== tab 123
+asfdjhkfsdajhklfda
+== tab sdafkhjfkjhfskjhf
+:::
+
+::: tip
+This is a tip.
+:::
+
+::: info
+This is an info box.
+:::
+
+::: warning
+Watch out!
+:::
+
+::: danger
+STOP! This is dangerous.
+:::
+
+Markdown It Spoiler !!十分强大!!。
+
+::: code-group
+
+```sh [npm]
+npm install vitepress-plugin-group-icons
+```
+
+```sh [yarn]
+yarn add vitepress-plugin-group-icons
+```
+
+```sh [pnpm]
+pnpm add vitepress-plugin-group-icons
+```
+
+```sh [bun]
+bun add vitepress-plugin-group-icons
+```
+
 :::

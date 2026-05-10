@@ -1,4 +1,5 @@
 import path from "path";
+
 import { withMermaid } from "vitepress-plugin-mermaid";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { RssPlugin } from "vitepress-plugin-rss";
@@ -9,9 +10,12 @@ import markdownItKatex from "markdown-it-katex";
 import { footnote } from "@mdit/plugin-footnote";
 import { mark } from "@mdit/plugin-mark";
 import { sup } from "@mdit/plugin-sup";
+import { ins } from "@mdit/plugin-ins";
+import { imgSize, obsidianImgSize } from "@mdit/plugin-img-size";
 import { container } from "@mdit/plugin-container";
 import { align } from "@mdit/plugin-align";
 import { tasklist } from "@mdit/plugin-tasklist";
+import { spoiler } from "@mdit/plugin-spoiler";
 
 import type { RSSOptions } from "vitepress-plugin-rss";
 
@@ -67,9 +71,13 @@ export default withMermaid({
       md.use(mark);
       md.use(sup);
       md.use(tasklist);
+      md.use(imgSize);
+      md.use(obsidianImgSize);
+      md.use(spoiler);
       md.use(align);
+      md.use(ins);
       md.use(container, {
-        name: "Align",
+        name: "important",
       });
     },
   },

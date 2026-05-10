@@ -7,6 +7,9 @@
   "devDependencies": {
     "@mdit/plugin-align": "^0.24.2",
     "@mdit/plugin-container": "^0.23.2",
+    "@mdit/plugin-img-size": "^0.23.2",
+    "@mdit/plugin-ins": "^0.23.2",
+    "@mdit/plugin-spoiler": "^0.23.2",
     "@mdit/plugin-sub": "^0.24.2",
     "@types/node": "^24.9.1",
     "@zinkawaii/tsconfig": "^0.0.2",

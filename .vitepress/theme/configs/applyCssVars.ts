@@ -25,6 +25,9 @@ export function applyCssVars() {
       : "var(--vp-c-gutter)",
     "--vp-avatar-home-vh-height": globalConfig.homePage.modules.banner.avatar,
     "--vp-image-home-vh-height": globalConfig.homePage.modules.banner.image,
+    "--vp-show-title": globalConfig.styles.visual.enableCardTitle
+      ? "block"
+      : "none",
   };
 
   Object.entries(vars).forEach(([k, v]) =>

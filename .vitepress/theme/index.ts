@@ -20,6 +20,7 @@ import { globalConfig } from "#config";
  * ========================= */
 
 const catppuccinMap = import.meta.glob("./styles/catppuccin/**/*.css", {
+  // query => no style.
   as: "raw",
 });
 
