@@ -147,7 +147,7 @@ const handleCategoryClick = (category: string) => {
 }
 
 .tag {
-  font-family: var(--vp-font-family-mono);
+  font-family: var(--vp-use-mono);
   text-transform: var(--vp-title-uppercase);
   font-weight: 600;
   padding: 12px 24px;
