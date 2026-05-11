@@ -79,7 +79,7 @@ export const globalConfig = {
   homePage: {
     avatar:
       "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=3", // your avatar
-    city: "Hedong, Tianjin", // your location
+    city: "127.0.0.1", // your location
     // introduce: (you cannot use it now)
     // "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
 
@@ -91,6 +91,7 @@ export const globalConfig = {
         image: "65vh", // only work when type is "image", e.g. "65vh"
         avatar: "50vh", // only work when type is "avatar", e.g. "100vh"
       },
+      pictures: true, // show pictures
       lastMoment: true, // last moment
       recentPosts: true, // recent posts
       projects: true, // projects (may be very sloooooow)

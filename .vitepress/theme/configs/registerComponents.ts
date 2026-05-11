@@ -17,6 +17,7 @@ import Manager from "../components/manager/manager.vue";
 import Moments from "../components/moments/moments.vue";
 import File from "../components/utils/file.vue";
 import Musics from "../components/dashboard/Musics.vue";
+import Pictures from "../components/dashboard/Pictures.vue";
 
 const components = {
   // Dashboard
@@ -29,6 +30,7 @@ const components = {
   Musics,
   // Components
   PostCard,
+  Pictures,
   FriendCard,
   // Pages
   Articles,
