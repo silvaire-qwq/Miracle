@@ -3,4 +3,6 @@ layout: home
 footer: false
 title: Whiteboard
 ---
-<Comments title="false"/>
+<ClientOnly>
+  <Comments title="false"/>
+</ClientOnly>

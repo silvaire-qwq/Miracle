@@ -3,4 +3,6 @@ layout: home
 footer: false
 ---
 
-<Articles />
+<ClientOnly>
+  <Articles />
+</ClientOnly>

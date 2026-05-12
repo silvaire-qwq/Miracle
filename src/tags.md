@@ -3,4 +3,6 @@ layout: home
 footer: false
 ---
 
-<Tags />
+<ClientOnly>
+  <Tags />
+</ClientOnly>
