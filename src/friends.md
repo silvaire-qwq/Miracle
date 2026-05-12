@@ -9,16 +9,12 @@ import { generateGrid } from "#theme/utils/generateGrid";
 import { columnCount, updateColumns } from "#theme/utils/dynamicColumns";
 import { globalConfig } from "#config";
 
-// 可自定义分组权重：值越大越靠后（Friends 始终置底）
 const friendWeights: Record<string, number> = globalConfig.friendWeights
 
-// 默认头像
 const defaultImg = "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c";
 
-// 好友列表
 const { friends } = globalConfig;
 
-// 监听窗口变化，更新列数
 onMounted(() => {
   updateColumns();
   window.addEventListener("resize", updateColumns);
@@ -31,12 +27,10 @@ const groupedFriends = computed(() => {
   const raw = generateGrid(
     friends,
     undefined,
-    // 以 folder（分类）为分组键，若无则归为 "friends"
     (friend) => friend.folder ?? "friends",
     columnCount.value
   );
 
-  // 统一按 friendWeights 排序（不再把 "Friends" 置底）
   return raw.sort((a, b) => {
     const wa = friendWeights[a.key] ?? 0;
     const wb = friendWeights[b.key] ?? 0;
@@ -44,7 +38,6 @@ const groupedFriends = computed(() => {
     return wa - wb;
   });
 });
-// ...existing code...
 </script>
 
 <div class="allFriend">

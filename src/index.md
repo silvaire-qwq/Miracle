@@ -5,39 +5,55 @@ pageClass: indexPage
 footer: false
 ---
 
-<FirstPage />
+<ClientOnly>
+  <FirstPage />
+</ClientOnly>
 
 <div v-if="globalConfig.homePage.modules.pictures">
     <h2><Icon :icon="globalConfig.icon.photos" /> {{ globalConfig.lang.photos }}</h2>
+    <ClientOnly>
         <Pictures />
+    </ClientOnly>
 </div>
 
 <div v-if="globalConfig.homePage.modules.recentPosts">
     <h2><Icon :icon="globalConfig.icon.recentPosts" /> {{ globalConfig.lang.recentPosts }}</h2>
     <div v-if="globalConfig.homePage.modules.lastMoment">
-        <LastMoment />
+        <ClientOnly>
+            <LastMoment />
+        </ClientOnly>
     </div>
-    <RecentPosts />
+    <ClientOnly>
+        <RecentPosts />
+    </ClientOnly>
 </div>
 
 <div v-if="globalConfig.homePage.modules.musics">
     <h2><Icon :icon="globalConfig.icon.musics" /> {{ globalConfig.lang.musics }}</h2>
-    <Musics />
+    <ClientOnly>
+        <Musics />
+    </ClientOnly>
 </div>
 
 <div v-if="globalConfig.homePage.modules.projects">
     <h2><Icon :icon="globalConfig.icon.projects" /> {{ globalConfig.lang.projects }}</h2>
-    <Projects />
+    <ClientOnly>
+        <Projects />
+    </ClientOnly>
 </div>
 
 <div v-if="globalConfig.homePage.modules.techStack">
     <h2><Icon :icon="globalConfig.icon.techStack" /> {{ globalConfig.lang.techStack }}</h2>
-    <TechStack />
+    <ClientOnly>
+        <TechStack />
+    </ClientOnly>
 </div>
 
 <div v-if="globalConfig.homePage.modules.friends">
     <h2><Icon :icon="globalConfig.icon.friends" /> {{ globalConfig.lang.friends }}</h2>
-    <Friends />
+    <ClientOnly>
+        <Friends />
+    </ClientOnly>
 </div>
 
 <script setup lang="ts">
@@ -46,7 +62,6 @@ footer: false
 </script>
 
 <style>
-    /* 同时显示两个头像看起来很乱所以隐藏掉一个小的 */
     .indexPage img.VPImage.logo {
         display: none
     }
