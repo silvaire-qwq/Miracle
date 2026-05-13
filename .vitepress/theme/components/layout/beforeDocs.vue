@@ -54,9 +54,11 @@
       <div class="anchorContainer">
         <Icon class="anchor" :icon="globalConfig.icon.calendar" />
       </div>
-      <span class="categoryIcon">{{
-        formatRelativeDate(frontmatter.published)
-      }}</span>
+      <ClientOnly>
+        <span class="categoryIcon">{{
+          formatRelativeDate(frontmatter.published)
+        }}</span>
+      </ClientOnly>
 
       <div class="anchorContainer">
         <Icon class="anchor" :icon="globalConfig.icon.category" />

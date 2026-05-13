@@ -7,49 +7,51 @@
     <h2 class="styledH2" v-if="props.title !== 'false'">
       {{ globalConfig.lang.comments }}
     </h2>
-    <div v-if="globalConfig.comments.type == 'giscus'">
-      <component
-        v-if="isDark"
-        :is="'script'"
-        src="https://giscus.app/client.js"
-        :data-repo="globalConfig.comments.giscus.repo"
-        :data-repo-id="globalConfig.comments.giscus.repoId"
-        data-category="Announcements"
-        :data-category-id="globalConfig.comments.giscus.categoryId"
-        data-mapping="pathname"
-        data-reactions-enabled="0"
-        data-emit-metadata="0"
-        data-input-position="top"
-        :data-theme="globalConfig.comments.giscus.themes.dark"
-        :data-lang="globalConfig.lang.giscusLang"
-        crossorigin="anonymous"
-        data-loading="eager"
-        async
-      >
-      </component>
-      <component
-        v-else
-        :is="'script'"
-        src="https://giscus.app/client.js"
-        :data-repo="globalConfig.comments.giscus.repo"
-        :data-repo-id="globalConfig.comments.giscus.repoId"
-        data-category="Announcements"
-        :data-category-id="globalConfig.comments.giscus.categoryId"
-        data-mapping="pathname"
-        data-reactions-enabled="0"
-        data-emit-metadata="0"
-        data-input-position="top"
-        :data-theme="globalConfig.comments.giscus.themes.light"
-        :data-lang="globalConfig.lang.giscusLang"
-        crossorigin="anonymous"
-        data-loading="eager"
-        async
-      >
-      </component>
-    </div>
-    <div v-if="globalConfig.comments.type == 'twikoo'">
-      <Twikoo />
-    </div>
+    <ClientOnly>
+      <div v-if="globalConfig.comments.type == 'giscus'">
+        <component
+          v-if="isDark"
+          :is="'script'"
+          src="https://giscus.app/client.js"
+          :data-repo="globalConfig.comments.giscus.repo"
+          :data-repo-id="globalConfig.comments.giscus.repoId"
+          data-category="Announcements"
+          :data-category-id="globalConfig.comments.giscus.categoryId"
+          data-mapping="pathname"
+          data-reactions-enabled="0"
+          data-emit-metadata="0"
+          data-input-position="top"
+          :data-theme="globalConfig.comments.giscus.themes.dark"
+          :data-lang="globalConfig.lang.giscusLang"
+          crossorigin="anonymous"
+          data-loading="eager"
+          async
+        >
+        </component>
+        <component
+          v-else
+          :is="'script'"
+          src="https://giscus.app/client.js"
+          :data-repo="globalConfig.comments.giscus.repo"
+          :data-repo-id="globalConfig.comments.giscus.repoId"
+          data-category="Announcements"
+          :data-category-id="globalConfig.comments.giscus.categoryId"
+          data-mapping="pathname"
+          data-reactions-enabled="0"
+          data-emit-metadata="0"
+          data-input-position="top"
+          :data-theme="globalConfig.comments.giscus.themes.light"
+          :data-lang="globalConfig.lang.giscusLang"
+          crossorigin="anonymous"
+          data-loading="eager"
+          async
+        >
+        </component>
+      </div>
+      <div v-if="globalConfig.comments.type == 'twikoo'">
+        <Twikoo />
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
