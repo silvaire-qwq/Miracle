@@ -1,3 +1,5 @@
 shamefullyHoist: true
 onlyBuiltDependencies:
   - esbuild
+allowBuilds:
+  esbuild: true
