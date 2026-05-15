@@ -38,6 +38,9 @@
   --vp-shadow-brand:
     var(--vp-c-brand-soft) 0px 12px 25px -5px,
     var(--vp-c-brand-soft) 0px 7px 15px -7px;
+  --vp-shadow-negative:
+    var(--vp-c-yellow-soft) 0px 12px 25px -5px,
+    var(--vp-c-yellow-soft) 0px 7px 15px -7px;
 
   /* Blur */
   --vp-blur: blur(5px);

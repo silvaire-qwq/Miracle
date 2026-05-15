@@ -23,54 +23,75 @@ const props = defineProps({
   },
 });
 
-// 获取 URL 中的 category 参数
+// URL category
 const urlParams = new URLSearchParams(window.location.search);
 const selectedCategory = ref(urlParams.get("category"));
 
-// 创建一个响应式变量来存储过滤后的文章
-const articles = ref(posts);
+// negative 状态
+import { useDeepHideNegative } from "../../utils/useDeepHideNegative";
 
-// 限制文章数量
-watch(
-  () => props.maxItems,
-  () => {
-    if (props.maxItems > 0) {
-      articles.value = posts.slice(0, props.maxItems);
-    } else {
-      articles.value = posts;
-    }
-  },
+const { showNegative, pendingTimer, hasShownByShortcut, initDeepHideListener } =
+  useDeepHideNegative();
+
+// 文章列表
+const articles = ref(
+  posts.filter((post) => showNegative.value || !post.negative),
 );
 
-// 监听 selectedCategory 的变化，重新过滤文章
-watch(selectedCategory, (newCategory) => {
-  nextTick(() => {
-    if (newCategory) {
-      articles.value = posts.filter((post) => post.category === newCategory);
-    } else {
-      articles.value = posts;
-    }
-  });
+// 更新文章
+const updateArticles = () => {
+  let filtered = posts.filter((post) => showNegative.value || !post.negative);
+
+  if (selectedCategory.value) {
+    filtered = filtered.filter(
+      (post) => post.category === selectedCategory.value,
+    );
+  }
+
+  if (props.maxItems > 0) {
+    filtered = filtered.slice(0, props.maxItems);
+  }
+
+  articles.value = filtered;
+};
+
+// watch maxItems
+watch(
+  () => props.maxItems,
+  () => updateArticles(),
+);
+
+// watch category
+watch(selectedCategory, () => {
+  nextTick(() => updateArticles());
 });
 
+// watch negative
+watch(showNegative, () => {
+  nextTick(() => updateArticles());
+});
+
+// mount
 onMounted(() => {
+  const cleanup = initDeepHideListener();
+
   updateColumns();
   window.addEventListener("resize", updateColumns);
 
-  if (selectedCategory.value) {
-    nextTick(() => {
-      articles.value = posts.filter(
-        (post) => post.category === selectedCategory.value,
-      );
-    });
-  }
-});
+  updateArticles();
 
+  onBeforeUnmount(() => {
+    cleanup?.();
+    window.removeEventListener("resize", updateColumns);
+  });
+});
+// unmount
 onBeforeUnmount(() => {
   window.removeEventListener("resize", updateColumns);
+  window.removeEventListener("keydown", handleKeydown);
 });
 
-// 🔹 按年份分组 + 瀑布流布局
+// grid
 const groupedArticles = computed(() => {
   const grid = generateGrid(
     articles.value,
@@ -78,43 +99,97 @@ const groupedArticles = computed(() => {
     (post) => new Date(post.originDate).getFullYear().toString(),
     columnCount.value,
   );
-  // 按年份倒序
+
   return grid.sort((a, b) => Number(b.key) - Number(a.key));
 });
 
-// 提取所有唯一的类别
+// categories
 const categories = computed(() => {
-  const allCategories: Set<string> = new Set();
+  const set = new Set<string>();
+
   posts.forEach((post) => {
-    post.category
-      .split(",")
-      .forEach((category) => allCategories.add(category.trim()));
+    post.category.split(",").forEach((c) => set.add(c.trim()));
   });
-  return Array.from(allCategories);
+
+  return Array.from(set);
 });
 
-// 获取每个类别的文章数量
+// 是否存在 negative
+const hasNegativePosts = computed(() => {
+  return posts.some((post) => post.negative);
+});
+
+// category count
 const categoryCounts = computed(() => {
   const counts: Record<string, number> = {};
+
   posts.forEach((post) => {
-    post.category.split(",").forEach((category) => {
-      category = category.trim();
-      counts[category] = (counts[category] || 0) + 1;
+    if (!showNegative.value && post.negative) return;
+
+    post.category.split(",").forEach((c) => {
+      c = c.trim();
+      counts[c] = (counts[c] || 0) + 1;
     });
   });
+
   return counts;
 });
 
-// 点击某个类别时更新 URL 中的 category 参数
+// category click
 const handleCategoryClick = (category: string) => {
-  selectedCategory.value = category;
   const url = new URL(window.location.href);
-  url.searchParams.set("category", category); // 更新 URL
-  window.history.pushState({}, "", url); // 更改 URL并保留浏览历史
+
+  if (selectedCategory.value === category) {
+    selectedCategory.value = null;
+    url.searchParams.delete("category");
+  } else {
+    selectedCategory.value = category;
+    url.searchParams.set("category", category);
+  }
+
+  window.history.pushState({}, "", url);
 };
 
-// 卡片悬浮效果
+// 🔥 deep hide toggle（核心）
+const toggleNegative = () => {
+  showNegative.value = !showNegative.value;
+};
+
+// 🔥 键盘监听：S 延迟 1s 解锁
+const handleKeydown = (e: KeyboardEvent) => {
+  if (!globalConfig.deepHideNegative) return;
+
+  if (e.key.toLowerCase() !== "s") return;
+
+  if (hasShownByShortcut.value) return;
+  if (pendingTimer.value) return;
+
+  pendingTimer.value = window.setTimeout(() => {
+    showNegative.value = true;
+    hasShownByShortcut.value = true;
+    pendingTimer.value = null;
+  }, 1000);
+};
+
+// hover
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
+
+/**
+ * ✅ NEW: 控制 Negative 按钮是否显示
+ */
+const showNegativeButton = computed(() => {
+  if (globalConfig.deepHideNegative) {
+    return hasNegativePosts.value && hasShownByShortcut.value;
+  }
+  return hasNegativePosts.value;
+});
+
+// 可选：同步状态（更稳）
+watch(showNegative, (val) => {
+  if (globalConfig.deepHideNegative && val) {
+    hasShownByShortcut.value = true;
+  }
+});
 </script>
 
 <template>
@@ -136,16 +211,25 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         />
         <span class="name">{{ globalConfig.lang.tags }}</span>
       </a>
+
+      <!-- Negative Button -->
       <span
-        class="tag"
-        @click="handleCategoryClick('')"
+        v-if="showNegativeButton"
+        class="tag negative"
+        @click="toggleNegative"
         @mouseenter="handleMouseEnter"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
-        :class="{ active: !selectedCategory }"
+        :class="{ active: showNegative }"
       >
-        <span class="name">{{ globalConfig.lang.allPosts }}</span>
+        <Icon
+          :icon="globalConfig.icon.negative"
+          style="opacity: 0.4; margin-right: 10px"
+        />
+        <span class="name">{{ globalConfig.lang.negative }}</span>
       </span>
+
+      <!-- Categories -->
       <span
         v-for="category in categories"
         :key="category"
@@ -156,7 +240,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
         :class="{ active: selectedCategory === category }"
       >
-        <span class="name"><span class="anchor">#</span>{{ category }}</span>
+        <span class="name"><span class="anchor">※</span>{{ category }}</span>
         <span class="count">{{ categoryCounts[category] }}</span>
       </span>
     </div>

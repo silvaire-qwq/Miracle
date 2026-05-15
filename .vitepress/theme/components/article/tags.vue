@@ -22,54 +22,76 @@ const props = defineProps({
   },
 });
 
-// 获取 URL 中的 tag 参数
+// =========================
+// URL tag
+// =========================
 const urlParams = new URLSearchParams(window.location.search);
 const selectedTag = ref(urlParams.get("tag"));
 
-// 创建响应式文章列表
-const articles = ref(posts);
+// =========================
+// 🔥 DeepHide Negative
+// =========================
+import { useDeepHideNegative } from "../../utils/useDeepHideNegative";
 
-// 限制文章数量
-watch(
-  () => props.maxItems,
-  () => {
-    if (props.maxItems > 0) {
-      articles.value = posts.slice(0, props.maxItems);
-    } else {
-      articles.value = posts;
-    }
-  },
+const { showNegative, pendingTimer, hasShownByShortcut, initDeepHideListener } =
+  useDeepHideNegative();
+
+// =========================
+// articles
+// =========================
+const articles = ref(
+  posts.filter((post) => showNegative.value || !post.negative),
 );
 
-// 监听 selectedTag 变化
-watch(selectedTag, (newTag) => {
-  nextTick(() => {
-    if (newTag) {
-      articles.value = posts.filter((post) => post.tags?.includes(newTag));
-    } else {
-      articles.value = posts;
-    }
-  });
-});
+const updateArticles = () => {
+  let filtered = posts.filter((post) => showNegative.value || !post.negative);
 
+  // tag filter
+  if (selectedTag.value) {
+    filtered = filtered.filter((post) =>
+      post.tags?.includes(selectedTag.value!),
+    );
+  }
+
+  // limit
+  if (props.maxItems > 0) {
+    filtered = filtered.slice(0, props.maxItems);
+  }
+
+  articles.value = filtered;
+};
+
+// =========================
+// watchers
+// =========================
+watch(() => props.maxItems, updateArticles);
+watch(selectedTag, () => nextTick(updateArticles));
+watch(showNegative, () => nextTick(updateArticles));
+
+// =========================
+// lifecycle
+// =========================
 onMounted(() => {
+  const cleanup = initDeepHideListener();
+
   updateColumns();
   window.addEventListener("resize", updateColumns);
 
-  if (selectedTag.value) {
-    nextTick(() => {
-      articles.value = posts.filter((post) =>
-        post.tags?.includes(selectedTag.value!),
-      );
-    });
-  }
-});
+  updateArticles();
 
+  onBeforeUnmount(() => {
+    cleanup?.();
+    window.removeEventListener("resize", updateColumns);
+  });
+});
 onBeforeUnmount(() => {
   window.removeEventListener("resize", updateColumns);
+  window.removeEventListener("keydown", handleKeydown);
 });
 
-// 按年份分组 + 瀑布流
+// =========================
+// grid grouping
+// =========================
 const groupedArticles = computed(() => {
   const grid = generateGrid(
     articles.value,
@@ -77,39 +99,105 @@ const groupedArticles = computed(() => {
     (post) => new Date(post.originDate).getFullYear().toString(),
     columnCount.value,
   );
-  // 按年份倒序
+
   return grid.sort((a, b) => Number(b.key) - Number(a.key));
 });
 
-// 提取所有唯一标签
+// =========================
+// tags
+// =========================
 const tags = computed(() => {
-  const allTags: Set<string> = new Set();
+  const allTags = new Set<string>();
+
   posts.forEach((post) => {
-    (post.tags || []).forEach((tag) => allTags.add(tag.trim()));
+    if (!showNegative.value && post.negative) return;
+
+    (post.tags || []).forEach((tag) => {
+      allTags.add(tag.trim());
+    });
   });
+
   return Array.from(allTags);
 });
 
-// 获取每个标签的文章数量
+const hasNegativePosts = computed(() => {
+  return posts.some((post) => post.negative);
+});
+
 const tagCounts = computed(() => {
   const counts: Record<string, number> = {};
+
   posts.forEach((post) => {
+    if (!showNegative.value && post.negative) return;
+
     (post.tags || []).forEach((tag) => {
-      tag = tag.trim();
-      counts[tag] = (counts[tag] || 0) + 1;
+      const t = tag.trim();
+      counts[t] = (counts[t] || 0) + 1;
     });
   });
+
   return counts;
 });
 
-// 点击标签更新 URL
+// =========================
+// tag click
+// =========================
 const handleTagClick = (tag: string) => {
-  selectedTag.value = tag;
   const url = new URL(window.location.href);
-  url.searchParams.set("tag", tag);
+
+  if (selectedTag.value === tag) {
+    selectedTag.value = null;
+    url.searchParams.delete("tag");
+  } else {
+    selectedTag.value = tag;
+    url.searchParams.set("tag", tag);
+  }
+
   window.history.pushState({}, "", url);
 };
 
+// =========================
+// 🔥 DeepHide trigger (S key)
+// =========================
+const handleKeydown = (e: KeyboardEvent) => {
+  if (!globalConfig.deepHideNegative) return;
+  if (e.key.toLowerCase() !== "s") return;
+
+  if (hasShownByShortcut.value) return;
+  if (pendingTimer.value) return;
+
+  pendingTimer.value = window.setTimeout(() => {
+    showNegative.value = true;
+    hasShownByShortcut.value = true;
+    pendingTimer.value = null;
+  }, 1000);
+};
+
+// toggle
+const toggleNegative = () => {
+  showNegative.value = !showNegative.value;
+};
+
+// =========================
+// UI logic (same pattern as categories page)
+// =========================
+const showNegativeButton = computed(() => {
+  if (globalConfig.deepHideNegative) {
+    return hasNegativePosts.value && hasShownByShortcut.value;
+  }
+  return hasNegativePosts.value;
+});
+
+// sync unlock state
+watch(showNegative, (val) => {
+  if (globalConfig.deepHideNegative && val) {
+    hasShownByShortcut.value = true;
+  }
+});
+
+// =========================
+// hover
+// =========================
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 </script>
 
@@ -117,7 +205,7 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
   <div>
     <h1 class="year">{{ globalConfig.lang.tags }}</h1>
 
-    <!-- Tags Section -->
+    <!-- Tags -->
     <div class="tags">
       <a
         class="tag"
@@ -132,16 +220,25 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         />
         <span class="name">{{ globalConfig.lang.categories }}</span>
       </a>
+
+      <!-- negative button -->
       <span
-        class="tag"
-        @click="handleTagClick('')"
+        v-if="showNegativeButton"
+        class="tag negative"
+        @click="toggleNegative"
         @mouseenter="handleMouseEnter"
         @mousemove="handleMouseMove"
         @mouseleave="handleMouseLeave"
-        :class="{ active: !selectedTag }"
+        :class="{ active: showNegative }"
       >
-        <span class="name">{{ globalConfig.lang.allPosts }}</span>
+        <Icon
+          :icon="globalConfig.icon.negative"
+          style="opacity: 0.4; margin-right: 10px"
+        />
+        <span class="name">{{ globalConfig.lang.negative }}</span>
       </span>
+
+      <!-- tags -->
       <span
         v-for="tag in tags"
         :key="tag"
@@ -152,14 +249,15 @@ const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
         @mouseleave="handleMouseLeave"
         :class="{ active: selectedTag === tag }"
       >
-        <span class="name"><span class="anchor">#</span>{{ tag }}</span>
+        <span class="name"> <span class="anchor">#</span>{{ tag }} </span>
         <span class="count">{{ tagCounts[tag] }}</span>
       </span>
     </div>
 
-    <!-- Articles Grouped by Year -->
+    <!-- posts -->
     <div v-for="group in groupedArticles" :key="group.key">
       <h1 class="year">{{ group.key }}</h1>
+
       <div class="posts-grid">
         <div
           v-for="(col, colIndex) in group.columns"

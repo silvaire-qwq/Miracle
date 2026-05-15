@@ -5,7 +5,6 @@ description: A lovely VitePress theme QwQ
 tags: [Miracle, Demo, Markdown]
 category: Miracle
 origin: https://github.com/silviare-qwq/Miracle
-negative: true
 ---
 
 # H1

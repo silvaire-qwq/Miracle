@@ -171,3 +171,18 @@ div.tags,
 .posts-grid {
   margin-bottom: 30px;
 }
+
+/* negative 默认保持普通样式，仅选中后变黄 */
+
+.tag.negative.active,
+.tag.negative:hover {
+  border-color: var(--vp-c-yellow-1);
+  box-shadow: var(--vp-shadow-negative) !important;
+
+  span.name,
+  span.count,
+  span.anchor,
+  svg {
+    color: var(--vp-c-yellow-1);
+  }
+}

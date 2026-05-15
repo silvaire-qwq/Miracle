@@ -31,6 +31,7 @@ export const globalConfig = {
     repo: "silvaire-qwq/Miracle", // the repo of ur blog
   },
   dateCreated: "2024-08-23", // date created (YYYY-MM-DD)
+  deepHideNegative: true, // enable press "s" 1s to show negative button
 
   // theme setting
   styles: {

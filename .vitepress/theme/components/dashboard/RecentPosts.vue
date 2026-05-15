@@ -10,10 +10,14 @@ const props = defineProps({
   },
 });
 
-// 应用 maxItems 限制
-const articles = computed(() =>
-  props.maxItems > 0 ? posts.slice(0, props.maxItems) : posts,
-);
+// 先过滤掉 negative: true 的文章，再应用 maxItems 限制
+const articles = computed(() => {
+  const filteredPosts = posts.filter((post) => post.negative !== true);
+
+  return props.maxItems > 0
+    ? filteredPosts.slice(0, props.maxItems)
+    : filteredPosts;
+});
 </script>
 
 <template>
