@@ -108,6 +108,9 @@ const categories = computed(() => {
   const set = new Set<string>();
 
   posts.forEach((post) => {
+    // ❗关键：当不显示 negative 时，跳过 negative 文章
+    if (!showNegative.value && post.negative) return;
+
     post.category.split(",").forEach((c) => set.add(c.trim()));
   });
 
