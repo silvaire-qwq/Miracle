@@ -53,16 +53,19 @@ try {
   const friendsDir = path.resolve("./data/friends");
   const momentsDir = path.resolve("./data/moments");
   const markdownDir = path.resolve("./src/posts");
+  const photosDir = path.resolve("./public/data/photos");
 
   log("miracle", "Clearing directories");
   emptyDir(friendsDir);
   emptyDir(momentsDir);
   emptyDir(markdownDir);
+  emptyDir(photosDir);
 
   log("miracle", "Ensuring directories exist");
   ensureDir(friendsDir);
   ensureDir(momentsDir);
   ensureDir(markdownDir);
+  ensureDir(photosDir);
 
   log("miracle", "Writing templates");
   const friendTemplate = {
