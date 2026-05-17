@@ -80,7 +80,7 @@ export const globalConfig = {
   homePage: {
     avatar:
       "https://wsrv.nl/?url=avatars.githubusercontent.com/u/184231508?s=400&u=0a370792ba6bbb95a04d309171b562bcd7283a0f&v=3", // your avatar
-    city: "127.0.0.1", // your location
+    city: "Fangxing Avenue, Wuling", // your location
     // introduce: (you cannot use it now)
     // "Awa middle schowol stuwudent whowo is leawarning frowont-end develowopment~!", // introduce your self
 
