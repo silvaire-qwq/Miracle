@@ -1,33 +1,83 @@
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount } from "vue";
+import { computed, onMounted, onBeforeUnmount, watch } from "vue";
 import { globalConfig } from "#config";
 import { generateGrid } from "../../utils/generateGrid";
 import { columnCount, updateColumns } from "../../utils/dynamicColumns";
 import PostCard from "../article/postCard.vue";
 
+// 引入同款负面状态 Hook
+import { useDeepHideNegative } from "../../utils/useDeepHideNegative";
+
 const props = defineProps<{ maxItems?: number }>();
 
+// negative 状态
+const { showNegative, pendingTimer, hasShownByShortcut, initDeepHideListener } =
+  useDeepHideNegative();
+
+// 🔥 键盘监听：S 延迟 1s 解锁
+const handleKeydown = (e: KeyboardEvent) => {
+  if (!globalConfig.deepHideNegative) return;
+
+  if (e.key.toLowerCase() !== "s") return;
+
+  if (hasShownByShortcut.value) return;
+  if (pendingTimer.value) return;
+
+  pendingTimer.value = window.setTimeout(() => {
+    showNegative.value = true;
+    hasShownByShortcut.value = true;
+    pendingTimer.value = null;
+  }, 1000);
+};
+
+// 🛑 新增 keyup 监听：如果用户在 1s 内松开了 S 键，则取消解锁，防止误触
+const handleKeyup = (e: KeyboardEvent) => {
+  if (e.key.toLowerCase() === "s" && pendingTimer.value) {
+    clearTimeout(pendingTimer.value);
+    pendingTimer.value = null;
+  }
+};
+
+// 同步状态
+watch(showNegative, (val) => {
+  if (globalConfig.deepHideNegative && val) {
+    hasShownByShortcut.value = true;
+  }
+});
+
+let cleanup: (() => void) | undefined;
+
 onMounted(() => {
+  cleanup = initDeepHideListener();
   updateColumns();
   window.addEventListener("resize", updateColumns);
+  window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("keyup", handleKeyup); // ✅ 绑定 keyup 移除定时器
 });
+
 onBeforeUnmount(() => {
+  cleanup?.();
   window.removeEventListener("resize", updateColumns);
+  window.removeEventListener("keydown", handleKeydown);
+  window.removeEventListener("keyup", handleKeyup); // ✅ 移除 keyup 监听
 });
 
 // 🔹 瀑布流数据，按年份分组，动态列数
 const groupedMoments = computed(() => {
+  const validMoments = globalConfig.moments.filter(
+    (moment: any) =>
+      !globalConfig.deepHideNegative || showNegative.value || !moment.negative,
+  );
+
   const grid = generateGrid(
-    globalConfig.moments,
+    validMoments,
     props.maxItems,
     (item: any) =>
       item.date ? new Date(item.date).getFullYear().toString() : "all",
     columnCount.value,
   );
 
-  // 倒序排序年份
   return grid.sort((a, b) => {
-    // "all" 永远放最后
     if (a.key === "all") return 1;
     if (b.key === "all") return -1;
     return Number(b.key) - Number(a.key);
@@ -44,12 +94,13 @@ const groupedMoments = computed(() => {
         :key="colIndex"
         class="column"
       >
-        <div v-for="moment in col">
+        <div v-for="moment in col" :key="moment.fileName">
+          <!-- ✅ 关键改动：将 :key 移到了正确的循环外层，并向子组件传递了 :negative="moment.negative" -->
           <PostCard
-            :key="moment.fileName"
             :description="moment.content"
             :originDate="moment.date"
             :image="moment.image"
+            :negative="moment.negative"
           />
         </div>
       </div>
@@ -58,6 +109,7 @@ const groupedMoments = computed(() => {
 </template>
 
 <style scoped>
+/* 保持您原有的样式不变 */
 .posts-grid {
   display: flex;
   gap: var(--vp-gap);

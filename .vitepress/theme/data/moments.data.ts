@@ -8,6 +8,7 @@ export interface Moment {
   time: string;
   content: string;
   image?: string;
+  negative?: boolean;
 }
 
 let data: Moment[];

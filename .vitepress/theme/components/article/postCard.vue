@@ -53,19 +53,20 @@ const isClickable = computed(() => !!clink.value);
 
 <template>
   <!-- 用 a 或 div 动态渲染 -->
+  <!-- ✅ 关键改动：动态绑定 class，当 props.negative 为真时添加 'is-negative' 类 -->
   <component
     :is="isClickable ? 'a' : 'div'"
     :href="isClickable ? url : undefined"
     :type="props.type"
     class="diary"
+    :class="{ 'is-negative': props.negative }"
     @mouseenter="handleMouseEnter"
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
   >
+    <!-- ✅ 优化：删除了原本代码中重复嵌套了一层的 v-if="props.image" -->
     <div v-if="props.image" class="img-container">
-      <div v-if="props.image" class="img-container">
-        <img :src="props.image" />
-      </div>
+      <img :src="props.image" />
     </div>
 
     <div class="textPlace">
@@ -165,9 +166,22 @@ const isClickable = computed(() => !!clink.value);
 }
 
 .diary:hover {
-  border-color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-2);
   box-shadow: var(--vp-shadow-brand);
 }
+
+/* ========================================== */
+/* ✅ 新增：Negative 状态下的 Hover 样式覆盖 */
+/* ========================================== */
+.diary.is-negative:hover {
+  border-color: var(--vp-c-yellow-1);
+  box-shadow: var(--vp-shadow-negative) !important;
+}
+
+.diary.is-negative:hover .title {
+  color: var(--vp-c-yellow-1);
+}
+/* ========================================== */
 
 .textPlace {
   padding: 25px;

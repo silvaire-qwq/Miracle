@@ -1,5 +1,6 @@
 <template>
   <a
+    v-if="lastMoment"
     class="last-moment"
     href="/moments"
     @mouseenter="handleMouseEnter"
@@ -22,28 +23,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { computed } from "vue";
 import { useCardHover } from "../../utils/useCardHover";
 import { formatRelativeDate } from "../../utils/formatRelativeDate";
 import { globalConfig } from "#config";
+import { useDeepHideNegative } from "../../utils/useDeepHideNegative";
 
 interface Moment {
   date: string;
   time: string;
   content: string;
+  negative?: boolean;
 }
 
 const { handleMouseMove, handleMouseEnter, handleMouseLeave } = useCardHover();
 const { moments } = globalConfig;
+const { showNegative } = useDeepHideNegative();
 
-const lastMoment = ref<Moment | null>(null);
+// 动态计算最新的 moment
+const lastMoment = computed<Moment | null>(() => {
+  // 过滤出应当显示的 moments
+  const validMoments = (moments as Moment[]).filter(
+    (m) => !globalConfig.deepHideNegative || showNegative.value || !m.negative,
+  );
 
-function loadLastMoment() {
-  lastMoment.value = moments[0] || null;
-}
-
-onMounted(() => {
-  loadLastMoment();
+  // 返回过滤后的第一个（即最新的一条），如果没有则返回 null
+  return validMoments[0] || null;
 });
 </script>
 
