@@ -18,6 +18,7 @@
     "markdown-it-katex": "^2.0.3",
     "mermaid": "^11.14.0",
     "prettier": "3.6.2",
+    "tsx": "^4.22.3",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitepress-plugin-rss": "^0.3.2",
@@ -37,10 +38,10 @@
     "typed.js": "^2.1.0"
   },
   "scripts": {
-    "id": "node .vitepress/theme/scripts/genId.js",
+    "id": "tsx .vitepress/theme/scripts/genId.js",
     "clean": "node .vitepress/theme/scripts/setup.js",
-    "dev": "node .vitepress/theme/scripts/genId.js && vitepress dev --port 4321",
-    "build": "node .vitepress/theme/scripts/genId.js && vitepress build",
+    "dev": "tsx .vitepress/theme/scripts/genId.js && vitepress dev --port 4321",
+    "build": "tsx .vitepress/theme/scripts/genId.js && vitepress build",
     "preview": "vitepress preview --port 4321",
     "format": "pnpm exec prettier . --write"
   }

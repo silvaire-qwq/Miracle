@@ -6,7 +6,7 @@
   </div>
 
   <!-- Miracle Grid Section -->
-  <div class="allFriend">
+  <div class="allFriend" style="margin-top: 50px">
     <ClientOnly>
       <div class="friends-grid">
         <div
@@ -20,7 +20,6 @@
               :link="friend.link"
               :desc="friend.desc"
               :img="friend.img || defaultImg"
-              :folder="friend.folder"
             />
           </div>
         </div>

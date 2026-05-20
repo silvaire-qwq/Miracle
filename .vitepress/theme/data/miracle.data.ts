@@ -5,7 +5,8 @@ export interface Friend {
   title: string;
   link: string;
   desc?: string;
-  img?: string;
+  id: string;
+  img: string;
 }
 
 export default defineLoader({
@@ -50,13 +51,9 @@ export default defineLoader({
           results.push({
             title: siteData.title || "",
             desc: siteData.description || "",
-            // Handle both absolute and relative paths for favicon
-            img: siteData.favicon
-              ? siteData.favicon.startsWith("http")
-                ? siteData.favicon
-                : `${cleanBaseUrl}${siteData.favicon}`
-              : "",
             link: cleanBaseUrl,
+            img: siteData.favicon,
+            id: siteData.id,
           });
         } catch (err: any) {
           console.error(
