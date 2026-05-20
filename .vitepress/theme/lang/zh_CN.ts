@@ -56,4 +56,5 @@ export const languageFile = {
   miracle: "Miracle",
   prodecs:
     "于 Miracle ID Project 申请的唯一推流代号，作用于所有启用了本功能的 Miracle 网站端。",
+  gettingData: "正在获取最新中心推流数据文件",
 };
