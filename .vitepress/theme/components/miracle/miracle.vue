@@ -16,10 +16,13 @@
         >
           <div v-for="friend in col" :key="friend.link" class="friend-card">
             <FriendCard
-              :title="friend.title"
+              :title="'#' + friend.id"
               :link="friend.link"
-              :desc="friend.desc"
+              :desc="friend.title"
               :img="friend.img || defaultImg"
+              :style="{
+                '--title': 'var(--vp-font-family-mono)',
+              }"
             />
           </div>
         </div>

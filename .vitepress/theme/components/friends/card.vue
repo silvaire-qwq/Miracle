@@ -85,6 +85,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   font-weight: 600;
   margin: 0;
   transition: all var(--vp-transition-time);
+  font-family: var(--title), var(--vp-font-family-base);
 }
 
 .card:hover .title {
