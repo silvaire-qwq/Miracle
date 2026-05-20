@@ -16,7 +16,7 @@ It's Miracle!!!!!
 ## Getting Started
 
 1. Create your blog repository:
-   - [Generate a new repository](https://github.com/silvaire-qwq/miracle/generate) from this template or fork this repository.
+   - [Generate a new repository](https://github.com/Miralous/miracle/generate) from this template or fork this repository.
 2. To edit your blog locally, clone your repository, run `pnpm install` to install dependencies.
    - Install [pnpm](https://pnpm.io) `npm install -g pnpm` if you haven't.
 3. Run `pnpm clean` to initialize your blog.

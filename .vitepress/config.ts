@@ -105,7 +105,7 @@ export default withMermaid({
       }<br>
         ${
           globalConfig.lang.poweredBy
-        } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/silvaire-qwq/Miracle">Miracle</a><br>
+        } <a href="https://vitepress.dev/">VitePress</a> & <a href="https://github.com/Miralous/Miracle">Miracle</a><br>
         ${globalConfig.title} ${
           globalConfig.lang.hasExistedFor
         } ${getRunningTime(globalConfig.dateCreated)} ${globalConfig.lang.days}

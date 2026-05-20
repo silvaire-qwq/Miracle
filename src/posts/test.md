@@ -36,7 +36,7 @@ origin: https://github.com/silviare-qwq/Miracle
 > [!IMPORTANT]
 > IMPORTANT
 
-[Normal Link](https://github.com/silvaire-qwq/Miracle/archive/refs/heads/main.zip). Or you can try to download <File text="This File" url="https://github.com/silvaire-qwq/Miracle/archive/refs/heads/main.zip" icon="ph:file-archive-duotone"/>.
+[Normal Link](https://github.com/Miralous/Miracle/archive/refs/heads/main.zip). Or you can try to download <File text="This File" url="https://github.com/Miralous/Miracle/archive/refs/heads/main.zip" icon="ph:file-archive-duotone"/>.
 
 **Bold** _Italic_ **_Both_** ~~Delete~~ ++ins++
 

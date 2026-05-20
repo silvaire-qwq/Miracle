@@ -67,7 +67,7 @@ try {
   log("miracle", "Writing templates");
   const friendTemplate = {
     title: "It's Miracle!!!!!",
-    link: "https://github.com/silvaire-qwq/miracle",
+    link: "https://github.com/Miralous/miracle",
     desc: "A lovely VitePress theme QwQ",
     img: "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c",
     folder: "miracle",
@@ -107,7 +107,7 @@ published: 2025-09-21
 description: A lovely VitePress theme QwQ
 tags: [Miracle]
 category: Miracle
-origin: https://github.com/silvaire-qwq/miracle
+origin: https://github.com/Miralous/miracle
 ---
 `;
   fs.writeFileSync(

@@ -28,7 +28,7 @@ export const globalConfig = {
   blogBase: {
     type: "github", // github / gitea
     giteaUrl: "https://gitea.com", // if the type is gitea, fill in the gitea url like: https://gitea.com
-    repo: "silvaire-qwq/Miracle", // the repo of ur blog
+    repo: "Miralous/Miracle", // the repo of ur blog
   },
   dateCreated: "2024-08-23", // date created (YYYY-MM-DD)
   deepHideNegative: true, // enable press "s" 1s to show negative button
@@ -88,7 +88,7 @@ export const globalConfig = {
     modules: {
       banner: {
         type: "avatar", // "image" or "avatar"
-        imgurl: "", // only work when type is image, e.g. "https://cdn.jsdelivr.net/gh/silvaire-qwq/Miracle@main/src/assets/banner.png"
+        imgurl: "", // only work when type is image, e.g. "https://cdn.jsdelivr.net/gh/Miralous/Miracle@main/src/assets/banner.png"
         image: "65vh", // only work when type is "image", e.g. "65vh"
         avatar: "50vh", // only work when type is "avatar", e.g. "100vh"
       },
@@ -127,7 +127,7 @@ export const globalConfig = {
     ],
   },
 
-  github: "silvaire-qwq", // your github username
+  github: "Miralous", // your github username
 
   // navigation items
   nav: [
@@ -158,7 +158,7 @@ export const globalConfig = {
     enable: true,
     type: "giscus",
     giscus: {
-      repo: "silvaire-qwq/Miracle",
+      repo: "Miralous/Miracle",
       repoId: "R_kgDOPz1WLw",
       categoryId: "DIC_kwDOPz1WL84Cvsrq",
       themes: {
