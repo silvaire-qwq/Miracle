@@ -1,12 +1,20 @@
 <template>
   <div style="height: 30px"></div>
-  <div class="num"><span class="anchor">#</span>{{ id }}</div>
+
+  <div
+    class="num"
+    :style="{
+      color: trueNum ? 'var(--vp-c-green-1)' : 'var(--vp-c-red-1)',
+    }"
+  >
+    <span class="anchor">#</span>{{ id }}
+  </div>
   <div class="desc">
     {{ globalConfig.lang.prodesc }}
   </div>
 
   <!-- Miracle Grid Section -->
-  <div class="allFriend" style="margin-top: 50px">
+  <div class="allFriend" style="margin-top: 50px" v-if="trueNum">
     <ClientOnly>
       <div class="friends-grid">
         <div
@@ -35,9 +43,13 @@
 import { computed, onMounted, onBeforeUnmount } from "vue";
 import { globalConfig } from "#config";
 import { columnCount, updateColumns } from "#theme/utils/dynamicColumns";
-// Import the data fetched by your new loader
+// 引入解构后的数据
 import { data as miracleData } from "../../data/miracle.data";
 console.log(miracleData);
+
+// 从打包的数据对象中，安全解构出列表数组和布尔值
+const friendsList = computed(() => miracleData?.friends || []);
+const trueNum = computed(() => miracleData?.trueNum ?? false);
 
 const id = globalConfig.miracle.id;
 const defaultImg =
@@ -53,13 +65,16 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", updateColumns);
 });
 
-// A pure responsive distribution logic into active grid columns without categories
+// 纯响应式瀑布流分栏逻辑
 const gridColumns = computed(() => {
+  // 建立对应列数的空数组容器，类型推导基于完整的朋友列表项
   const cols = Array.from(
     { length: columnCount.value },
-    () => [] as typeof miracleData,
+    () => [] as typeof friendsList.value,
   );
-  miracleData.forEach((item, index) => {
+
+  // 修复点：使用解构后的数组 friendsList 进行循环
+  friendsList.value.forEach((item: any, index: any) => {
     cols[index % columnCount.value].push(item);
   });
   return cols;
@@ -67,6 +82,17 @@ const gridColumns = computed(() => {
 </script>
 
 <style scoped>
+/* 新增：提示条样式，你可以根据主题自行美化 */
+.warning-banner {
+  padding: 12px 16px;
+  background-color: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  color: #ca8a04;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
 /* Original Title Styles */
 .num {
   margin-top: 30px;
