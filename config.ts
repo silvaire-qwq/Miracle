@@ -16,9 +16,16 @@ const languageMap: Record<string, any> = { zh, en };
 // website language (zh / en)
 const defaultLanguage = "en";
 const languageFile = languageMap[defaultLanguage] || en; // do not edit it
-
 // CONFIGS ----------------------------------------------------------------------
 export const globalConfig = {
+  // Miracle ID Proj.
+  miracle: {
+    // up to 6 digits. use it before looking https://github.com/Miralous/uid-bucket
+    id: "114514",
+    // file source
+    src: "https://raw.githubusercontent.com/Miralous/uid-bucket/refs/heads/main/data.json",
+  },
+
   title: "Silvaire's Blog", // title
   description: "Per Aspera Ad Astra", // description
   author: "Silvaire", // your name
@@ -149,6 +156,8 @@ export const globalConfig = {
         { text: languageFile.manager, link: "/manager" },
         // enable / disable comments
         { text: languageFile.whiteboard, link: "/whiteboard" },
+        // enable / disable Miracle ID
+        { text: languageFile.miracle, link: "/miracle" },
       ],
     },
   ],

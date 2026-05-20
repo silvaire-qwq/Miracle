@@ -53,4 +53,7 @@ export const languageFile = {
   allPhotos: "All Photos",
   photos: "Photos",
   previewTree: "Preview tree",
+  miracle: "Miracle",
+  prodesc:
+    "The unique stream key requested from the Miracle ID Project applies to all Miracle web clients with this feature enabled.",
 };

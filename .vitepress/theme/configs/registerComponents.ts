@@ -18,6 +18,7 @@ import Moments from "../components/moments/moments.vue";
 import File from "../components/utils/file.vue";
 import Musics from "../components/dashboard/Musics.vue";
 import Pictures from "../components/dashboard/Pictures.vue";
+import Miracle from "../components/miracle/miracle.vue";
 
 const components = {
   // Dashboard
@@ -40,6 +41,7 @@ const components = {
   // Layout
   Icon,
   Comments,
+  Miracle,
   Twikoo,
   File,
 };

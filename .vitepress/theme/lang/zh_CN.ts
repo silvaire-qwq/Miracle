@@ -53,4 +53,7 @@ export const languageFile = {
   allPhotos: "所有照片",
   photos: "图库",
   previewTree: "预览文件库",
+  miracle: "Miracle",
+  prodecs:
+    "于 Miracle ID Project 申请的唯一推流代号，作用于所有启用了本功能的 Miracle 网站端。",
 };
