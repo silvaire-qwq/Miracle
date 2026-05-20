@@ -23,7 +23,7 @@ export const globalConfig = {
     // up to 6 digits. use it before looking https://github.com/Miralous/uid-bucket
     id: "114514",
     // file source
-    src: "https://gh.llkk.cc/https://raw.githubusercontent.com/Miralous/uid-bucket/refs/heads/main/data.json",
+    src: "https://raw.githubusercontent.com/Miralous/uid-bucket/refs/heads/main/data.json",
   },
 
   title: "Silvaire's Blog", // title
