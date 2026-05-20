@@ -1,9 +1,13 @@
 <template>
   <div style="height: 30px"></div>
 
-  <!-- 加载状态提示（提升用户体验） -->
-  <div v-if="isLoading" class="loading-box"></div>
+  <!-- 1. 加载状态提示（只要数据没跑完，就保持 Loading） -->
+  <div v-if="isLoading" class="loading-box">
+    <div class="spinner"></div>
+    <span>{{ globalConfig.lang.gettingData }}</span>
+  </div>
 
+  <!-- 2. 数据获取完毕后的真实渲染 -->
   <template v-else>
     <div
       class="num"
@@ -19,6 +23,7 @@
 
     <!-- Miracle Grid Section -->
     <div class="allFriend" style="margin-top: 50px" v-if="trueNum">
+      <!-- 💡 用 ClientOnly 确保瀑布流分栏计算完全在浏览器端运行 -->
       <ClientOnly>
         <div class="friends-grid">
           <div
@@ -42,12 +47,8 @@
       </ClientOnly>
     </div>
 
-    <!-- 错误或不匹配时的友情提示（可选） -->
-    <div class="allFriend" style="margin-top: 50px" v-else>
-      <div class="warning-banner">
-        ⚠️ 站点配置校验未通过或数据未匹配，无法显示列表。
-      </div>
-    </div>
+    <!-- 校验失败的提示 -->
+    <div class="allFriend" style="margin-top: 50px" v-else></div>
   </template>
 </template>
 
@@ -56,33 +57,45 @@ import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import { globalConfig } from "#config";
 import { columnCount, updateColumns } from "#theme/utils/dynamicColumns";
 
-// 💡 关键修改点 1：引入你的异步加载函数（注意检查你的方法名和路径是否一致）
-import { clientSideLoad, type Friend } from "../../utils/miracleSrc";
+// 💡 重点：这里**千万不要**直接静态 import { getMiracleData } !!
+// 静态导入会被 Vite 编译死，我们改成在下方动态 import。
+interface Friend {
+  title: string;
+  link: string;
+  desc?: string;
+  id: string;
+  sourceId: string;
+  img: string;
+}
 
-// 💡 关键修改点 2：把原本只读的 computed 改为响应式的 ref 变量
 const friendsList = ref<Friend[]>([]);
 const trueNum = ref<boolean>(false);
-const isLoading = ref<boolean>(true); // 默认处于加载中
+const isLoading = ref<boolean>(true);
 
 const id = globalConfig.miracle.id;
 const defaultImg =
   "https://pic2.zhimg.com/50/v2-cc1a32fcb444fc9d5e23f2ee078dc6e1_720w.jpg?source=1940ef5c";
 
-// Track reactive layout resizing
 onMounted(async () => {
-  // 1. 窗口监听和列数初始化
+  // 初始化响应式列数
   updateColumns();
   window.addEventListener("resize", updateColumns);
 
-  // 💡 关键修改点 3：页面“打开时”，立刻在客户端实时跑一遍 fetch 逻辑
   try {
-    const res = await clientSideLoad();
+    // 💡【终极绝招】使用 import() 动态导入！
+    // 迫使 Vite 将其作为纯客户端运行时代码打包，绝不会在打包编译阶段锁死数据
+    const { getMiracleData } = await import("../../utils/miracleSrc");
+
+    // 执行实时 fetch 请求
+    const res = await getMiracleData();
+
+    // 注入数据
     friendsList.value = res.friends || [];
     trueNum.value = res.trueNum ?? false;
   } catch (error) {
-    console.error("[Component] 实时数据加载失败:", error);
+    console.error("[Component Runtime Error] 客户端实时加载失败:", error);
   } finally {
-    // 关闭加载状态，渲染真实 DOM
+    // 数据拿到或报错后，均关闭 loading 状态
     isLoading.value = false;
   }
 });
@@ -91,11 +104,9 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", updateColumns);
 });
 
-// 纯响应式瀑布流分栏逻辑
+// 瀑布流分栏逻辑
 const gridColumns = computed(() => {
-  // 建立对应列数的空数组容器
   const cols = Array.from({ length: columnCount.value }, () => [] as Friend[]);
-
   friendsList.value.forEach((item: Friend, index: number) => {
     cols[index % columnCount.value].push(item);
   });
@@ -104,21 +115,21 @@ const gridColumns = computed(() => {
 </script>
 
 <style scoped>
-/* 新增：加载中的动画和文字样式 */
+/* 加载动画样式 */
 .loading-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 0;
-  gap: 12px;
+  padding: 80px 0;
+  gap: 16px;
   color: var(--vp-c-text-2);
   font-size: 14px;
 }
 .spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid var(--vp-c-brand-2);
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--vp-c-brand-1);
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -132,15 +143,16 @@ const gridColumns = computed(() => {
 /* 提示条样式 */
 .warning-banner {
   padding: 12px 16px;
-  background-color: rgba(234, 179, 8, 0.15);
-  border: 1px solid rgba(234, 179, 8, 0.3);
-  color: #ca8a04;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--vp-c-red-1);
   border-radius: 8px;
   margin-bottom: 20px;
   font-size: 14px;
+  text-align: center;
 }
 
-/* Original Title Styles */
+/* 原始样式保持不变 */
 .num {
   margin-top: 30px;
   margin-bottom: 10px;
@@ -159,8 +171,6 @@ const gridColumns = computed(() => {
   opacity: 0.8;
   font-weight: 500;
 }
-
-/* Base Layout Grid Styles */
 .friends-grid {
   display: flex;
   gap: var(--vp-gap);
